@@ -62,3 +62,19 @@ Point& Point::operator=(const Point& rhs) {
 
     return *this;
 }
+
+Point& Point::operator+=(const Vector3& rhs) {
+    this->x += rhs.x;
+    this->y += rhs.y;
+    this->z += rhs.z;
+
+    return *this;
+}
+
+Point& Point::operator-=(const Vector3& rhs) {
+    this->x -= rhs.x;
+    this->y -= rhs.y;
+    this->z -= rhs.z;
+
+    return *this;
+}

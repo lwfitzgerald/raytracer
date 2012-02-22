@@ -30,8 +30,11 @@ public:
 
     Vector3 operator*(const double a);
 
-    Vector3& operator+=(const Vector3& rhs);
-    Vector3& operator-=(const Vector3& rhs);
+    Point& operator+=(const Vector3& rhs);
+    Point& operator-=(const Vector3& rhs);
+    Vector3& operator-=(const Point& rhs);
+
+
 };
 
 #endif /* POINT_H_ */
