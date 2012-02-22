@@ -65,18 +65,18 @@ __inline Vector3 Vector3::operator*(const double other) {
     );
 }
 
-__inline Vector3& Vector3::operator+=(const Vector3& other) {
-    this->x += other.x;
-    this->y += other.y;
-    this->z += other.z;
+__inline Vector3& Vector3::operator+=(const Vector3& rhs) {
+    this->x += rhs.x;
+    this->y += rhs.y;
+    this->z += rhs.z;
 
     return *this;
 }
 
-__inline Vector3& Vector3::operator-=(const Vector3& other) {
-    this->x -= other.x;
-    this->y -= other.y;
-    this->z -= other.z;
+__inline Vector3& Vector3::operator-=(const Vector3& rhs) {
+    this->x -= rhs.x;
+    this->y -= rhs.y;
+    this->z -= rhs.z;
 
     return *this;
 }
