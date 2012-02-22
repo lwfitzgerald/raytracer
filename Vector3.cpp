@@ -17,7 +17,7 @@ Vector3::Vector3(const double x, const double y, const double z) {
     this->z = z;
 }
 
-Vector3::Vector3(const Vector3 & old) {
+Vector3::Vector3(const Vector3& old) {
     this->x = old.x;
     this->y = old.y;
     this->z = old.z;
@@ -33,7 +33,7 @@ __inline Vector3 Vector3::operator-() {
     );
 }
 
-__inline Vector3 Vector3::operator+(const Vector3 & rhs) {
+__inline Vector3 Vector3::operator+(const Vector3& rhs) {
     return Vector3(
         this->x + rhs.x,
         this->y + rhs.y,
@@ -41,7 +41,7 @@ __inline Vector3 Vector3::operator+(const Vector3 & rhs) {
     );
 }
 
-__inline Vector3 Vector3::operator-(const Vector3 & rhs) {
+__inline Vector3 Vector3::operator-(const Vector3& rhs) {
     return Vector3(
         this->x - rhs.x,
         this->y - rhs.y,
@@ -49,7 +49,7 @@ __inline Vector3 Vector3::operator-(const Vector3 & rhs) {
     );
 }
 
-__inline Vector3 Vector3::operator=(const Vector3 & rhs) {
+__inline Vector3 &Vector3::operator=(const Vector3& rhs) {
     this->x = rhs.x;
     this->y = rhs.y;
     this->z = rhs.z;
@@ -65,7 +65,7 @@ __inline Vector3 Vector3::operator*(const double a) {
     );
 }
 
-__inline Vector3 Vector3::operator+=(const Vector3 & rhs) {
+__inline Vector3& Vector3::operator+=(const Vector3 &rhs) {
     this->x += rhs.x;
     this->y += rhs.y;
     this->z += rhs.z;
@@ -73,7 +73,7 @@ __inline Vector3 Vector3::operator+=(const Vector3 & rhs) {
     return *this;
 }
 
-__inline Vector3 Vector3::operator-=(const Vector3 & rhs) {
+__inline Vector3& Vector3::operator-=(const Vector3 &rhs) {
     this->x -= rhs.x;
     this->y -= rhs.y;
     this->z -= rhs.z;
