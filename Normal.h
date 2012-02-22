@@ -32,7 +32,7 @@ public:
 
     __inline ~Normal() {}
 
-    __inline Normal operator-() {
+    __inline Normal operator-() const {
         return Normal(
             -this->x,
             -this->y,
@@ -40,7 +40,7 @@ public:
         );
     }
 
-    __inline Normal operator+(const Normal& other) {
+    __inline Normal operator+(const Normal& other) const {
         return Normal(
             this->x + other.x,
             this->y + other.y,
@@ -48,7 +48,7 @@ public:
         );
     }
 
-    __inline Vector3 operator+(const Vector3& other) {
+    __inline Vector3 operator+(const Vector3& other) const {
         return Vector3(
             this->x + other.x,
             this->y + other.y,
@@ -56,7 +56,7 @@ public:
         );
     }
 
-    __inline Normal operator*(const double a) {
+    __inline Normal operator*(const double a) const {
         return Normal(
             a * this->x,
             a * this->y,
@@ -88,7 +88,7 @@ public:
         return *this;
     }
 
-    __inline double dot(const Vector3& rhs) {
+    __inline double dot(const Vector3& rhs) const {
         return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
     }
 };

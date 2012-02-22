@@ -35,7 +35,7 @@ public:
 
     __inline ~Vector3() {};
 
-    __inline Vector3 operator-() {
+    __inline Vector3 operator-() const {
         return Vector3(
             -this->x,
             -this->y,
@@ -43,7 +43,7 @@ public:
         );
     }
 
-    __inline Vector3 operator+(const Vector3& other) {
+    __inline Vector3 operator+(const Vector3& other) const {
         return Vector3(
             this->x + other.x,
             this->y + other.y,
@@ -51,7 +51,7 @@ public:
         );
     }
 
-    __inline Vector3 operator-(const Vector3& rhs) {
+    __inline Vector3 operator-(const Vector3& rhs) const {
         return Vector3(
             this->x - rhs.x,
             this->y - rhs.y,
@@ -67,7 +67,7 @@ public:
         return *this;
     }
 
-    __inline Vector3 operator*(const double other) {
+    __inline Vector3 operator*(const double other) const {
         return Vector3(
             other * this->x,
             other * this->y,
@@ -91,23 +91,23 @@ public:
         return *this;
     }
 
-    __inline double mag() {
+    __inline double mag() const {
         return sqrt(sqr(this->x) + sqr(this->y) + sqr(this->z));
     }
 
-    __inline double magsqr() {
+    __inline double magsqr() const {
         return sqr(this->x) + sqr(this->y) + sqr(this->z);
     }
 
-    __inline double dot(const Vector3& rhs) {
+    __inline double dot(const Vector3& rhs) const {
         return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
     }
 
-    __inline double dot(const Normal& rhs) {
+    __inline double dot(const Normal& rhs) const {
         return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
     }
 
-    __inline Vector3 cross(const Vector3& other) {
+    __inline Vector3 cross(const Vector3& other) const {
         return Vector3(
             this->y * other.z + this->z * other.y,
             this->z * other.x + this->x * other.z,
@@ -126,7 +126,7 @@ public:
         }
     }
 
-    __inline Vector3 hat() {
+    __inline Vector3 hat() const {
         double lengthSqr = this->magsqr();
 
         Vector3 newVector = *this;

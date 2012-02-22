@@ -32,7 +32,7 @@ public:
 
     __inline ~Point3() {}
 
-    __inline Point3 operator-() {
+    __inline Point3 operator-() const {
         return Point3(
             -this->x,
             -this->y,
@@ -40,7 +40,7 @@ public:
         );
     }
 
-    __inline Point3 operator+(const Vector3& other) {
+    __inline Point3 operator+(const Vector3& other) const {
         return Point3(
             this->x + other.x,
             this->y + other.y,
@@ -48,7 +48,7 @@ public:
         );
     }
 
-    __inline Point3 operator-(const Vector3& rhs) {
+    __inline Point3 operator-(const Vector3& rhs) const {
         return Point3(
             this->x - rhs.x,
             this->y - rhs.y,
@@ -56,7 +56,7 @@ public:
         );
     }
 
-    __inline Vector3 operator-(const Point3& rhs) {
+    __inline Vector3 operator-(const Point3& rhs) const {
         return Vector3(
             this->x - rhs.x,
             this->y - rhs.y,
