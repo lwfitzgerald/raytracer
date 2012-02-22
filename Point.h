@@ -16,23 +16,77 @@ public:
     double y;
     double z;
 
-    Point();
-    Point(const double x, const double y, const double z);
-    Point(const Point & old);
-    ~Point();
+    __inline Point() {}
 
-    Point operator-();
+    __inline Point(const double x, const double y, const double z) {
+        this->x = x;
+        this->y = y;
+        this->z = z;
+    }
 
-    Point operator+(const Vector3& other);
-    Point operator-(const Vector3& rhs);
-    Vector3 operator-(const Point& rhs);
-    Point& operator=(const Point& rhs);
+    __inline Point(const Point& old) {
+        this->x = old.x;
+        this->y = old.y;
+        this->z = old.z;
+    }
 
-    Vector3 operator*(const double a);
+    __inline ~Point() {}
 
-    Point& operator+=(const Vector3& rhs);
-    Point& operator-=(const Vector3& rhs);
-    Vector3& operator-=(const Point& rhs);
+    __inline Point operator-() {
+        return Point(
+            -this->x,
+            -this->y,
+            -this->z
+        );
+    }
+
+    __inline Point operator+(const Vector3& other) {
+        return Point(
+            this->x + other.x,
+            this->y + other.y,
+            this->z + other.z
+        );
+    }
+
+    __inline Point operator-(const Vector3& rhs) {
+        return Point(
+            this->x - rhs.x,
+            this->y - rhs.y,
+            this->z - rhs.z
+        );
+    }
+
+    __inline Vector3 operator-(const Point& rhs) {
+        return Vector3(
+            this->x - rhs.x,
+            this->y - rhs.y,
+            this->z - rhs.z
+        );
+    }
+
+    __inline Point& operator=(const Point& rhs) {
+        this->x = rhs.x;
+        this->y = rhs.y;
+        this->z = rhs.z;
+
+        return *this;
+    }
+
+    __inline Point& operator+=(const Vector3& rhs) {
+        this->x += rhs.x;
+        this->y += rhs.y;
+        this->z += rhs.z;
+
+        return *this;
+    }
+
+    __inline Point& operator-=(const Vector3& rhs) {
+        this->x -= rhs.x;
+        this->y -= rhs.y;
+        this->z -= rhs.z;
+
+        return *this;
+    }
 };
 
 #endif /* POINT_H_ */
