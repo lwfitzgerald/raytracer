@@ -16,25 +16,25 @@ public:
 
     Vector3();
     Vector3(const double x, const double y, const double z);
-    Vector3(const Vector3 & old);
+    Vector3(const Vector3& old);
     ~Vector3();
 
     Vector3 operator-();
 
-    Vector3 operator+(const Vector3 &rhs);
-    Vector3 operator-(const Vector3 &rhs);
-    Vector3& operator=(const Vector3 &rhs);
+    Vector3 operator+(const Vector3& rhs);
+    Vector3 operator-(const Vector3& rhs);
+    Vector3& operator=(const Vector3& rhs);
 
     Vector3 operator*(const double a);
 
-    Vector3& operator+=(const Vector3 &rhs);
-    Vector3& operator-=(const Vector3 &rhs);
+    Vector3& operator+=(const Vector3& rhs);
+    Vector3& operator-=(const Vector3& rhs);
 
     double mag();
     double magsqr();
 
-    double dot(const Vector3 &rhs);
-    Vector3 cross(const Vector3 &rhs);
+    double dot(const Vector3& rhs);
+    Vector3 cross(const Vector3& rhs);
 
     void normalise();
     Vector3 hat();
