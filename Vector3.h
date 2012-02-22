@@ -22,7 +22,7 @@ public:
     Vector3 operator-();
 
     Vector3 operator+(const Vector3& other);
-    Vector3 operator-(const Vector3& other);
+    Vector3 operator-(const Vector3& rhs);
     Vector3& operator=(const Vector3& rhs);
 
     Vector3 operator*(const double scalar);

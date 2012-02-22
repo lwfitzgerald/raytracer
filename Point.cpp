@@ -31,11 +31,11 @@ Point Point::operator-() {
     );
 }
 
-Point Point::operator+(const Vector3& rhs) {
+Point Point::operator+(const Vector3& other) {
     return Point(
-        this->x + rhs.x,
-        this->y + rhs.y,
-        this->z + rhs.z
+        this->x + other.x,
+        this->y + other.y,
+        this->z + other.z
     );
 }
 

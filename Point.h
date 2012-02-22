@@ -23,7 +23,7 @@ public:
 
     Point operator-();
 
-    Point operator+(const Vector3& rhs);
+    Point operator+(const Vector3& other);
     Point operator-(const Vector3& rhs);
     Vector3 operator-(const Point& rhs);
     Point& operator=(const Point& rhs);
@@ -33,8 +33,6 @@ public:
     Point& operator+=(const Vector3& rhs);
     Point& operator-=(const Vector3& rhs);
     Vector3& operator-=(const Point& rhs);
-
-
 };
 
 #endif /* POINT_H_ */

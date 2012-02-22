@@ -41,11 +41,11 @@ __inline Vector3 Vector3::operator+(const Vector3& other) {
     );
 }
 
-__inline Vector3 Vector3::operator-(const Vector3& other) {
+__inline Vector3 Vector3::operator-(const Vector3& rhs) {
     return Vector3(
-        this->x - other.x,
-        this->y - other.y,
-        this->z - other.z
+        this->x - rhs.x,
+        this->y - rhs.y,
+        this->z - rhs.z
     );
 }
 
