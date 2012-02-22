@@ -33,19 +33,19 @@ __inline Vector3 Vector3::operator-() {
     );
 }
 
-__inline Vector3 Vector3::operator+(const Vector3& rhs) {
+__inline Vector3 Vector3::operator+(const Vector3& other) {
     return Vector3(
-        this->x + rhs.x,
-        this->y + rhs.y,
-        this->z + rhs.z
+        this->x + other.x,
+        this->y + other.y,
+        this->z + other.z
     );
 }
 
-__inline Vector3 Vector3::operator-(const Vector3& rhs) {
+__inline Vector3 Vector3::operator-(const Vector3& other) {
     return Vector3(
-        this->x - rhs.x,
-        this->y - rhs.y,
-        this->z - rhs.z
+        this->x - other.x,
+        this->y - other.y,
+        this->z - other.z
     );
 }
 
@@ -57,26 +57,26 @@ __inline Vector3 &Vector3::operator=(const Vector3& rhs) {
     return *this;
 }
 
-__inline Vector3 Vector3::operator*(const double a) {
+__inline Vector3 Vector3::operator*(const double other) {
     return Vector3(
-        a * this->x,
-        a * this->y,
-        a * this->z
+        other * this->x,
+        other * this->y,
+        other * this->z
     );
 }
 
-__inline Vector3& Vector3::operator+=(const Vector3& rhs) {
-    this->x += rhs.x;
-    this->y += rhs.y;
-    this->z += rhs.z;
+__inline Vector3& Vector3::operator+=(const Vector3& other) {
+    this->x += other.x;
+    this->y += other.y;
+    this->z += other.z;
 
     return *this;
 }
 
-__inline Vector3& Vector3::operator-=(const Vector3& rhs) {
-    this->x -= rhs.x;
-    this->y -= rhs.y;
-    this->z -= rhs.z;
+__inline Vector3& Vector3::operator-=(const Vector3& other) {
+    this->x -= other.x;
+    this->y -= other.y;
+    this->z -= other.z;
 
     return *this;
 }
@@ -89,15 +89,15 @@ __inline double Vector3::magsqr() {
     return sqr(this->x) + sqr(this->y) + sqr(this->z);
 }
 
-__inline double Vector3::dot(const Vector3 & rhs) {
-    return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
+__inline double Vector3::dot(const Vector3& other) {
+    return this->x * other.x + this->y * other.y + this->z * other.z;
 }
 
-__inline Vector3 Vector3::cross(const Vector3 & rhs) {
+__inline Vector3 Vector3::cross(const Vector3& other) {
     return Vector3(
-        this->y * rhs.z + this->z * rhs.y,
-        this->z * rhs.x + this->x * rhs.z,
-        this->x * rhs.y + this->y * rhs.x
+        this->y * other.z + this->z * other.y,
+        this->z * other.x + this->x * other.z,
+        this->x * other.y + this->y * other.x
     );
 }
 
