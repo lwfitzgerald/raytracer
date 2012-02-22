@@ -18,75 +18,23 @@ public:
 
     __inline Point3() {}
 
-    __inline Point3(const double x, const double y, const double z) {
-        this->x = x;
-        this->y = y;
-        this->z = z;
-    }
+    __inline Point3(const double x, const double y, const double z)
+    : x(x), y(y), z(z) {}
 
-    __inline Point3(const Point3& old) {
-        this->x = old.x;
-        this->y = old.y;
-        this->z = old.z;
-    }
+    __inline Point3(const Point3& old)
+    : x(old.x), y(old.y), z(old.z) {}
 
     __inline ~Point3() {}
 
-    __inline Point3 operator-() const {
-        return Point3(
-            -this->x,
-            -this->y,
-            -this->z
-        );
-    }
+    __inline Point3 operator+(const Vector3& other) const;
+    __inline Point3 operator-(const Vector3& rhs) const;
 
-    __inline Point3 operator+(const Vector3& other) const {
-        return Point3(
-            this->x + other.x,
-            this->y + other.y,
-            this->z + other.z
-        );
-    }
+    __inline Vector3 operator-(const Point3& rhs) const;
 
-    __inline Point3 operator-(const Vector3& rhs) const {
-        return Point3(
-            this->x - rhs.x,
-            this->y - rhs.y,
-            this->z - rhs.z
-        );
-    }
+    __inline Point3& operator=(const Point3& rhs);
 
-    __inline Vector3 operator-(const Point3& rhs) const {
-        return Vector3(
-            this->x - rhs.x,
-            this->y - rhs.y,
-            this->z - rhs.z
-        );
-    }
-
-    __inline Point3& operator=(const Point3& rhs) {
-        this->x = rhs.x;
-        this->y = rhs.y;
-        this->z = rhs.z;
-
-        return *this;
-    }
-
-    __inline Point3& operator+=(const Vector3& rhs) {
-        this->x += rhs.x;
-        this->y += rhs.y;
-        this->z += rhs.z;
-
-        return *this;
-    }
-
-    __inline Point3& operator-=(const Vector3& rhs) {
-        this->x -= rhs.x;
-        this->y -= rhs.y;
-        this->z -= rhs.z;
-
-        return *this;
-    }
+    __inline Point3& operator+=(const Vector3& rhs);
+    __inline Point3& operator-=(const Vector3& rhs);
 };
 
 #endif /* POINT_H_ */

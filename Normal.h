@@ -8,7 +8,7 @@
 #ifndef NORMAL_H_
 #define NORMAL_H_
 
-#include "Vector3.h"
+#include "Prereqs.h"
 
 class Normal {
 public:
@@ -18,79 +18,32 @@ public:
 
     __inline Normal() {}
 
-    __inline Normal(const double x, const double y, const double z) {
-        this->x = x;
-        this->y = y;
-        this->z = z;
-    }
+    __inline Normal(const double x, const double y, const double z)
+    : x(x), y(y), z(z) {}
 
-    __inline Normal(const Normal& old) {
-        this->x = old.x;
-        this->y = old.y;
-        this->z = old.z;
-    }
+    __inline Normal(const Normal& old)
+    : x(old.x), y(old.y), z(old.z) {}
 
     __inline ~Normal() {}
 
-    __inline Normal operator-() const {
-        return Normal(
-            -this->x,
-            -this->y,
-            -this->z
-        );
+    Normal operator-() const;
+
+    Normal operator+(const Normal& other) const;
+    Vector3 operator+(const Vector3& other) const;
+
+    // Scalar mult
+    __inline friend Normal operator*(const double lhs, const Normal& rhs) {
+        return rhs * lhs;
     }
+    Normal operator*(const double& rhs) const;
 
-    __inline Normal operator+(const Normal& other) const {
-        return Normal(
-            this->x + other.x,
-            this->y + other.y,
-            this->z + other.z
-        );
-    }
+    double operator*(const Vector3& other) const;
 
-    __inline Vector3 operator+(const Vector3& other) const {
-        return Vector3(
-            this->x + other.x,
-            this->y + other.y,
-            this->z + other.z
-        );
-    }
+    Normal& operator=(const Normal& rhs);
 
-    __inline Normal operator*(const double a) const {
-        return Normal(
-            a * this->x,
-            a * this->y,
-            a * this->z
-        );
-    }
+    Normal& operator+=(const Normal& rhs);
 
-    __inline Normal& operator=(const Normal& rhs) {
-        this->x = rhs.x;
-        this->y = rhs.y;
-        this->z = rhs.z;
-
-        return *this;
-    }
-
-    __inline Normal& operator+=(const Normal& rhs) {
-        this->x += rhs.x;
-        this->y += rhs.y;
-        this->z += rhs.z;
-
-        return *this;
-    }
-
-    __inline Normal& operator-=(const Normal& rhs) {
-        this->x -= rhs.x;
-        this->y -= rhs.y;
-        this->z -= rhs.z;
-
-        return *this;
-    }
-
-    __inline double dot(const Vector3& rhs) const {
-        return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
-    }
+    Normal& operator-=(const Normal& rhs);
 };
 
 #endif /* NORMAL_H_ */
