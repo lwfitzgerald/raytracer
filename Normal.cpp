@@ -16,19 +16,19 @@ __inline Normal Normal::operator-() const {
     );
 }
 
-__inline Normal Normal::operator+(const Normal& other) const {
+__inline Normal Normal::operator+(const Normal& rhs) const {
     return Normal(
-        this->x + other.x,
-        this->y + other.y,
-        this->z + other.z
+        this->x + rhs.x,
+        this->y + rhs.y,
+        this->z + rhs.z
     );
 }
 
-__inline Vector3 Normal::operator+(const Vector3& other) const {
+__inline Vector3 Normal::operator+(const Vector3& rhs) const {
     return Vector3(
-        this->x + other.x,
-        this->y + other.y,
-        this->z + other.z
+        this->x + rhs.x,
+        this->y + rhs.y,
+        this->z + rhs.z
     );
 }
 
@@ -40,8 +40,8 @@ __inline Normal Normal::operator*(const double& rhs) const {
     );
 }
 
-__inline double Normal::operator*(const Vector3& other) const {
-    return this->x * other.x + this->y * other.y + this->z * other.z;
+__inline double Normal::operator*(const Vector3& rhs) const {
+    return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
 }
 
 __inline Normal& Normal::operator=(const Normal& rhs) {

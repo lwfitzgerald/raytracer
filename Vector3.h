@@ -33,7 +33,7 @@ public:
     Vector3& operator=(const Vector3& rhs);
 
     // Scalar mult
-    __inline friend Vector3 operator*(const double lhs, const Vector3& rhs) {
+    __inline friend Vector3 operator*(const double& lhs, const Vector3& rhs) {
         return rhs * lhs;
     }
     Vector3 operator*(const double& rhs) const;

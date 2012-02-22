@@ -28,21 +28,20 @@ public:
 
     Normal operator-() const;
 
-    Normal operator+(const Normal& other) const;
-    Vector3 operator+(const Vector3& other) const;
+    Normal operator+(const Normal& rhs) const;
+    Vector3 operator+(const Vector3& rhs) const;
 
     // Scalar mult
-    __inline friend Normal operator*(const double lhs, const Normal& rhs) {
+    __inline friend Normal operator*(const double& lhs, const Normal& rhs) {
         return rhs * lhs;
     }
     Normal operator*(const double& rhs) const;
 
-    double operator*(const Vector3& other) const;
+    double operator*(const Vector3& rhs) const;
 
     Normal& operator=(const Normal& rhs);
 
     Normal& operator+=(const Normal& rhs);
-
     Normal& operator-=(const Normal& rhs);
 };
 
