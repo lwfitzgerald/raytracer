@@ -16,15 +16,15 @@ public:
     double y;
     double z;
 
-    __inline Vector3() {};
+    Vector3() {};
 
-    __inline Vector3(const double x, const double y, const double z)
+    Vector3(const double x, const double y, const double z)
     : x(x), y(y), z(z) {}
 
-    __inline Vector3(const Vector3& old)
+    Vector3(const Vector3& old)
     : x(old.x), y(old.y), z(old.z) {}
 
-    __inline ~Vector3() {};
+    ~Vector3() {};
 
     Vector3 operator-() const;
 
@@ -33,7 +33,7 @@ public:
     Vector3& operator=(const Vector3& rhs);
 
     // Scalar mult
-    __inline friend Vector3 operator*(const double& lhs, const Vector3& rhs) {
+    friend Vector3 operator*(const double& lhs, const Vector3& rhs) {
         return rhs * lhs;
     }
     Vector3 operator*(const double& rhs) const;

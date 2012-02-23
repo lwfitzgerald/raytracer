@@ -8,14 +8,22 @@
 #ifndef RAY_H_
 #define RAY_H_
 
-class Point3;
-class Vector3;
+#include "Point3.h"
+#include "Vector3.h"
 
 class Ray {
 public:
-    Ray();
-    Ray(const Point3 origin, const Vector3& direction);
-    Ray(const Ray& old);
+    Point3 origin;
+    Vector3 direction;
+
+    Ray() {}
+
+    Ray(const Point3& origin, const Vector3& direction)
+    : origin(origin), direction(direction) {}
+
+    Ray(const Ray& old)
+    : origin(old.origin), direction(old.direction) {}
+
     ~Ray();
 
     Ray& operator=(const Ray& rhs);

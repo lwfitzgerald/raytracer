@@ -16,25 +16,30 @@ public:
     double y;
     double z;
 
-    __inline Point3() {}
+    Point3() {}
 
-    __inline Point3(const double x, const double y, const double z)
+    Point3(const double x, const double y, const double z)
     : x(x), y(y), z(z) {}
 
-    __inline Point3(const Point3& old)
+    Point3(const Point3& old)
     : x(old.x), y(old.y), z(old.z) {}
 
-    __inline ~Point3() {}
+    ~Point3() {}
 
-    __inline Point3 operator+(const Vector3& other) const;
-    __inline Point3 operator-(const Vector3& rhs) const;
+    Point3 operator+(const Vector3& other) const;
+    Point3 operator-(const Vector3& rhs) const;
 
-    __inline Vector3 operator-(const Point3& rhs) const;
+    Vector3 operator-(const Point3& rhs) const;
 
-    __inline Point3& operator=(const Point3& rhs);
+    Point3& operator=(const Point3& rhs);
 
-    __inline Point3& operator+=(const Vector3& rhs);
-    __inline Point3& operator-=(const Vector3& rhs);
+    friend Point3 operator*(const double& lhs, const Point3& rhs) {
+        return rhs * lhs;
+    }
+    Point3 operator*(const double& rhs) const;
+
+    Point3& operator+=(const Vector3& rhs);
+    Point3& operator-=(const Vector3& rhs);
 };
 
 #endif /* POINT_H_ */

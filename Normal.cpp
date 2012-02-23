@@ -8,7 +8,7 @@
 #include "Normal.h"
 #include "Vector3.h"
 
-__inline Normal Normal::operator-() const {
+Normal Normal::operator-() const {
     return Normal(
         -this->x,
         -this->y,
@@ -16,7 +16,7 @@ __inline Normal Normal::operator-() const {
     );
 }
 
-__inline Normal Normal::operator+(const Normal& rhs) const {
+Normal Normal::operator+(const Normal& rhs) const {
     return Normal(
         this->x + rhs.x,
         this->y + rhs.y,
@@ -24,7 +24,7 @@ __inline Normal Normal::operator+(const Normal& rhs) const {
     );
 }
 
-__inline Vector3 Normal::operator+(const Vector3& rhs) const {
+Vector3 Normal::operator+(const Vector3& rhs) const {
     return Vector3(
         this->x + rhs.x,
         this->y + rhs.y,
@@ -32,7 +32,7 @@ __inline Vector3 Normal::operator+(const Vector3& rhs) const {
     );
 }
 
-__inline Normal Normal::operator*(const double& rhs) const {
+Normal Normal::operator*(const double& rhs) const {
     return Normal(
         rhs * this->x,
         rhs * this->y,
@@ -40,11 +40,11 @@ __inline Normal Normal::operator*(const double& rhs) const {
     );
 }
 
-__inline double Normal::operator*(const Vector3& rhs) const {
+double Normal::operator*(const Vector3& rhs) const {
     return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
 }
 
-__inline Normal& Normal::operator=(const Normal& rhs) {
+Normal& Normal::operator=(const Normal& rhs) {
     this->x = rhs.x;
     this->y = rhs.y;
     this->z = rhs.z;
@@ -52,7 +52,7 @@ __inline Normal& Normal::operator=(const Normal& rhs) {
     return *this;
 }
 
-__inline Normal& Normal::operator+=(const Normal& rhs) {
+Normal& Normal::operator+=(const Normal& rhs) {
     this->x += rhs.x;
     this->y += rhs.y;
     this->z += rhs.z;
@@ -60,7 +60,7 @@ __inline Normal& Normal::operator+=(const Normal& rhs) {
     return *this;
 }
 
-__inline Normal& Normal::operator-=(const Normal& rhs) {
+Normal& Normal::operator-=(const Normal& rhs) {
     this->x -= rhs.x;
     this->y -= rhs.y;
     this->z -= rhs.z;

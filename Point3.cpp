@@ -7,7 +7,7 @@
 
 #include "Point3.h"
 
-__inline Point3 Point3::operator+(const Vector3& other) const {
+Point3 Point3::operator+(const Vector3& other) const {
     return Point3(
         this->x + other.x,
         this->y + other.y,
@@ -15,7 +15,7 @@ __inline Point3 Point3::operator+(const Vector3& other) const {
     );
 }
 
-__inline Point3 Point3::operator-(const Vector3& rhs) const {
+Point3 Point3::operator-(const Vector3& rhs) const {
     return Point3(
         this->x - rhs.x,
         this->y - rhs.y,
@@ -23,7 +23,7 @@ __inline Point3 Point3::operator-(const Vector3& rhs) const {
     );
 }
 
-__inline Vector3 Point3::operator-(const Point3& rhs) const {
+Vector3 Point3::operator-(const Point3& rhs) const {
     return Vector3(
         this->x - rhs.x,
         this->y - rhs.y,
@@ -31,7 +31,7 @@ __inline Vector3 Point3::operator-(const Point3& rhs) const {
     );
 }
 
-__inline Point3& Point3::operator=(const Point3& rhs) {
+Point3& Point3::operator=(const Point3& rhs) {
     this->x = rhs.x;
     this->y = rhs.y;
     this->z = rhs.z;
@@ -39,7 +39,15 @@ __inline Point3& Point3::operator=(const Point3& rhs) {
     return *this;
 }
 
-__inline Point3& Point3::operator+=(const Vector3& rhs) {
+Point3 Point3::operator*(const double& rhs) const {
+    return Point3(
+        rhs * this->x,
+        rhs * this->y,
+        rhs * this->z
+    );
+}
+
+Point3& Point3::operator+=(const Vector3& rhs) {
     this->x += rhs.x;
     this->y += rhs.y;
     this->z += rhs.z;
@@ -47,10 +55,12 @@ __inline Point3& Point3::operator+=(const Vector3& rhs) {
     return *this;
 }
 
-__inline Point3& Point3::operator-=(const Vector3& rhs) {
+Point3& Point3::operator-=(const Vector3& rhs) {
     this->x -= rhs.x;
     this->y -= rhs.y;
     this->z -= rhs.z;
 
     return *this;
 }
+
+

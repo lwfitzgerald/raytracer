@@ -16,15 +16,15 @@ public:
     double y;
     double z;
 
-    __inline Normal() {}
+    Normal() {}
 
-    __inline Normal(const double x, const double y, const double z)
+    Normal(const double x, const double y, const double z)
     : x(x), y(y), z(z) {}
 
-    __inline Normal(const Normal& old)
+    Normal(const Normal& old)
     : x(old.x), y(old.y), z(old.z) {}
 
-    __inline ~Normal() {}
+    ~Normal() {}
 
     Normal operator-() const;
 
@@ -32,7 +32,7 @@ public:
     Vector3 operator+(const Vector3& rhs) const;
 
     // Scalar mult
-    __inline friend Normal operator*(const double& lhs, const Normal& rhs) {
+    friend Normal operator*(const double& lhs, const Normal& rhs) {
         return rhs * lhs;
     }
     Normal operator*(const double& rhs) const;
