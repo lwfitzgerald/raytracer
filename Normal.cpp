@@ -7,6 +7,7 @@
 
 #include "Normal.h"
 #include "Vector3.h"
+#include "Point3.h"
 
 Normal Normal::operator-() const {
     return Normal(
@@ -45,6 +46,22 @@ double Normal::operator*(const Vector3& rhs) const {
 }
 
 Normal& Normal::operator=(const Normal& rhs) {
+    this->x = rhs.x;
+    this->y = rhs.y;
+    this->z = rhs.z;
+
+    return *this;
+}
+
+Normal& Normal::operator=(const Vector3& rhs) {
+    this->x = rhs.x;
+    this->y = rhs.y;
+    this->z = rhs.z;
+
+    return *this;
+}
+
+Normal& Normal::operator=(const Point3& rhs) {
     this->x = rhs.x;
     this->y = rhs.y;
     this->z = rhs.z;

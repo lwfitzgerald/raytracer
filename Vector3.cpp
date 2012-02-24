@@ -5,11 +5,10 @@
  *      Author: darkip
  */
 
+#include "Prereqs.h"
+
 #include "Vector3.h"
 #include "Normal.h"
-#include "macros.h"
-
-#include "math.h"
 
 Vector3 Vector3::operator-() const {
     return Vector3(

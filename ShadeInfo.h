@@ -8,6 +8,8 @@
 #ifndef SHADEINFO_H_
 #define SHADEINFO_H_
 
+#include "Prereqs.h"
+
 #include "Point3.h"
 #include "Normal.h"
 #include "Colour.h"

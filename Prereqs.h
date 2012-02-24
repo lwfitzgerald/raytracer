@@ -1,7 +1,11 @@
 #ifndef PREREQS_H_
 #define PREREQS_H_
 
-class Point;
+#include "math.h"
+
+#define sqr(x) ((x) * (x))
+
+class Point3;
 class Vector3;
 class Normal;
 class Colour;

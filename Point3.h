@@ -8,6 +8,8 @@
 #ifndef POINT_H_
 #define POINT_H_
 
+#include "Prereqs.h"
+
 #include "Vector3.h"
 
 class Point3 {

@@ -40,6 +40,8 @@ public:
     double operator*(const Vector3& rhs) const;
 
     Normal& operator=(const Normal& rhs);
+    Normal& operator=(const Vector3& rhs);
+    Normal& operator=(const Point3& rhs);
 
     Normal& operator+=(const Normal& rhs);
     Normal& operator-=(const Normal& rhs);

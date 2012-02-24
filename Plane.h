@@ -9,6 +9,7 @@
 #define PLANE_H_
 
 #include "Prereqs.h"
+
 #include "Object.h"
 #include "Point3.h"
 #include "Normal.h"
