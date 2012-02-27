@@ -24,7 +24,7 @@ public:
     Colour(const Colour& old)
     : r(old.r), g(old.g), b(old.b) {}
 
-    ~Colour();
+    ~Colour() {}
 
     Colour& operator=(const Colour& rhs);
 
