@@ -41,7 +41,7 @@ Colour Colour::operator/(const double& rhs) const {
 
 Colour Colour::operator*(const Colour& rhs) const {
     return Colour(
-        this->r  * rhs.r,
+        this->r * rhs.r,
         this->g * rhs.g,
         this->b * rhs.b
     );
