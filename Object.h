@@ -14,11 +14,11 @@ class Object {
 public:
     virtual bool hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const = 0;
 
+    virtual ~Object() {};
 protected:
     static const double epsilon = 0.001;
 
     Object() {};
-    virtual ~Object() {};
 
     Object& operator=(const Object& rhs);
 };

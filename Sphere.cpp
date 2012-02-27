@@ -38,6 +38,7 @@ bool Sphere::hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const {
     if (t > this->epsilon) {
         tmin = t;
 
+        // Normal calculated by vector from C to P and then normalised using the radius
         shadeInfo.hitNormal = (oMinusC + t * ray.direction) / this->radius;
         shadeInfo.hitPoint = ray.origin + t * ray.direction;
         return true;
