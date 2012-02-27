@@ -10,21 +10,28 @@
 
 class Colour {
 public:
-    int r;
-    int g;
-    int b;
+    double r;
+    double g;
+    double b;
 
     Colour() {}
 
-    Colour(int r, int g, int b)
+    Colour(const double r, const double g, const double b)
     : r(r), g(g), b(b) {}
 
-    Colour(Colour& old)
+    Colour(const Colour& old)
     : r(old.r), g(old.g), b(old.b) {}
 
     ~Colour();
 
     Colour& operator=(const Colour& rhs);
+
+    Colour operator+(const Colour& rhs) const;
+
+    __inline friend Colour operator*(const double& lhs, const Colour& rhs) {
+        return rhs * lhs;
+    }
+    Colour operator*(const double& rhs) const;
 };
 
 #endif /* COLOUR_H_ */
