@@ -1,9 +1,9 @@
-#include "RayTracer.h"
+#include "World.h"
 
 int main(int argc, char *argv[]) {
-    RayTracer* rayTracer = new RayTracer();
-
-    rayTracer->parseInput(argc, argv);
+    World world;
+    world.setup();
+    world.renderScene();
 
     return 0;
 }

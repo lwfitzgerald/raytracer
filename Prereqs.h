@@ -13,4 +13,7 @@ class Colour;
 class Ray;
 class ShadeInfo;
 
+class World;
+class ViewPlane;
+
 #endif /* PREREQS_H_ */
