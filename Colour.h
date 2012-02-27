@@ -8,6 +8,8 @@
 #ifndef COLOUR_H_
 #define COLOUR_H_
 
+#include "Prereqs.h"
+
 class Colour {
 public:
     double r;
@@ -32,6 +34,13 @@ public:
         return rhs * lhs;
     }
     Colour operator*(const double& rhs) const;
+
+    Colour operator/(const double& rhs) const;
+    Colour operator*(const Colour& rhs) const;
+
+    Colour exp(const double& rhs) const;
+
+    Colour& operator+=(const Colour& rhs);
 };
 
 #endif /* COLOUR_H_ */
