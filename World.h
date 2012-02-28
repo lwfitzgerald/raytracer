@@ -19,16 +19,18 @@
 class World {
 public:
     World() {}
-    ~World() {}
+    ~World();
 
     void setup();
     void renderScene() const;
+
+    void addObject(Object* object);
 private:
     Colour backgroundColour;
     ViewPlane viewPlane;
 
     // Vector of objects in the world
-    std::vector<Object> objects;
+    std::vector<Object*> objects;
 };
 
 #endif /* WORLD_H_ */

@@ -7,11 +7,24 @@
 
 #include "World.h"
 
+World::~World() {
+    // On destruction, delete all objects
+
+    std::vector<Object*>::iterator itr;
+
+    for (itr=this->objects.begin(); itr < this->objects.end(); itr++) {
+        delete *itr;
+    }
+}
+
 void World::setup() {
     // First specify the view plane parameters
-    viewPlane.setResolution(640, 480); // TODO: Move these "magic numbers" out of this file
-    viewPlane.setPixelSize(1.0);
-    viewPlane.setGamma(1.0);
+    this->viewPlane.setResolution(HORIZONTAL_RES, VERTICAL_RES);
+    this->viewPlane.setPixelSize(PIXEL_SIZE);
+    this->viewPlane.setGamma(GAMMA);
+
+    this->viewPlane.setPixelColour(0, 0, RED);
+    this->viewPlane.writePPM("output.ppm");
 
     // Set the background colour
     //backgroundColour =
@@ -19,4 +32,8 @@ void World::setup() {
 
 void World::renderScene() const {
 
+}
+
+void World::addObject(Object* object) {
+    this->objects.push_back(object);
 }
