@@ -1,7 +1,10 @@
 #ifndef PREREQS_H_
 #define PREREQS_H_
 
-#include "math.h"
+#include <cmath>
+#include <string>
+
+#include "Constants.h"
 
 #define sqr(x) ((x) * (x))
 
