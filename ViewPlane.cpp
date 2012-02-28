@@ -15,7 +15,6 @@
 #define MAX_COLOUR_VALUE       255  // Maximum colour value
 #define MAX_COLOUR_VALUE_CHARS 3    // Maximum number of characters for a colour value
 
-
 void ViewPlane::setResolution(const int horizontal, const int vertical) {
     this->horizontalRes = horizontal;
     this->verticalRes = vertical;

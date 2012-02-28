@@ -8,6 +8,8 @@
 #ifndef RAY_H_
 #define RAY_H_
 
+#include "Prereqs.h"
+
 #include "Point3.h"
 #include "Vector3.h"
 
@@ -24,7 +26,7 @@ public:
     Ray(const Ray& old)
     : origin(old.origin), direction(old.direction) {}
 
-    ~Ray();
+    ~Ray() {}
 
     Ray& operator=(const Ray& rhs);
 };

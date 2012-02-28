@@ -9,10 +9,11 @@
 #define CONSTANTS_H_
 
 // Render settings
-#define HORIZONTAL_RES 1
-#define VERTICAL_RES   1
-#define PIXEL_SIZE     1.0
-#define GAMMA          1.0
+#define HORIZONTAL_RES  640
+#define VERTICAL_RES    480
+#define PIXEL_SIZE      1.0
+#define GAMMA           1.0
+#define OUTPUT_FILENAME "output.ppm"
 
 // Define some colours
 #define BLACK          Colour(0, 0, 0)

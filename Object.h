@@ -9,9 +9,12 @@
 #define OBJECT_H_
 
 #include "Prereqs.h"
+#include "Colour.h"
 
 class Object {
 public:
+    Colour colour;
+
     virtual bool hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const = 0;
 
     virtual ~Object() {};

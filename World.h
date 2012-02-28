@@ -22,7 +22,7 @@ public:
     ~World();
 
     void setup();
-    void renderScene() const;
+    void renderScene();
 
     void addObject(Object* object);
 private:
@@ -31,6 +31,8 @@ private:
 
     // Vector of objects in the world
     std::vector<Object*> objects;
+
+    ShadeInfo hitObjects(const Ray& ray) const;
 };
 
 #endif /* WORLD_H_ */
