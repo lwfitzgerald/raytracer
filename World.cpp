@@ -14,12 +14,13 @@
 #include "Point3.h"
 #include "Plane.h"
 #include "Sphere.h"
-
-#define VIEW_PLANE_Z 100;
+#include "RegularCamera.h"
 
 World::~World() {
-    // On destruction, delete all objects
+    // Delete the camera
+    delete this->camera;
 
+    // On destruction, delete all objects
     std::vector<Object*>::iterator itr;
 
     for (itr=this->objects.begin(); itr < this->objects.end(); itr++) {
@@ -35,6 +36,12 @@ void World::setup() {
 
     this->backgroundColour = BLUE;
 
+    // Configure the camera
+    this->camera = new RegularCamera();
+    this->camera->calcUVW();
+    ((RegularCamera*) this->camera)->setViewPlaneDistance(300);
+    this->camera->renderScene(*this);
+
     Sphere* sphere1 = new Sphere(Point3(0, 0, -25), 80);
     sphere1->colour = RED;
     addObject(sphere1);
@@ -49,29 +56,7 @@ void World::setup() {
 }
 
 void World::renderScene() {
-    Ray ray;
-    ShadeInfo shadeInfo;
-    double x, y, z = VIEW_PLANE_Z;
-
-    for (int i=0; i < this->viewPlane.verticalRes; i++) {
-        for (int j=0; j < this->viewPlane.horizontalRes; j++) {
-            x = this->viewPlane.pixelSize * (j - 0.5 * (this->viewPlane.horizontalRes - 1.0));
-            y = this->viewPlane.pixelSize * (i - 0.5 * (this->viewPlane.verticalRes - 1.0));
-            ray.origin = Point3(x, y, z);
-
-            // Intersect will all objects in scene
-            shadeInfo = hitObjects(ray);
-
-            if (shadeInfo.hit) {
-                this->viewPlane.setPixelColour(j, i, shadeInfo.colour);
-            } else {
-                this->viewPlane.setPixelColour(j, i, this->backgroundColour);
-            }
-        }
-    }
-
-    // Write output image
-    this->viewPlane.writePPM(OUTPUT_FILENAME);
+    camera->renderScene(*this);
 }
 
 ShadeInfo World::hitObjects(const Ray& ray) const {

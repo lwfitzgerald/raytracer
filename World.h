@@ -18,6 +18,12 @@
 
 class World {
 public:
+    Colour backgroundColour;
+    ViewPlane viewPlane;
+
+    // Vector of objects in the world
+    std::vector<Object*> objects;
+
     World() {}
     ~World();
 
@@ -25,14 +31,10 @@ public:
     void renderScene();
 
     void addObject(Object* object);
-private:
-    Colour backgroundColour;
-    ViewPlane viewPlane;
-
-    // Vector of objects in the world
-    std::vector<Object*> objects;
 
     ShadeInfo hitObjects(const Ray& ray) const;
+private:
+    Camera* camera;
 };
 
 #endif /* WORLD_H_ */

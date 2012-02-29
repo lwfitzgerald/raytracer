@@ -9,6 +9,7 @@
 
 #define sqr(x) ((x) * (x))
 
+class Object;
 class Point3;
 class Vector3;
 class Normal;
@@ -19,5 +20,7 @@ class ShadeInfo;
 
 class World;
 class ViewPlane;
+class Camera;
+class RegularCamera;
 
 #endif /* PREREQS_H_ */
