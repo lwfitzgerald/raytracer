@@ -68,7 +68,7 @@ void ViewPlane::writePPM(const char* filename) const {
      */
     int lineCount = 0;
 
-    for (int i=0; i < this->verticalRes; i++) {
+    for (int i=this->verticalRes-1; i >= 0; i--) {
         for (int j=0; j < this->horizontalRes; j++) {
             Colour& pixelColour = getPixelColour(j, i);
 
