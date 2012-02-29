@@ -18,7 +18,8 @@ public:
     Point3 origin;
     Vector3 direction;
 
-    Ray() {}
+    Ray()
+    : origin(0.0, 0.0, 0.0), direction(0.0, 0.0, -1.0) {}
 
     Ray(const Point3& origin, const Vector3& direction)
     : origin(origin), direction(direction) {}

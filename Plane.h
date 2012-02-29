@@ -24,7 +24,7 @@ public:
     Plane(const Plane& old)
     : position(old.position), normal(old.normal) {}
 
-    virtual ~Plane();
+    virtual ~Plane() {}
 
     Plane& operator=(const Plane& rhs);
 

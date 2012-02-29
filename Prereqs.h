@@ -1,6 +1,7 @@
 #ifndef PREREQS_H_
 #define PREREQS_H_
 
+#include <iostream>
 #include <cmath>
 #include <string>
 

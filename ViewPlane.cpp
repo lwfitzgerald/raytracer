@@ -7,7 +7,6 @@
 
 #include "ViewPlane.h"
 
-#include <iostream>
 #include <fstream>
 
 #define PPM_MAGIC_NUMBER       "P3" // PPM magic number
@@ -37,14 +36,14 @@ void ViewPlane::setGamma(const float gamma) {
 }
 
 void ViewPlane::setPixelColour(const int x, const int y, const Colour& colour) {
-    pixelColours[x * this->verticalRes + y] = colour;
+    pixelColours[y * this->horizontalRes + x] = colour;
 }
 
 Colour& ViewPlane::getPixelColour(const int x, const int y) const {
-    return pixelColours[x * this->verticalRes + y];
+    return pixelColours[y * this->horizontalRes + x];
 }
 
-void ViewPlane::writePPM(char* filename) const {
+void ViewPlane::writePPM(const char* filename) const {
     std::ofstream file;
     file.open(filename);
 
@@ -69,21 +68,23 @@ void ViewPlane::writePPM(char* filename) const {
      */
     int lineCount = 0;
 
-    for (int i=0; i < this->horizontalRes; i++) {
-        for (int j=0; j < this->verticalRes; j++) {
-            Colour& pixelColour = getPixelColour(i, j);
+    for (int i=0; i < this->verticalRes; i++) {
+        for (int j=0; j < this->horizontalRes; j++) {
+            Colour& pixelColour = getPixelColour(j, i);
 
             if (lineCount + (3 * (MAX_COLOUR_VALUE_CHARS + 1)) > PPM_MAX_CHARS_PER_LINE) {
                 // We'll go over 70 chars per line so insert line break
                 file << std::endl;
+                lineCount = 0;
             }
 
-            file << pixelColour.r * MAX_COLOUR_VALUE << " ";
-            file << pixelColour.g * MAX_COLOUR_VALUE << " ";
-            file << pixelColour.b * MAX_COLOUR_VALUE << " ";
+            file << (int) (pixelColour.r * MAX_COLOUR_VALUE) << " ";
+            file << (int) (pixelColour.g * MAX_COLOUR_VALUE) << " ";
+            file << (int) (pixelColour.b * MAX_COLOUR_VALUE) << " ";
+
+            lineCount += (3 * (MAX_COLOUR_VALUE_CHARS + 1));
         }
     }
 
-    //file.flush();
     file.close();
 }

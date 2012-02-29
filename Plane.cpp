@@ -17,7 +17,7 @@ Plane& Plane::operator=(const Plane& rhs) {
 }
 
 bool Plane::hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const {
-    double t = ((this->position - ray.origin) * this->normal) / (ray.direction * this->normal);
+    double t = (this->position - ray.origin) * this->normal / (ray.direction * this->normal);
 
     if (t > this->epsilon) {
         tmin = t;

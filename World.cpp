@@ -12,6 +12,7 @@
 #include "Ray.h"
 #include "ShadeInfo.h"
 #include "Point3.h"
+#include "Plane.h"
 #include "Sphere.h"
 
 #define VIEW_PLANE_Z 100;
@@ -32,27 +33,36 @@ void World::setup() {
     this->viewPlane.setPixelSize(PIXEL_SIZE);
     this->viewPlane.setGamma(GAMMA);
 
-    Sphere* test = new Sphere(Point3(0, 0, 0), 85);
+    this->backgroundColour = BLUE;
+
+    Sphere* test = new Sphere(Point3(0, 0, -25), 80);
+    test->colour = RED;
     addObject(test);
 
-    this->viewPlane.writePPM(OUTPUT_FILENAME);
-
-    // Set the background colour
-    //backgroundColour =
+    Plane* test2 = new Plane(Point3(0, 0, -50), Normal(0, 0, 1));
+    test2->colour = GREEN;
+    addObject(test2);
 }
 
 void World::renderScene() {
-    Colour pixelColour;
     Ray ray;
+    ShadeInfo shadeInfo;
     double x, y, z = VIEW_PLANE_Z;
 
-    for (int i=0; i < this->viewPlane.horizontalRes; i++) {
-        for (int j=0; j < this->viewPlane.verticalRes; j++) {
+    for (int i=0; i < this->viewPlane.verticalRes; i++) {
+        for (int j=0; j < this->viewPlane.horizontalRes; j++) {
             x = this->viewPlane.pixelSize * (j - 0.5 * (this->viewPlane.horizontalRes - 1.0));
-            y = this->viewPlane.pixelSize * (j - 0.5 * (this->viewPlane.horizontalRes - 1.0));
+            y = this->viewPlane.pixelSize * (i - 0.5 * (this->viewPlane.verticalRes - 1.0));
             ray.origin = Point3(x, y, z);
 
-            this->viewPlane.setPixelColour(i, j, pixelColour);
+            // Intersect will all objects in scene
+            shadeInfo = hitObjects(ray);
+
+            if (shadeInfo.hit) {
+                this->viewPlane.setPixelColour(j, i, shadeInfo.colour);
+            } else {
+                this->viewPlane.setPixelColour(j, i, this->backgroundColour);
+            }
         }
     }
 

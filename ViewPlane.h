@@ -38,7 +38,7 @@ public:
     void setPixelColour(const int x, const int y, const Colour& colour);
     Colour& getPixelColour(const int x, const int y) const;
 
-    void writePPM(char* filename) const;
+    void writePPM(const char* filename) const;
 
 private:
     Colour* pixelColours;
