@@ -35,13 +35,17 @@ void World::setup() {
 
     this->backgroundColour = BLUE;
 
-    Sphere* test = new Sphere(Point3(0, 0, -25), 80);
-    test->colour = RED;
-    addObject(test);
+    Sphere* sphere1 = new Sphere(Point3(0, 0, -25), 80);
+    sphere1->colour = RED;
+    addObject(sphere1);
 
-    Plane* test2 = new Plane(Point3(0, 0, -50), Normal(0, 0, 1));
-    test2->colour = GREEN;
-    addObject(test2);
+    Sphere* sphere2 = new Sphere(Point3(0, 40, -25), 80);
+    sphere2->colour = BLUE;
+    addObject(sphere2);
+
+    Plane* plane = new Plane(Point3(0, 0, -50), Normal(0, 0, 1));
+    plane->colour = GREEN;
+    addObject(plane);
 }
 
 void World::renderScene() {
@@ -74,8 +78,8 @@ ShadeInfo World::hitObjects(const Ray& ray) const {
     ShadeInfo shadeInfo;
     double t;
 
-    // Set tmin to largest possible double value
-    double tmin = std::numeric_limits<double>::max();
+    // Set tmin to infinity
+    double tmin = std::numeric_limits<double>::infinity();
 
     for (unsigned int i=0; i < this->objects.size(); i++) {
         if (this->objects[i]->hit(ray, t, shadeInfo) && t < tmin) {
