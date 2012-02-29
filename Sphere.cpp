@@ -17,7 +17,7 @@ Sphere& Sphere::operator=(Sphere& rhs) {
     return *this;
 }
 
-bool Sphere::hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const {
+bool Sphere::hit(const Ray& ray, double& tmin) const {
     Vector3 oMinusC = ray.origin - this->center;
     const double a = ray.direction * ray.direction;
     const double b = 2.0 * ray.direction * oMinusC;
@@ -37,23 +37,24 @@ bool Sphere::hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const {
 
     if (t > this->epsilon) {
         tmin = t;
-
-        // Normal calculated by vector from C to P and then normalised using the radius
-        shadeInfo.hitNormal = (oMinusC + t * ray.direction) / this->radius;
-        shadeInfo.hitPoint = ray.origin + t * ray.direction;
         return true;
     }
 
     // Handle the + root
     t = (-b + discroot) / denom;
 
-    if (t > this->epsilon) {
+    if (t > this->epsilon && t) {
         tmin = t;
-
-        shadeInfo.hitNormal = (oMinusC + t * ray.direction) / this->radius;
-        shadeInfo.hitPoint = ray.origin + t * ray.direction;
         return true;
     }
 
     return false;
+}
+
+void Sphere::getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const {
+    Vector3 oMinusC = ray.origin - this->center;
+
+    // Normal calculated by vector from C to P and then normalised using the radius
+    shadeInfo.hitNormal = (oMinusC + tmin * ray.direction) / this->radius;
+    shadeInfo.hitPoint = ray.origin + tmin * ray.direction;
 }

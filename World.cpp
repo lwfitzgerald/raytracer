@@ -75,18 +75,25 @@ void World::renderScene() {
 }
 
 ShadeInfo World::hitObjects(const Ray& ray) const {
-    ShadeInfo shadeInfo;
     double t;
+    ShadeInfo shadeInfo;
+    Object* tminHitObject = NULL;
 
     // Set tmin to infinity
     double tmin = std::numeric_limits<double>::infinity();
 
     for (unsigned int i=0; i < this->objects.size(); i++) {
-        if (this->objects[i]->hit(ray, t, shadeInfo) && t < tmin) {
+        if (this->objects[i]->hit(ray, t) && t < tmin) {
             shadeInfo.hit = true;
+            tminHitObject = this->objects[i];
             tmin = t;
-            shadeInfo.colour = objects[i]->colour;
         }
+    }
+
+    if (shadeInfo.hit) {
+        // Some object was hit so get the shading information for it
+        tminHitObject->getShadeInfo(shadeInfo, ray, tmin);
+        shadeInfo.colour = tminHitObject->colour;
     }
 
     return shadeInfo;

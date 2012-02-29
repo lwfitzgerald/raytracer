@@ -27,7 +27,8 @@ public:
 
     Sphere& operator=(Sphere& rhs);
 
-    virtual bool hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const;
+    virtual bool hit(const Ray& ray, double& tmin) const;
+    virtual void getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const;
 
 private:
     Point3 center;

@@ -15,7 +15,8 @@ class Object {
 public:
     Colour colour;
 
-    virtual bool hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const = 0;
+    virtual bool hit(const Ray& ray, double& tmin) const = 0;
+    virtual void getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const = 0;
 
     virtual ~Object() {};
 protected:

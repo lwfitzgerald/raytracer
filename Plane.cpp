@@ -16,17 +16,18 @@ Plane& Plane::operator=(const Plane& rhs) {
     return *this;
 }
 
-bool Plane::hit(const Ray& ray, double& tmin, ShadeInfo& shadeInfo) const {
+bool Plane::hit(const Ray& ray, double& tmin) const {
     double t = (this->position - ray.origin) * this->normal / (ray.direction * this->normal);
 
     if (t > this->epsilon) {
         tmin = t;
-
-        shadeInfo.hitNormal = this->normal;
-        shadeInfo.hitPoint = ray.origin + t * ray.direction;
-
         return true;
     }
 
     return false;
+}
+
+void Plane::getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const {
+    shadeInfo.hitNormal = this->normal;
+    shadeInfo.hitPoint = ray.origin + tmin * ray.direction;
 }
