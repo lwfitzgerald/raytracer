@@ -69,7 +69,7 @@ void ViewPlane::writePPM(const char* filename) const {
     int lineCount = 0;
 
     for (int i=this->verticalRes-1; i >= 0; i--) {
-        for (int j=0; j < this->horizontalRes; j++) {
+        for (int j=this->horizontalRes-1; j >= 0; j--) {
             Colour& pixelColour = getPixelColour(j, i);
 
             if (lineCount + (3 * (MAX_COLOUR_VALUE_CHARS + 1)) > PPM_MAX_CHARS_PER_LINE) {

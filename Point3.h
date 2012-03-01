@@ -42,6 +42,8 @@ public:
 
     Point3& operator+=(const Vector3& rhs);
     Point3& operator-=(const Vector3& rhs);
+
+    bool operator==(const Point3& rhs);
 };
 
 #endif /* POINT_H_ */

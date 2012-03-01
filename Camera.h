@@ -19,6 +19,7 @@ public:
     :
         eye(0.0, 0, 350.0),
         lookAt(0.0, 0.0, 0.0),
+        rollAngle(0.0),
         up(0.0, 1.0, 0.0),
         u(1.0, 0.0, 0.0),
         v(0.0, 1.0, 0.0),
@@ -31,16 +32,20 @@ public:
     void setEyePoint(const Point3& point);
     void setLookAtPoint(const Point3& point);
     void setUpVector(const Vector3& vector);
+    void setRollAngle(const double& angle);
 
     void calcUVW();
 
 protected:
     Point3 eye;
     Point3 lookAt;
+    double rollAngle;
     Vector3 up;
     Vector3 u;
     Vector3 v;
     Vector3 w;
+
+    Matrix getRollTransform() const;
 };
 
 #endif /* CAMERA_H_ */

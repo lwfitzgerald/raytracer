@@ -63,4 +63,8 @@ Point3& Point3::operator-=(const Vector3& rhs) {
     return *this;
 }
 
-
+bool Point3::operator==(const Point3& rhs) {
+    return this->x == rhs.x &&
+           this->y == rhs.y &&
+           this->z == rhs.z;
+}

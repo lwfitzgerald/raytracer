@@ -38,9 +38,9 @@ void World::setup() {
 
     // Configure the camera
     this->camera = new RegularCamera();
-    this->camera->calcUVW();
     ((RegularCamera*) this->camera)->setViewPlaneDistance(300);
-    this->camera->renderScene(*this);
+    this->camera->calcUVW();
+    this->camera->setRollAngle(30);
 
     Sphere* sphere1 = new Sphere(Point3(0, 0, -25), 80);
     sphere1->colour = RED;

@@ -13,6 +13,7 @@ class Object;
 class Point3;
 class Vector3;
 class Normal;
+class Matrix;
 class Colour;
 
 class Ray;
