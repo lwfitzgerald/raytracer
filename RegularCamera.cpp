@@ -23,13 +23,13 @@ void RegularCamera::renderScene(World& world) const {
 
     for (int i=0; i < viewPlane.verticalRes; i++) {
         for (int j=0; j < viewPlane.horizontalRes; j++) {
-            x = viewPlane.pixelSize * (j - 0.5 * viewPlane.horizontalRes + 0.5);
-            y = viewPlane.pixelSize * (i - 0.5 * viewPlane.verticalRes + 0.5);
+            x = viewPlane.pixelSize * (j - viewPlane.horizontalRes / 2 + 0.5);
+            y = viewPlane.pixelSize * (i - viewPlane.verticalRes / 2 + 0.5);
 
             ray.direction = x * this->u + y * this->v - this->viewPlaneDistance * this->w;
             ray.direction.normalise();
 
-            // Intersect will all objects in scene
+            // Intersect with all objects in scene
             shadeInfo = world.hitObjects(ray);
 
             if (shadeInfo.hit) {

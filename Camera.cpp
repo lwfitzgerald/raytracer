@@ -25,7 +25,6 @@ void Camera::setRollAngle(const double& angle) {
     this->rollAngle = angle * (PI / 180);
 
     this->up = getRollTransform() * this->up;
-    calcUVW();
 }
 
 void Camera::calcUVW() {
