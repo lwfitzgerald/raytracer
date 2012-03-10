@@ -54,6 +54,12 @@ public:
 
     void normalise();
     Vector3 hat() const;
+
+    __inline friend std::ostream& operator<<(std::ostream& lhs, Vector3& rhs) {
+        lhs << "(" << rhs.x << "," << rhs.y << "," << rhs.z << ")";
+
+        return lhs;
+    }
 };
 
 #endif /* VECTOR3_H_ */
