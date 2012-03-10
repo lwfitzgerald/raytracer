@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <vector>
 
 #include "Constants.h"
 
@@ -23,5 +24,11 @@ class World;
 class ViewPlane;
 class Camera;
 class RegularCamera;
+
+class Material;
+class Lambert;
+
+class Light;
+class AmbientLight;
 
 #endif /* PREREQS_H_ */

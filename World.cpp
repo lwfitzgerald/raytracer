@@ -15,10 +15,15 @@
 #include "Objects/Plane.h"
 #include "Objects/Sphere.h"
 #include "Cameras/RegularCamera.h"
+#include "Lights/DirectionalLight.h"
+#include "Materials/Lambert.h"
 
 World::~World() {
     // Delete the camera
     delete this->camera;
+
+    // Delete the ambient light
+    delete this->ambientLight;
 
     // On destruction, delete all objects
     std::vector<Object*>::iterator itr;
@@ -34,24 +39,45 @@ void World::setup() {
     this->viewPlane.setPixelSize(PIXEL_SIZE);
     this->viewPlane.setGamma(GAMMA);
 
-    this->backgroundColour = BLUE;
+    this->backgroundColour = BLACK;
 
     // Configure the camera
     this->camera = new RegularCamera();
-    ((RegularCamera*) this->camera)->setViewPlaneDistance(50);
-    this->camera->setRollAngle(45);
+    ((RegularCamera*) this->camera)->setViewPlaneDistance(500);
+    this->camera->setRollAngle(0);
     this->camera->calcUVW();
 
-    Sphere* sphere1 = new Sphere(Point3(0, 0, -25), 80);
-    sphere1->colour = RED;
+    this->ambientLight->setIntensity(0);
+
+    DirectionalLight* directionalLight = new DirectionalLight();
+    directionalLight->setDirection(Vector3(100, 100, 200));
+    this->lights.push_back(directionalLight);
+
+    Lambert* redLambert = new Lambert();
+    redLambert->setDiffuseColour(RED);
+    redLambert->setAmbientReflection(1);
+    redLambert->setDiffuseReflection(1);
+
+    Lambert* blueLambert = new Lambert();
+    blueLambert->setDiffuseColour(BLUE);
+    blueLambert->setAmbientReflection(1);
+    blueLambert->setDiffuseReflection(1);
+
+    Lambert* greenLambert = new Lambert();
+    greenLambert->setDiffuseColour(GREEN);
+    greenLambert->setAmbientReflection(1);
+    greenLambert->setDiffuseReflection(1);
+
+    Sphere* sphere1 = new Sphere(Point3(-80, 0, 0), 80);
+    sphere1->setMaterial(redLambert);
     addObject(sphere1);
 
-    Sphere* sphere2 = new Sphere(Point3(0, 40, -25), 80);
-    sphere2->colour = BLUE;
+    Sphere* sphere2 = new Sphere(Point3(80, 0, 0), 80);
+    sphere2->setMaterial(blueLambert);
     addObject(sphere2);
 
-    Plane* plane = new Plane(Point3(0, 0, -50), Normal(0, 0, 1));
-    plane->colour = GREEN;
+    Plane* plane = new Plane(Point3(0, -100, 0), Normal(0, 1, 0));
+    plane->setMaterial(greenLambert);
     addObject(plane);
 }
 
@@ -78,7 +104,7 @@ ShadeInfo World::hitObjects(const Ray& ray) const {
     if (shadeInfo.hit) {
         // Some object was hit so get the shading information for it
         tminHitObject->getShadeInfo(shadeInfo, ray, tmin);
-        shadeInfo.colour = tminHitObject->colour;
+        shadeInfo.colour = tminHitObject->material->shade(shadeInfo, *this);
     }
 
     return shadeInfo;

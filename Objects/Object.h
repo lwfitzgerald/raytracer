@@ -13,10 +13,14 @@
 
 class Object {
 public:
-    Colour colour;
+    Material* material;
 
     virtual bool hit(const Ray& ray, double& tmin) const = 0;
     virtual void getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const = 0;
+
+    virtual void setMaterial(Material* material) {
+        this->material = material;
+    }
 
     virtual ~Object() {};
 protected:
