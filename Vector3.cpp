@@ -92,9 +92,9 @@ double Vector3::magsqr() const {
 
 Vector3 Vector3::cross(const Vector3& rhs) const {
     return Vector3(
-        this->y * rhs.z + this->z * rhs.y,
-        this->z * rhs.x + this->x * rhs.z,
-        this->x * rhs.y + this->y * rhs.x
+        this->y * rhs.z - this->z * rhs.y,
+        this->z * rhs.x - this->x * rhs.z,
+        this->x * rhs.y - this->y * rhs.x
     );
 }
 
