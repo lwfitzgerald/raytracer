@@ -8,8 +8,8 @@
 #ifndef OBJECT_H_
 #define OBJECT_H_
 
-#include "Prereqs.h"
-#include "Colour.h"
+#include "../Prereqs.h"
+#include "../Utils/Colour.h"
 
 class Object {
 public:

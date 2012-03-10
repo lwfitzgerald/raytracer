@@ -6,8 +6,8 @@
  */
 
 #include "Plane.h"
-#include "Ray.h"
-#include "ShadeInfo.h"
+#include "../Utils/Ray.h"
+#include "../Utils/ShadeInfo.h"
 
 Plane& Plane::operator=(const Plane& rhs) {
     this->position = rhs.position;

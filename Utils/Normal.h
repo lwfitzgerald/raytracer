@@ -8,7 +8,7 @@
 #ifndef NORMAL_H_
 #define NORMAL_H_
 
-#include "Prereqs.h"
+#include "../Prereqs.h"
 
 class Normal {
 public:

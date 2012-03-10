@@ -10,7 +10,7 @@
 
 #include "Prereqs.h"
 
-#include "Colour.h"
+#include "Utils/Colour.h"
 
 class ViewPlane {
 public:

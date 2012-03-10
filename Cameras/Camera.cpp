@@ -7,7 +7,7 @@
 
 #include "Camera.h"
 
-#include "Matrix.h"
+#include "../Utils/Matrix.h"
 
 void Camera::setEyePoint(const Point3& point) {
     this->eye = point;

@@ -8,10 +8,10 @@
 #ifndef SPHERE_H_
 #define SPHERE_H_
 
-#include "Prereqs.h"
+#include "../Prereqs.h"
 
 #include "Object.h"
-#include "Point3.h"
+#include "../Utils/Point3.h"
 
 class Sphere: public Object {
 public:

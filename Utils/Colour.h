@@ -8,7 +8,7 @@
 #ifndef COLOUR_H_
 #define COLOUR_H_
 
-#include "Prereqs.h"
+#include "../Prereqs.h"
 
 class Colour {
 public:

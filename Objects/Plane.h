@@ -8,11 +8,11 @@
 #ifndef PLANE_H_
 #define PLANE_H_
 
-#include "Prereqs.h"
+#include "../Prereqs.h"
 
 #include "Object.h"
-#include "Point3.h"
-#include "Normal.h"
+#include "../Utils/Point3.h"
+#include "../Utils/Normal.h"
 
 class Plane: public Object {
 public:

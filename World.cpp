@@ -9,12 +9,12 @@
 
 #include <limits>
 
-#include "Ray.h"
-#include "ShadeInfo.h"
-#include "Point3.h"
-#include "Plane.h"
-#include "Sphere.h"
-#include "RegularCamera.h"
+#include "Utils/Ray.h"
+#include "Utils/ShadeInfo.h"
+#include "Utils/Point3.h"
+#include "Objects/Plane.h"
+#include "Objects/Sphere.h"
+#include "Cameras/RegularCamera.h"
 
 World::~World() {
     // Delete the camera

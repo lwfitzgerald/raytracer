@@ -5,7 +5,7 @@
  *      Author: darkip
  */
 
-#include "Prereqs.h"
+#include "../Prereqs.h"
 
 #include "Vector3.h"
 #include "Normal.h"

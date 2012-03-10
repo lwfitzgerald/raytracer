@@ -6,9 +6,9 @@
  */
 
 #include "Sphere.h"
-#include "Ray.h"
-#include "Vector3.h"
-#include "ShadeInfo.h"
+#include "../Utils/Ray.h"
+#include "../Utils/Vector3.h"
+#include "../Utils/ShadeInfo.h"
 
 Sphere& Sphere::operator=(Sphere& rhs) {
     this->center = rhs.center;

@@ -8,10 +8,10 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
-#include "Prereqs.h"
+#include "../Prereqs.h"
 
-#include "Point3.h"
-#include "Vector3.h"
+#include "../Utils/Point3.h"
+#include "../Utils/Vector3.h"
 
 class Camera {
 public:

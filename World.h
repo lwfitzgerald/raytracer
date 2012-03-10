@@ -12,8 +12,8 @@
 
 #include "Prereqs.h"
 
-#include "Object.h"
-#include "Colour.h"
+#include "Objects/Object.h"
+#include "Utils/Colour.h"
 #include "ViewPlane.h"
 
 class World {

@@ -7,10 +7,10 @@
 
 #include "RegularCamera.h"
 
-#include "Ray.h"
-#include "ShadeInfo.h"
-#include "World.h"
-#include "ViewPlane.h"
+#include "../Utils/Ray.h"
+#include "../Utils/ShadeInfo.h"
+#include "../World.h"
+#include "../ViewPlane.h"
 
 void RegularCamera::renderScene(World& world) const {
     ViewPlane& viewPlane = world.viewPlane;
