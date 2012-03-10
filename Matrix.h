@@ -30,6 +30,17 @@ public:
 
     Vector3 operator*(const Vector3& rhs) const;
 
+    __inline friend std::ostream& operator<<(std::ostream &lhs, Matrix& rhs) {
+        for (int i=0; i < 4; i++) {
+            for (int j=0; j < 4; j++) {
+                lhs << rhs.matrix[i][j] << " ";
+            }
+            lhs << std::endl;
+        }
+
+        return lhs;
+    }
+
     void setToIdentity();
 };
 
