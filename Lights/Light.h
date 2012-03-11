@@ -18,7 +18,7 @@ public:
     virtual ~Light() {}
 
     virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const = 0;
-    virtual Colour getIllumination(const ShadeInfo& shadeInfo) const = 0;
+    virtual Colour getRadiance(const ShadeInfo& shadeInfo) const = 0;
 
     void setIntensity(const double& intensity) {
         this->intensity = intensity;

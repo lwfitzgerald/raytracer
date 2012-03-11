@@ -11,7 +11,7 @@
 
 Colour Lambert::shade(const ShadeInfo& shadeInfo, const World& world) const {
     // Calculate ambient contribution first
-    Colour colour = (this->diffuseReflection * this->diffuseColour) * world.ambientLight->getIllumination(shadeInfo);
+    Colour colour = (this->ambientReflection * this->diffuseColour) * world.ambientLight->getRadiance(shadeInfo);
 
     // Then add contributions from other lights
 
@@ -20,8 +20,8 @@ Colour Lambert::shade(const ShadeInfo& shadeInfo, const World& world) const {
         double NdotL = shadeInfo.hitNormal * lightDirection;
 
         if (NdotL > 0) {
-            // Not self occlusion so contribution!
-            colour += (this->diffuseReflection * this->diffuseColour * INV_PI) * world.lights[i]->getIllumination(shadeInfo) * NdotL;
+            // f modelled in terms of perfect diffuse reflectance
+            colour += this->diffuseReflection * this->diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
         }
     }
 

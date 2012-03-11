@@ -18,6 +18,6 @@ Vector3 DirectionalLight::getDirection(const ShadeInfo& shadeInfo) const {
     return direction;
 }
 
-Colour DirectionalLight::getIllumination(const ShadeInfo& shadeInfo) const {
+Colour DirectionalLight::getRadiance(const ShadeInfo& shadeInfo) const {
     return this->colour * this->intensity;
 }

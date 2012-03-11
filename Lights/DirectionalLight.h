@@ -18,7 +18,7 @@ public:
     virtual ~DirectionalLight() {}
 
     virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
-    virtual Colour getIllumination(const ShadeInfo& shadeInfo) const;
+    virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
 
     void setDirection(const Vector3& direction) {
         this->direction = direction.hat();

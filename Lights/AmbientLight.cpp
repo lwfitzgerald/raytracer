@@ -17,6 +17,6 @@ Vector3 AmbientLight::getDirection(const ShadeInfo& shadeInfo) const {
     return Vector3(0.0, 0.0, 0.0);
 }
 
-Colour AmbientLight::getIllumination(const ShadeInfo& shadeInfo) const {
+Colour AmbientLight::getRadiance(const ShadeInfo& shadeInfo) const {
     return this->colour * this->intensity;
 }

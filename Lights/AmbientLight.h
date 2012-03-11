@@ -17,7 +17,7 @@ public:
     virtual ~AmbientLight() {}
 
     virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
-    virtual Colour getIllumination(const ShadeInfo& shadeInfo) const;
+    virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
 };
 
 #endif /* AMBIENTLIGHT_H_ */
