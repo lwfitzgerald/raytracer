@@ -23,6 +23,5 @@
 #define BLUE           Colour(0, 0, 1.0)
 
 #define PI 3.14159265358979323846
-#define INV_PI 0.31830987334251404
 
 #endif /* CONSTANTS_H_ */
