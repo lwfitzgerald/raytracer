@@ -29,7 +29,12 @@ public:
 
     ~Ray() {}
 
-    Ray& operator=(const Ray& rhs);
+    Ray& operator=(const Ray& rhs) {
+        this->origin = rhs.origin;
+        this->direction = rhs.direction;
+
+        return *this;
+    }
 };
 
 #endif /* RAY_H_ */

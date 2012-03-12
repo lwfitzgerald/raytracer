@@ -6,7 +6,6 @@
  */
 
 #include "DirectionalLight.h"
-#include "../Utils/ShadeInfo.h"
 
 DirectionalLight::DirectionalLight()
 : Light() {

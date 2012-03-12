@@ -17,48 +17,48 @@ Colour& Colour::operator=(const Colour& rhs) {
 
 Colour Colour::operator+(const Colour& rhs) const {
     return Colour(
-        this->r + rhs.r,
-        this->g + rhs.g,
-        this->b + rhs.b
+        std::max(0.0, std::min(1.0, this->r + rhs.r)),
+        std::max(0.0, std::min(1.0, this->g + rhs.g)),
+        std::max(0.0, std::min(1.0, this->b + rhs.b))
     );
 }
 
 Colour Colour::operator*(const double& rhs) const {
     return Colour(
-        rhs * this->r,
-        rhs * this->g,
-        rhs * this->b
+        std::max(0.0, std::min(1.0, rhs * this->r)),
+        std::max(0.0, std::min(1.0, rhs * this->g)),
+        std::max(0.0, std::min(1.0, rhs * this->b))
     );
 }
 
 Colour Colour::operator/(const double& rhs) const {
     return Colour(
-        this->r / rhs,
-        this->g / rhs,
-        this->b / rhs
+        std::max(0.0, std::min(1.0, this->r / rhs)),
+        std::max(0.0, std::min(1.0, this->g / rhs)),
+        std::max(0.0, std::min(1.0, this->b / rhs))
     );
 }
 
 Colour Colour::operator*(const Colour& rhs) const {
     return Colour(
-        this->r * rhs.r,
-        this->g * rhs.g,
-        this->b * rhs.b
+        std::max(0.0, std::min(1.0, this->r * rhs.r)),
+        std::max(0.0, std::min(1.0, this->g * rhs.g)),
+        std::max(0.0, std::min(1.0, this->b * rhs.b))
     );
 }
 
 Colour Colour::exp(const double& rhs) const {
     return Colour(
-        pow(this->r, rhs),
-        pow(this->g, rhs),
-        pow(this->b, rhs)
+        std::max(0.0, std::min(1.0, pow(this->r, rhs))),
+        std::max(0.0, std::min(1.0, pow(this->g, rhs))),
+        std::max(0.0, std::min(1.0, pow(this->b, rhs)))
     );
 }
 
 Colour& Colour::operator+=(const Colour& rhs) {
-    this->r += rhs.r;
-    this->g += rhs.g;
-    this->b += rhs.b;
+    this->r = std::max(0.0, std::min(1.0, this->r + rhs.r));
+    this->g = std::max(0.0, std::min(1.0, this->g + rhs.g));
+    this->b = std::max(0.0, std::min(1.0, this->b + rhs.b));
 
     return *this;
 }

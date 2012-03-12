@@ -34,6 +34,14 @@ Vector3 Vector3::operator-(const Vector3& rhs) const {
     );
 }
 
+Vector3 Vector3::operator-(const Normal& rhs) const {
+    return Vector3(
+        this->x - rhs.x,
+        this->y - rhs.y,
+        this->z - rhs.z
+    );
+}
+
 Vector3& Vector3::operator=(const Vector3& rhs) {
     this->x = rhs.x;
     this->y = rhs.y;

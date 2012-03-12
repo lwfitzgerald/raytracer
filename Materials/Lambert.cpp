@@ -13,16 +13,13 @@ Colour Lambert::shade(const ShadeInfo& shadeInfo, const World& world) const {
     // Calculate ambient contribution first
     Colour colour = (this->ambientReflection * this->diffuseColour) * world.ambientLight->getRadiance(shadeInfo);
 
-    // Then add contributions from other lights
-
     for (unsigned int i=0; i < world.lights.size(); i++) {
-        Vector3 lightDirection = world.lights[i]->getDirection(shadeInfo);
-        double NdotL = shadeInfo.hitNormal * lightDirection;
+        // Calculate diffuse contribution...
 
-        if (NdotL > 0) {
-            // f modelled in terms of perfect diffuse reflectance
-            colour += this->diffuseReflection * this->diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
-        }
+        Vector3 lightDirection = world.lights[i]->getDirection(shadeInfo);
+        double NdotL = std::max(0.0, shadeInfo.hitNormal * lightDirection);
+
+        colour += this->diffuseReflection * this->diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
     }
 
     return colour;

@@ -16,7 +16,9 @@
 #include "Objects/Sphere.h"
 #include "Cameras/RegularCamera.h"
 #include "Lights/DirectionalLight.h"
+#include "Lights/PointLight.h"
 #include "Materials/Lambert.h"
+#include "Materials/Phong.h"
 
 World::~World() {
     // Delete the camera
@@ -49,35 +51,39 @@ void World::setup() {
 
     this->ambientLight->setIntensity(0);
 
-    DirectionalLight* directionalLight = new DirectionalLight();
-    directionalLight->setDirection(Vector3(100, 100, 200));
-    this->lights.push_back(directionalLight);
+    PointLight* pointLight = new PointLight();
+    pointLight->setLocation(Point3(100, 100, 100));
+    this->lights.push_back(pointLight);
 
-    Lambert* redLambert = new Lambert();
-    redLambert->setDiffuseColour(RED);
-    redLambert->setAmbientReflection(1);
-    redLambert->setDiffuseReflection(1);
+    PointLight* pointLight2 = new PointLight();
+    pointLight2->setLocation(Point3(-100, 100, 100));
+    this->lights.push_back(pointLight2);
 
-    Lambert* blueLambert = new Lambert();
-    blueLambert->setDiffuseColour(BLUE);
-    blueLambert->setAmbientReflection(1);
-    blueLambert->setDiffuseReflection(1);
+    Phong* redPhong = new Phong();
+    redPhong->setDiffuseColour(RED);
+    redPhong->setAmbientReflection(1);
+    redPhong->setDiffuseReflection(1);
 
-    Lambert* greenLambert = new Lambert();
-    greenLambert->setDiffuseColour(GREEN);
-    greenLambert->setAmbientReflection(1);
-    greenLambert->setDiffuseReflection(1);
+    Phong* bluePhong = new Phong();
+    bluePhong->setDiffuseColour(BLUE);
+    bluePhong->setAmbientReflection(1);
+    bluePhong->setDiffuseReflection(1);
+
+    Phong* grayPhong = new Phong();
+    grayPhong->setDiffuseColour(GREY);
+    grayPhong->setAmbientReflection(1);
+    grayPhong->setDiffuseReflection(1);
 
     Sphere* sphere1 = new Sphere(Point3(-80, 0, 0), 80);
-    sphere1->setMaterial(redLambert);
+    sphere1->setMaterial(redPhong);
     addObject(sphere1);
 
     Sphere* sphere2 = new Sphere(Point3(80, 0, 0), 80);
-    sphere2->setMaterial(blueLambert);
+    sphere2->setMaterial(bluePhong);
     addObject(sphere2);
 
     Plane* plane = new Plane(Point3(0, -100, 0), Normal(0, 1, 0));
-    plane->setMaterial(greenLambert);
+    plane->setMaterial(grayPhong);
     addObject(plane);
 }
 
@@ -96,6 +102,7 @@ ShadeInfo World::hitObjects(const Ray& ray) const {
     for (unsigned int i=0; i < this->objects.size(); i++) {
         if (this->objects[i]->hit(ray, t) && t < tmin) {
             shadeInfo.hit = true;
+            shadeInfo.ray = ray;
             tminHitObject = this->objects[i];
             tmin = t;
         }

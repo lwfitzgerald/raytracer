@@ -18,6 +18,7 @@
 // Define some colours
 #define BLACK          Colour(0, 0, 0)
 #define WHITE          Colour(1, 1, 1)
+#define GREY           Colour((double) 211 / 255, (double) 211 / 255, (double) 211 / 255)
 #define RED            Colour(1.0, 0, 0)
 #define GREEN          Colour(0, 1.0, 0)
 #define BLUE           Colour(0, 0, 1.0)

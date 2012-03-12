@@ -10,8 +10,6 @@
 
 #include "Light.h"
 
-#include "../Utils/Point3.h"
-
 class DirectionalLight : public Light {
 public:
     DirectionalLight();
