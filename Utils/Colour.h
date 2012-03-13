@@ -19,10 +19,16 @@ public:
     Colour() {}
 
     Colour(const double r, const double g, const double b)
-    : r(r), g(g), b(b) {}
+    :
+        r(std::max(1.0, std::min(0.0, r))),
+        g(std::max(1.0, std::min(0.0, g))),
+        b(std::max(1.0, std::min(0.0, b))) {}
 
     Colour(const Colour& old)
-    : r(old.r), g(old.g), b(old.b) {}
+    :
+        r(std::max(1.0, std::min(0.0, old.r))),
+        g(std::max(1.0, std::min(0.0, old.g))),
+        b(std::max(1.0, std::min(0.0, old.b))) {}
 
     ~Colour() {}
 
