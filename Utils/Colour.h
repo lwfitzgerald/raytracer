@@ -20,15 +20,15 @@ public:
 
     Colour(const double r, const double g, const double b)
     :
-        r(std::max(1.0, std::min(0.0, r))),
-        g(std::max(1.0, std::min(0.0, g))),
-        b(std::max(1.0, std::min(0.0, b))) {}
+        r(std::max(0.0, std::min(1.0, r))),
+        g(std::max(0.0, std::min(1.0, g))),
+        b(std::max(0.0, std::min(1.0, b))) {}
 
     Colour(const Colour& old)
     :
-        r(std::max(1.0, std::min(0.0, old.r))),
-        g(std::max(1.0, std::min(0.0, old.g))),
-        b(std::max(1.0, std::min(0.0, old.b))) {}
+        r(std::max(0.0, std::min(1.0, old.r))),
+        g(std::max(0.0, std::min(1.0, old.g))),
+        b(std::max(0.0, std::min(1.0, old.b))) {}
 
     ~Colour() {}
 
