@@ -9,7 +9,11 @@
 #include "../World.h"
 #include "../Utils/ShadeInfo.h"
 
-Colour Phong::shade(const ShadeInfo& shadeInfo, const World& world) const {
+Colour Phong::shade(
+    const ShadeInfo& shadeInfo,
+    const World& world,
+    const unsigned int depth
+) const {
     // Calculate ambient contribution first
     Colour colour = (this->ambientReflection * this->diffuseColour) * world.ambientLight->getRadiance(shadeInfo);
 
@@ -21,7 +25,7 @@ Colour Phong::shade(const ShadeInfo& shadeInfo, const World& world) const {
         double NdotL = shadeInfo.hitNormal * lightDirection;
 
         if (NdotL > 0) {
-            colour += this->specularReflection * this->diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
+            colour += this->diffuseReflection * this->diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
         }
 
         // Calculate specular contribution...
@@ -29,8 +33,20 @@ Colour Phong::shade(const ShadeInfo& shadeInfo, const World& world) const {
         // Calculate reflection vector
         Vector3 R = lightDirection - 2.0 * (lightDirection * shadeInfo.hitNormal) * shadeInfo.hitNormal;
 
-        colour += this->diffuseReflection * world.lights[i]->getRadiance(shadeInfo)
+        colour += this->specularReflection * world.lights[i]->getRadiance(shadeInfo)
                 * pow(std::max(0.0, R * shadeInfo.ray.direction), 100);
+
+        // Add contribution from reflections
+        if (depth != MAX_TRACE_DEPTH) {
+            ShadeInfo reflectInfo = world.hitObjects(
+                shadeInfo.ray.getReflectedRay(shadeInfo.hitPoint, shadeInfo.hitNormal),
+                depth+1
+            );
+
+            if (reflectInfo.hit) {
+                colour += specularReflection * reflectInfo.colour;
+            }
+        }
     }
 
     return colour;

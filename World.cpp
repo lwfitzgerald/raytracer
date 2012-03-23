@@ -45,6 +45,8 @@ void World::setup() {
 
     // Configure the camera
     this->camera = new RegularCamera();
+    this->camera->setEyePoint(Point3(0, 0, 200));
+    this->camera->setLookAtPoint(Point3(0, 0, -200));
     ((RegularCamera*) this->camera)->setViewPlaneDistance(500);
     this->camera->setRollAngle(0);
     this->camera->calcUVW();
@@ -52,46 +54,70 @@ void World::setup() {
     this->ambientLight->setIntensity(0);
 
     PointLight* pointLight = new PointLight();
-    pointLight->setLocation(Point3(100, 100, 100));
+    pointLight->setIntensity(1);
+    pointLight->setLocation(Point3(0, 0, 100));
     this->lights.push_back(pointLight);
 
     PointLight* pointLight2 = new PointLight();
+    pointLight2->setIntensity(0.5);
     pointLight2->setLocation(Point3(-100, 100, 100));
-    this->lights.push_back(pointLight2);
+    //this->lights.push_back(pointLight2);
 
     Phong* redPhong = new Phong();
     redPhong->setDiffuseColour(RED);
     redPhong->setAmbientReflection(1);
     redPhong->setDiffuseReflection(1);
+    redPhong->setSpecularReflection(0.3);
 
     Phong* bluePhong = new Phong();
     bluePhong->setDiffuseColour(BLUE);
     bluePhong->setAmbientReflection(1);
     bluePhong->setDiffuseReflection(1);
+    bluePhong->setSpecularReflection(0.3);
 
-    Phong* grayPhong = new Phong();
-    grayPhong->setDiffuseColour(GREY);
-    grayPhong->setAmbientReflection(1);
-    grayPhong->setDiffuseReflection(1);
+    Lambert* grayLambert = new Lambert();
+    grayLambert->setDiffuseColour(GREY);
+    grayLambert->setAmbientReflection(1);
+    grayLambert->setDiffuseReflection(0.5);
 
-    Sphere* sphere1 = new Sphere(Point3(-80, 0, 0), 80);
+    Sphere* sphere1 = new Sphere(Point3(0, 60, 0), 20);
     sphere1->setMaterial(redPhong);
     addObject(sphere1);
 
-    Sphere* sphere2 = new Sphere(Point3(80, 0, 0), 80);
+    Sphere* sphere2 = new Sphere(Point3(-60, 0, 100), 20);
     sphere2->setMaterial(bluePhong);
     addObject(sphere2);
 
-    Plane* plane = new Plane(Point3(0, -100, 0), Normal(0, 1, 0));
-    plane->setMaterial(grayPhong);
-    addObject(plane);
+    Plane* leftPlane = new Plane(Point3(-200, 0, 0), Normal(1, 0, 0));
+    leftPlane->setMaterial(grayLambert);
+    addObject(leftPlane);
+
+    Plane* rightPlane = new Plane(Point3(200, 0, 0), Normal(-1, 0, 0));
+    rightPlane->setMaterial(grayLambert);
+    addObject(rightPlane);
+
+    Plane* backPlane = new Plane(Point3(0, 0, -200), Normal(0, 0, 1));
+    backPlane->setMaterial(grayLambert);
+    addObject(backPlane);
+
+    Plane* frontPlane = new Plane(Point3(0, 0, 200), Normal(0, 0, -1));
+    frontPlane->setMaterial(grayLambert);
+    addObject(frontPlane);
+
+    Plane* topPlane = new Plane(Point3(0, 200, 0), Normal(0, -1, 0));
+    topPlane->setMaterial(grayLambert);
+    addObject(topPlane);
+
+    Plane* bottomPlane = new Plane(Point3(0, -200, 0), Normal(0, 1, 0));
+    bottomPlane->setMaterial(grayLambert);
+    addObject(bottomPlane);
 }
 
 void World::renderScene() {
     camera->renderScene(*this);
 }
 
-ShadeInfo World::hitObjects(const Ray& ray) const {
+ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {
     double t;
     ShadeInfo shadeInfo;
     Object* tminHitObject = NULL;
@@ -111,7 +137,8 @@ ShadeInfo World::hitObjects(const Ray& ray) const {
     if (shadeInfo.hit) {
         // Some object was hit so get the shading information for it
         tminHitObject->getShadeInfo(shadeInfo, ray, tmin);
-        shadeInfo.colour = tminHitObject->material->shade(shadeInfo, *this);
+
+        shadeInfo.colour = tminHitObject->material->shade(shadeInfo, *this, depth);
     }
 
     return shadeInfo;

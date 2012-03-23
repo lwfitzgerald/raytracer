@@ -12,6 +12,7 @@
 #define HORIZONTAL_RES  1920
 #define VERTICAL_RES    1080
 #define PIXEL_SIZE      1.0
+#define MAX_TRACE_DEPTH 10
 #define GAMMA           1.0
 #define OUTPUT_FILENAME "output.ppm"
 

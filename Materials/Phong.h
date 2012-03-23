@@ -20,7 +20,11 @@ public:
 
     virtual ~Phong() {}
 
-    virtual Colour shade(const ShadeInfo& shadeInfo, const World& world) const;
+    virtual Colour shade(
+        const ShadeInfo& shadeInfo,
+        const World& world,
+        const unsigned int depth
+    ) const;
 
     void setSpecularReflection(const double& specularReflection) {
         this->specularReflection = specularReflection;

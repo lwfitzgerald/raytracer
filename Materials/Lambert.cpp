@@ -9,7 +9,11 @@
 #include "../World.h"
 #include "../Utils/ShadeInfo.h"
 
-Colour Lambert::shade(const ShadeInfo& shadeInfo, const World& world) const {
+Colour Lambert::shade(
+        const ShadeInfo& shadeInfo,
+        const World& world,
+        const unsigned int depth
+) const {
     // Calculate ambient contribution first
     Colour colour = (this->ambientReflection * this->diffuseColour) * world.ambientLight->getRadiance(shadeInfo);
 

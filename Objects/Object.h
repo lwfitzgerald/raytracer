@@ -23,8 +23,10 @@ public:
     }
 
     virtual ~Object() {};
-protected:
+
     static const double epsilon = 0.001;
+protected:
+
 
     Object() {};
 

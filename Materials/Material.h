@@ -19,7 +19,11 @@ public:
 
     virtual ~Material() {}
 
-    virtual Colour shade(const ShadeInfo& shadeInfo, const World& world) const = 0;
+    virtual Colour shade(
+        const ShadeInfo& shadeInfo,
+        const World& world,
+        const unsigned int depth
+    ) const = 0;
 
     void setDiffuseColour(const Colour& diffuseColour) {
         this->diffuseColour = diffuseColour;

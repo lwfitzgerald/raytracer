@@ -12,6 +12,8 @@
 
 #include "Point3.h"
 #include "Vector3.h"
+#include "Normal.h"
+#include "../Objects/Object.h"
 
 class Ray {
 public:
@@ -34,6 +36,12 @@ public:
         this->direction = rhs.direction;
 
         return *this;
+    }
+
+    __inline Ray getReflectedRay(const Point3& hitPoint, const Normal& hitNormal) const {
+        double epsilon = Object::epsilon;
+        Vector3 reflectedDirection = this->direction - 2.0 * (this->direction * hitNormal) * hitNormal;
+        return Ray(hitPoint + epsilon * reflectedDirection, reflectedDirection);
     }
 };
 

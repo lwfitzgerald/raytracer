@@ -16,7 +16,11 @@ public:
     double g;
     double b;
 
-    Colour() {}
+    Colour()
+    :
+        r(0),
+        g(0),
+        b(0) {}
 
     Colour(const double r, const double g, const double b)
     :

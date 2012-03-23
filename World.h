@@ -11,6 +11,7 @@
 #include "Prereqs.h"
 
 #include "Utils/Colour.h"
+#include "Utils/ShadeInfo.h"
 #include "ViewPlane.h"
 #include "Lights/AmbientLight.h"
 
@@ -40,7 +41,11 @@ public:
 
     void addObject(Object* object);
 
-    ShadeInfo hitObjects(const Ray& ray) const;
+    __inline ShadeInfo hitObjects(const Ray& ray) const {
+        return hitObjects(ray, 1);
+    }
+
+    ShadeInfo hitObjects(const Ray& ray, const unsigned int depth) const;
 private:
     Camera* camera;
 };
