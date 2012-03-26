@@ -14,6 +14,7 @@
 #include "Utils/Point3.h"
 #include "Objects/Plane.h"
 #include "Objects/Sphere.h"
+#include "Objects/Disc.h"
 #include "Cameras/RegularCamera.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/PointLight.h"
@@ -87,6 +88,10 @@ void World::setup() {
     Sphere* sphere2 = new Sphere(Point3(-60, 0, 100), 20);
     sphere2->setMaterial(bluePhong);
     addObject(sphere2);
+
+    Disc* disc = new Disc(Point3(0,0,20), Normal(0, 0, 1), 20);
+    disc->setMaterial(bluePhong);
+    addObject(disc);
 
     Plane* leftPlane = new Plane(Point3(-200, 0, 0), Normal(1, 0, 0));
     leftPlane->setMaterial(grayLambert);
