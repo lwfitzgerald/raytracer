@@ -66,9 +66,7 @@ Vector3 Vector3::operator/(const double& rhs) const {
     );
 }
 
-double Vector3::operator*(const Normal& rhs) const {
-    return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
-}
+
 
 Vector3& Vector3::operator+=(const Vector3& rhs) {
     this->x += rhs.x;
@@ -86,7 +84,17 @@ Vector3& Vector3::operator-=(const Vector3& rhs) {
     return *this;
 }
 
+bool Vector3::operator==(const Vector3& rhs) {
+    return (std::abs(this->x - rhs.x) == 0 &&
+            std::abs(this->y - rhs.y) == 0 &&
+            std::abs(this->z - rhs.z) == 0);
+}
+
 double Vector3::operator*(const Vector3& rhs) const {
+    return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
+}
+
+double Vector3::operator*(const Normal& rhs) const {
     return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
 }
 
@@ -110,25 +118,15 @@ void Vector3::normalise() {
     double length = this->mag();
 
     if (length > 0) {
-        double inverseLength = 1.0 / length;
-        this->x *= inverseLength;
-        this->y *= inverseLength;
-        this->z *= inverseLength;
+        this->x /= length;
+        this->y /= length;
+        this->z /= length;
     }
 }
 
 Vector3 Vector3::hat() const {
-    double lengthSqr = this->magsqr();
-
     Vector3 newVector = *this;
-
-    if (lengthSqr > 0) {
-        double inverseLength = 1.0 / sqrt(lengthSqr);
-
-        newVector.x *= inverseLength;
-        newVector.y *= inverseLength;
-        newVector.z *= inverseLength;
-    }
+    newVector.normalise();
 
     return newVector;
 }

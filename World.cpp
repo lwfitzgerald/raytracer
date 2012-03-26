@@ -15,6 +15,7 @@
 #include "Objects/Plane.h"
 #include "Objects/Sphere.h"
 #include "Objects/Disc.h"
+#include "Objects/Triangle.h"
 #include "Cameras/RegularCamera.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/PointLight.h"
@@ -92,6 +93,10 @@ void World::setup() {
     Disc* disc = new Disc(Point3(0,0,20), Normal(0, 0, 1), 20);
     disc->setMaterial(bluePhong);
     addObject(disc);
+
+    Triangle* triangle = new Triangle(Point3(-50, -40, 0), Point3(-50, 40, 0), Point3(50, 0, 0));
+    triangle->setMaterial(redPhong);
+    addObject(triangle);
 
     Plane* leftPlane = new Plane(Point3(-200, 0, 0), Normal(1, 0, 0));
     leftPlane->setMaterial(grayLambert);

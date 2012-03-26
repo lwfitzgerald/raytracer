@@ -44,6 +44,8 @@ public:
     Vector3& operator+=(const Vector3& rhs);
     Vector3& operator-=(const Vector3& rhs);
 
+    bool operator==(const Vector3& rhs);
+
     // Dot product
     double operator*(const Vector3& rhs) const;
     double operator*(const Normal& rhs) const;
