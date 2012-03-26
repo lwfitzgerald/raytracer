@@ -1,16 +1,7 @@
-/*
- * Triangle.h
- *
- *  Created on: 26 Mar 2012
- *      Author: darkip
- */
-
 #ifndef TRIANGLE_H_
 #define TRIANGLE_H_
 
-#include "../Prereqs.h"
 #include "Plane.h"
-#include "../Utils/Point3.h"
 
 class Triangle: public Plane {
 public:

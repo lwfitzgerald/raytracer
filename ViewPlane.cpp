@@ -1,13 +1,4 @@
-/*
- * ViewPlane.cpp
- *
- *  Created on: 27 Feb 2012
- *      Author: darkip
- */
-
 #include "ViewPlane.h"
-
-#include <fstream>
 
 #define PPM_MAGIC_NUMBER       "P3" // PPM magic number
 #define PPM_MAX_CHARS_PER_LINE 70   // Maximum number of characters per line
@@ -28,11 +19,6 @@ void ViewPlane::setResolution(const int horizontal, const int vertical) {
 
 void ViewPlane::setPixelSize(const float pixelSize) {
     this->pixelSize = pixelSize;
-}
-
-void ViewPlane::setGamma(const float gamma) {
-    this->gamma = gamma;
-    this->invGamma = 1 / gamma;
 }
 
 void ViewPlane::setPixelColour(const int x, const int y, const Colour& colour) {

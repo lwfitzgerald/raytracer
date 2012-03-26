@@ -1,10 +1,3 @@
-/*
- * Triangle.cpp
- *
- *  Created on: 26 Mar 2012
- *      Author: darkip
- */
-
 #include "Triangle.h"
 #include "../Utils/Ray.h"
 

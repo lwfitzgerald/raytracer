@@ -1,10 +1,3 @@
-/*
- * Light.h
- *
- *  Created on: 10 Mar 2012
- *      Author: darkip
- */
-
 #ifndef LIGHT_H_
 #define LIGHT_H_
 

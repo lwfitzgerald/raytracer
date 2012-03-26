@@ -1,10 +1,3 @@
-/*
- * Camera.cpp
- *
- *  Created on: 29 Feb 2012
- *      Author: darkip
- */
-
 #include "Camera.h"
 
 #include "../Utils/Matrix.h"

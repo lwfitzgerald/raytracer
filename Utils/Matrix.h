@@ -1,10 +1,3 @@
-/*
- * Matrix.h
- *
- *  Created on: 29 Feb 2012
- *      Author: darkip
- */
-
 #ifndef MATRIX_H_
 #define MATRIX_H_
 

@@ -1,13 +1,4 @@
-/*
- * World.cpp
- *
- *  Created on: 27 Feb 2012
- *      Author: darkip
- */
-
 #include "World.h"
-
-#include <limits>
 
 #include "Utils/Ray.h"
 #include "Utils/ShadeInfo.h"
@@ -41,7 +32,6 @@ void World::setup() {
     // First specify the view plane parameters
     this->viewPlane.setResolution(HORIZONTAL_RES, VERTICAL_RES);
     this->viewPlane.setPixelSize(PIXEL_SIZE);
-    this->viewPlane.setGamma(GAMMA);
 
     this->backgroundColour = BLACK;
 

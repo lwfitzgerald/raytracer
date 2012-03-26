@@ -1,16 +1,9 @@
-/*
- * DirectionalLight.cpp
- *
- *  Created on: 10 Mar 2012
- *      Author: darkip
- */
-
 #include "DirectionalLight.h"
 
 DirectionalLight::DirectionalLight()
 : Light() {
     // Directional lights cause shadows
-    this->castsShadows = true;
+    castsShadows = true;
 }
 
 Vector3 DirectionalLight::getDirection(const ShadeInfo& shadeInfo) const {
@@ -18,5 +11,9 @@ Vector3 DirectionalLight::getDirection(const ShadeInfo& shadeInfo) const {
 }
 
 Colour DirectionalLight::getRadiance(const ShadeInfo& shadeInfo) const {
-    return this->colour * this->intensity;
+    return colour * intensity;
+}
+
+void DirectionalLight::setDirection(const Vector3& direction) {
+    this->direction = direction.hat();
 }

@@ -1,10 +1,3 @@
-/*
- * Sphere.cpp
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #include "Sphere.h"
 #include "../Utils/Ray.h"
 #include "../Utils/Vector3.h"
@@ -18,10 +11,10 @@ Sphere& Sphere::operator=(Sphere& rhs) {
 }
 
 bool Sphere::hit(const Ray& ray, double& tmin) const {
-    Vector3 oMinusC = ray.origin - this->center;
+    Vector3 oMinusC = ray.origin - center;
     const double a = ray.direction * ray.direction;
     const double b = 2.0 * ray.direction * oMinusC;
-    const double c = oMinusC * oMinusC - sqr(this->radius);
+    const double c = oMinusC * oMinusC - sqr(radius);
     const double disc = sqr(b) - 4.0 * a * c;
 
     if (disc < 0) {
@@ -35,7 +28,7 @@ bool Sphere::hit(const Ray& ray, double& tmin) const {
     // Handle the - root
     double t = (-b - discroot) / denom;
 
-    if (t > this->epsilon) {
+    if (t > epsilon) {
         tmin = t;
         return true;
     }
@@ -43,7 +36,7 @@ bool Sphere::hit(const Ray& ray, double& tmin) const {
     // Handle the + root
     t = (-b + discroot) / denom;
 
-    if (t > this->epsilon && t) {
+    if (t > epsilon && t) {
         tmin = t;
         return true;
     }
@@ -52,9 +45,9 @@ bool Sphere::hit(const Ray& ray, double& tmin) const {
 }
 
 void Sphere::getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const {
-    Vector3 oMinusC = ray.origin - this->center;
+    Vector3 oMinusC = ray.origin - center;
 
     // Normal calculated by vector from C to P and then normalised using the radius
-    shadeInfo.hitNormal = (oMinusC + tmin * ray.direction) / this->radius;
+    shadeInfo.hitNormal = (oMinusC + tmin * ray.direction) / radius;
     shadeInfo.hitPoint = ray.origin + tmin * ray.direction;
 }

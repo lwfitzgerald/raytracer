@@ -1,10 +1,3 @@
-/*
- * World.h
- *
- *  Created on: 27 Feb 2012
- *      Author: darkip
- */
-
 #ifndef WORLD_H_
 #define WORLD_H_
 
@@ -41,7 +34,7 @@ public:
 
     void addObject(Object* object);
 
-    __inline ShadeInfo hitObjects(const Ray& ray) const {
+    ShadeInfo hitObjects(const Ray& ray) const {
         return hitObjects(ray, 1);
     }
 

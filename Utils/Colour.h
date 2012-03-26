@@ -1,10 +1,3 @@
-/*
- * Colour.h
- *
- *  Created on: 24 Feb 2012
- *      Author: darkip
- */
-
 #ifndef COLOUR_H_
 #define COLOUR_H_
 

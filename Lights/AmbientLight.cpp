@@ -1,16 +1,9 @@
-/*
- * AmbientLight.cpp
- *
- *  Created on: 10 Mar 2012
- *      Author: darkip
- */
-
 #include "AmbientLight.h"
 
 AmbientLight::AmbientLight()
 : Light() {
     // Ambient lights don't cause shadows
-    this->castsShadows = false;
+    castsShadows = false;
 }
 
 Vector3 AmbientLight::getDirection(const ShadeInfo& shadeInfo) const {
@@ -18,5 +11,5 @@ Vector3 AmbientLight::getDirection(const ShadeInfo& shadeInfo) const {
 }
 
 Colour AmbientLight::getRadiance(const ShadeInfo& shadeInfo) const {
-    return this->colour * this->intensity;
+    return colour * intensity;
 }

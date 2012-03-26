@@ -1,22 +1,11 @@
-/*
- * Sphere.h
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #ifndef SPHERE_H_
 #define SPHERE_H_
-
-#include "../Prereqs.h"
 
 #include "Object.h"
 #include "../Utils/Point3.h"
 
 class Sphere: public Object {
 public:
-    Sphere() {}
-
     Sphere(const Point3& center, const double& radius)
     : center(center), radius(radius) {}
 

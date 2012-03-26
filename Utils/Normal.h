@@ -1,10 +1,3 @@
-/*
- * Normal.h
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #ifndef NORMAL_H_
 #define NORMAL_H_
 

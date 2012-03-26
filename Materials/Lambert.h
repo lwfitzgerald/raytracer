@@ -1,10 +1,3 @@
-/*
- * Lambert.h
- *
- *  Created on: 10 Mar 2012
- *      Author: darkip
- */
-
 #ifndef LAMBERT_H_
 #define LAMBERT_H_
 

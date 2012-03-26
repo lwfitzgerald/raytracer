@@ -1,10 +1,3 @@
-/*
- * Vector3.h
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #ifndef VECTOR3_H_
 #define VECTOR3_H_
 

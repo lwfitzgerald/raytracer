@@ -1,10 +1,3 @@
-/*
- * AmbientLight.h
- *
- *  Created on: 10 Mar 2012
- *      Author: darkip
- */
-
 #ifndef AMBIENTLIGHT_H_
 #define AMBIENTLIGHT_H_
 

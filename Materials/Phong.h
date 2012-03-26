@@ -1,10 +1,3 @@
-/*
- * Phong.h
- *
- *  Created on: 11 Mar 2012
- *      Author: darkip
- */
-
 #ifndef PHONG_H_
 #define PHONG_H_
 

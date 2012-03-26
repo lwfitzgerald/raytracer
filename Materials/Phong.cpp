@@ -1,10 +1,3 @@
-/*
- * Phong.cpp
- *
- *  Created on: 11 Mar 2012
- *      Author: darkip
- */
-
 #include "Phong.h"
 #include "../World.h"
 #include "../Utils/ShadeInfo.h"
@@ -15,7 +8,7 @@ Colour Phong::shade(
     const unsigned int depth
 ) const {
     // Calculate ambient contribution first
-    Colour colour = (this->ambientReflection * this->diffuseColour) * world.ambientLight->getRadiance(shadeInfo);
+    Colour colour = (ambientReflection * diffuseColour) * world.ambientLight->getRadiance(shadeInfo);
 
     for (unsigned int i=0; i < world.lights.size(); i++) {
         // Calculate diffuse contribution...
@@ -25,7 +18,7 @@ Colour Phong::shade(
         double NdotL = shadeInfo.hitNormal * lightDirection;
 
         if (NdotL > 0) {
-            colour += this->diffuseReflection * this->diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
+            colour += diffuseReflection * diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
         }
 
         // Calculate specular contribution...
@@ -33,7 +26,7 @@ Colour Phong::shade(
         // Calculate reflection vector
         Vector3 R = lightDirection - 2.0 * (lightDirection * shadeInfo.hitNormal) * shadeInfo.hitNormal;
 
-        colour += this->specularReflection * world.lights[i]->getRadiance(shadeInfo)
+        colour += specularReflection * world.lights[i]->getRadiance(shadeInfo)
                 * pow(std::max(0.0, R * shadeInfo.ray.direction), 100);
 
         // Add contribution from reflections

@@ -1,10 +1,3 @@
-/*
- * RegularCamera.h
- *
- *  Created on: 29 Feb 2012
- *      Author: darkip
- */
-
 #ifndef REGULARCAMERA_H_
 #define REGULARCAMERA_H_
 

@@ -1,10 +1,3 @@
-/*
- * Ray.h
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #ifndef RAY_H_
 #define RAY_H_
 
@@ -32,15 +25,15 @@ public:
     ~Ray() {}
 
     Ray& operator=(const Ray& rhs) {
-        this->origin = rhs.origin;
-        this->direction = rhs.direction;
+        origin = rhs.origin;
+        direction = rhs.direction;
 
         return *this;
     }
 
-    __inline Ray getReflectedRay(const Point3& hitPoint, const Normal& hitNormal) const {
+    Ray getReflectedRay(const Point3& hitPoint, const Normal& hitNormal) const {
         double epsilon = Object::epsilon;
-        Vector3 reflectedDirection = this->direction - 2.0 * (this->direction * hitNormal) * hitNormal;
+        Vector3 reflectedDirection = direction - 2.0 * (direction * hitNormal) * hitNormal;
         return Ray(hitPoint + epsilon * reflectedDirection, reflectedDirection);
     }
 };

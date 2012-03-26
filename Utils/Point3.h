@@ -1,10 +1,3 @@
-/*
- * Point.h
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #ifndef POINT_H_
 #define POINT_H_
 

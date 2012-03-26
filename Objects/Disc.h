@@ -1,21 +1,10 @@
-/*
- * Disc.h
- *
- *  Created on: 26 Mar 2012
- *      Author: darkip
- */
-
 #ifndef DISC_H_
 #define DISC_H_
 
 #include "Plane.h"
-#include "../Utils/Point3.h"
-#include "../Utils/Normal.h"
 
 class Disc: public Plane {
 public:
-    Disc() {}
-
     Disc(const Point3& position, const Normal& normal, const double& radius)
     :
         Plane(position, normal),

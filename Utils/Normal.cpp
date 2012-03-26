@@ -1,86 +1,79 @@
-/*
- * Normal.cpp
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #include "Normal.h"
 #include "Vector3.h"
 #include "Point3.h"
 
 Normal Normal::operator-() const {
     return Normal(
-        -this->x,
-        -this->y,
-        -this->z
+        -x,
+        -y,
+        -z
     );
 }
 
 Normal Normal::operator+(const Normal& rhs) const {
     return Normal(
-        this->x + rhs.x,
-        this->y + rhs.y,
-        this->z + rhs.z
+        x + rhs.x,
+        y + rhs.y,
+        z + rhs.z
     );
 }
 
 Vector3 Normal::operator+(const Vector3& rhs) const {
     return Vector3(
-        this->x + rhs.x,
-        this->y + rhs.y,
-        this->z + rhs.z
+        x + rhs.x,
+        y + rhs.y,
+        z + rhs.z
     );
 }
 
 Normal Normal::operator*(const double& rhs) const {
     return Normal(
-        rhs * this->x,
-        rhs * this->y,
-        rhs * this->z
+        rhs * x,
+        rhs * y,
+        rhs * z
     );
 }
 
 double Normal::operator*(const Vector3& rhs) const {
-    return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
+    return x * rhs.x + y * rhs.y + z * rhs.z;
 }
 
 Normal& Normal::operator=(const Normal& rhs) {
-    this->x = rhs.x;
-    this->y = rhs.y;
-    this->z = rhs.z;
+    x = rhs.x;
+    y = rhs.y;
+    z = rhs.z;
 
     return *this;
 }
 
 Normal& Normal::operator=(const Vector3& rhs) {
-    this->x = rhs.x;
-    this->y = rhs.y;
-    this->z = rhs.z;
+    x = rhs.x;
+    y = rhs.y;
+    z = rhs.z;
 
     return *this;
 }
 
 Normal& Normal::operator=(const Point3& rhs) {
-    this->x = rhs.x;
-    this->y = rhs.y;
-    this->z = rhs.z;
+    x = rhs.x;
+    y = rhs.y;
+    z = rhs.z;
 
     return *this;
 }
 
 Normal& Normal::operator+=(const Normal& rhs) {
-    this->x += rhs.x;
-    this->y += rhs.y;
-    this->z += rhs.z;
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
 
     return *this;
 }
 
 Normal& Normal::operator-=(const Normal& rhs) {
-    this->x -= rhs.x;
-    this->y -= rhs.y;
-    this->z -= rhs.z;
+    x -= rhs.x;
+    y -= rhs.y;
+    z -= rhs.z;
 
     return *this;
 }

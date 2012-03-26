@@ -1,10 +1,3 @@
-/*
- * Plane.cpp
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #include "Plane.h"
 #include "../Utils/Ray.h"
 #include "../Utils/ShadeInfo.h"
@@ -17,9 +10,9 @@ Plane& Plane::operator=(const Plane& rhs) {
 }
 
 bool Plane::hit(const Ray& ray, double& tmin) const {
-    double t = (this->position - ray.origin) * this->normal / (ray.direction * this->normal);
+    double t = (position - ray.origin) * normal / (ray.direction * normal);
 
-    if (t > this->epsilon) {
+    if (t > epsilon) {
         tmin = t;
         return true;
     }
@@ -28,6 +21,6 @@ bool Plane::hit(const Ray& ray, double& tmin) const {
 }
 
 void Plane::getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const {
-    shadeInfo.hitNormal = this->normal;
+    shadeInfo.hitNormal = normal;
     shadeInfo.hitPoint = ray.origin + tmin * ray.direction;
 }

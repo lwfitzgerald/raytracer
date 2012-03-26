@@ -1,10 +1,3 @@
-/*
- * ShadeInfo.h
- *
- *  Created on: 24 Feb 2012
- *      Author: darkip
- */
-
 #ifndef SHADEINFO_H_
 #define SHADEINFO_H_
 

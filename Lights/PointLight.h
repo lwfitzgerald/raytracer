@@ -1,10 +1,3 @@
-/*
- * PointLight.h
- *
- *  Created on: 12 Mar 2012
- *      Author: darkip
- */
-
 #ifndef POINTLIGHT_H_
 #define POINTLIGHT_H_
 
@@ -19,13 +12,7 @@ public:
     virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
     virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
 
-    void setLocation(const Point3& location) {
-        this->location = location;
-    }
-
-    Point3 getLocation() const {
-        return this->location;
-    }
+    void setLocation(const Point3& location);
 
 private:
     Point3 location;

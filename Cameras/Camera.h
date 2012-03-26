@@ -1,10 +1,3 @@
-/*
- * Camera.h
- *
- *  Created on: 29 Feb 2012
- *      Author: darkip
- */
-
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
@@ -34,6 +27,7 @@ public:
     void setUpVector(const Vector3& vector);
     void setRollAngle(const double& angle);
 
+    // Calculate u,v,w of the orthonormal basis
     void calcUVW();
 
 protected:
@@ -45,6 +39,7 @@ protected:
     Vector3 v;
     Vector3 w;
 
+    // Get the matrix transform to roll the up vector
     Matrix getRollTransform() const;
 };
 

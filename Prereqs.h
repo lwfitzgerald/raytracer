@@ -2,6 +2,7 @@
 #define PREREQS_H_
 
 #include <iostream>
+#include <fstream>
 #include <cmath>
 #include <string>
 #include <vector>

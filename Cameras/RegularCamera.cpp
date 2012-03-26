@@ -1,10 +1,3 @@
-/*
- * RegularCamera.cpp
- *
- *  Created on: 29 Feb 2012
- *      Author: darkip
- */
-
 #include "RegularCamera.h"
 
 #include "../Utils/Ray.h"

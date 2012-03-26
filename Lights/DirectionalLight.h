@@ -1,10 +1,3 @@
-/*
- * DirectionalLight.h
- *
- *  Created on: 10 Mar 2012
- *      Author: darkip
- */
-
 #ifndef DIRECTIONALLIGHT_H_
 #define DIRECTIONALLIGHT_H_
 
@@ -18,13 +11,8 @@ public:
     virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
     virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
 
-    void setDirection(const Vector3& direction) {
-        this->direction = direction.hat();
-    }
+    void setDirection(const Vector3& direction);
 
-    Vector3 getDirection() const {
-        return this->direction;
-    }
 private:
     Vector3 direction;
 };

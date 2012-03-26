@@ -1,10 +1,3 @@
-/*
- * Plane.h
- *
- *  Created on: 22 Feb 2012
- *      Author: darkip
- */
-
 #ifndef PLANE_H_
 #define PLANE_H_
 
@@ -14,8 +7,6 @@
 
 class Plane: public Object {
 public:
-    Plane() {}
-
     Plane(const Point3 &position, const Normal& normal)
     : position(position), normal(normal) {}
 
@@ -32,6 +23,8 @@ public:
 protected:
     Point3 position;
     Normal normal;
+
+    Plane() {}
 };
 
 #endif /* PLANE_H_ */
