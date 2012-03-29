@@ -62,6 +62,21 @@ bool Triangle::hit(const Ray& ray, double& tmin) const {
     return false;
 }
 
+BoundingBox Triangle::getBoundingBox() const {
+    return BoundingBox(
+        Point3(
+            std::min(A.x, std::min(B.x, C.x)),
+            std::max(A.y, std::max(B.y, C.y)),
+            std::max(A.z, std::max(B.z, C.z))
+        ),
+        Point3(
+            std::max(A.x, std::max(B.x, C.x)),
+            std::min(A.y, std::min(B.y, C.y)),
+            std::max(A.z, std::max(B.z, C.z))
+        )
+    );
+}
+
 void Triangle::prepare() {
     position = A;
     normal = (C - A).cross(B - A).hat();

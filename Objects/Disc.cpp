@@ -25,3 +25,22 @@ bool Disc::hit(const Ray& ray, double& tmin) const {
 
     return false;
 }
+
+bool Disc::isBoundable() const {
+    return true;
+}
+
+BoundingBox Disc::getBoundingBox() const {
+    return BoundingBox(
+        Point3(
+            position.x - radius,
+            position.y + radius,
+            position.z + radius
+        ),
+        Point3(
+            position.x + radius,
+            position.y - radius,
+            position.z - radius
+        )
+    );
+}

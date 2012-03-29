@@ -21,6 +21,8 @@ public:
 
     virtual bool hit(const Ray& ray, double& tmin) const;
 
+    virtual bool isBoundable() const;
+    virtual BoundingBox getBoundingBox() const;
 private:
     double radius;
 };

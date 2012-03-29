@@ -2,6 +2,7 @@
 #define OBJECT_H_
 
 #include "../Prereqs.h"
+#include "../Utils/BoundingBox.h"
 
 class Object {
 public:
@@ -11,6 +12,9 @@ public:
 
     virtual bool hit(const Ray& ray, double& tmin) const = 0;
     virtual void getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const = 0;
+
+    virtual bool isBoundable() const = 0;
+    virtual BoundingBox getBoundingBox() const = 0;
 
     virtual void setMaterial(Material* material) {
         this->material = material;

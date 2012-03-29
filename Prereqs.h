@@ -18,6 +18,7 @@ class Vector3;
 class Normal;
 class Matrix;
 class Colour;
+class BoundingBox;
 
 class Ray;
 class ShadeInfo;

@@ -16,6 +16,7 @@ public:
     Triangle& operator=(const Triangle& rhs);
 
     virtual bool hit(const Ray& ray, double& tmin) const;
+    virtual BoundingBox getBoundingBox() const;
 
 private:
     // Vertices

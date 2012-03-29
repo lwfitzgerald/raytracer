@@ -57,8 +57,6 @@ Vector3 Vector3::operator/(const double& rhs) const {
     );
 }
 
-
-
 Vector3& Vector3::operator+=(const Vector3& rhs) {
     x += rhs.x;
     y += rhs.y;

@@ -51,3 +51,14 @@ void Sphere::getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tm
     shadeInfo.hitNormal = (oMinusC + tmin * ray.direction) / radius;
     shadeInfo.hitPoint = ray.origin + tmin * ray.direction;
 }
+
+bool Sphere::isBoundable() const {
+    return true;
+}
+
+BoundingBox Sphere::getBoundingBox() const {
+    return BoundingBox(
+        Point3(center.x - radius, center.y + radius, center.z + radius),
+        Point3(center.x + radius, center.y - radius, center.z - radius)
+    );
+}
