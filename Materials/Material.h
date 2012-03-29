@@ -6,6 +6,7 @@
 
 class Material {
 public:
+    std::string name;
     Colour diffuseColour;
     double ambientReflection;
     double diffuseReflection;
@@ -32,6 +33,31 @@ public:
 
 protected:
     Material() {}
+
+    /**
+     * Constructs the material from an input string.
+     *
+     * WARNING - Does not store name to allow
+     * for a variable number of parameters in child
+     * classes.
+     *
+     * Child classes extending should have the following
+     * as the last line:
+     *
+     * iss >> name;
+     */
+    Material(std::istringstream& iss) {
+        double r, g, b;
+
+        iss >> r;
+        iss >> g;
+        iss >> b;
+
+        iss >> ambientReflection;
+        iss >> diffuseReflection;
+
+        diffuseColour = Colour(r, g, b);
+    }
 };
 
 #endif /* MATERIAL_H_ */

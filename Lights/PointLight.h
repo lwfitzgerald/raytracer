@@ -7,15 +7,16 @@
 class PointLight: public Light {
 public:
     PointLight();
+    PointLight(std::istringstream& iss);
     virtual ~PointLight() {}
 
     virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
     virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
 
-    void setLocation(const Point3& location);
+    void setPosition(const Point3& position);
 
 private:
-    Point3 location;
+    Point3 position;
 };
 
 #endif /* POINTLIGHT_H_ */

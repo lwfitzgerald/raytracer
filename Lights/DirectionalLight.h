@@ -6,6 +6,7 @@
 class DirectionalLight : public Light {
 public:
     DirectionalLight();
+    DirectionalLight(std::istringstream& iss);
     virtual ~DirectionalLight() {}
 
     virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;

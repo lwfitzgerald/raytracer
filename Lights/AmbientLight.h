@@ -6,6 +6,7 @@
 class AmbientLight: public Light {
 public:
     AmbientLight();
+    AmbientLight(std::istringstream& iss);
 
     virtual ~AmbientLight() {}
 

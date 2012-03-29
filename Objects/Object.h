@@ -16,14 +16,14 @@ public:
     virtual bool isBoundable() const = 0;
     virtual BoundingBox getBoundingBox() const = 0;
 
-    virtual void setMaterial(Material* material) {
-        this->material = material;
-    }
+    virtual void setMaterial(Material* material);
 
     static const double epsilon = 0.001;
 
 protected:
     Object() {};
+
+    void fetchMaterial(std::istringstream& iss, World& world);
 };
 
 #endif /* OBJECT_H_ */

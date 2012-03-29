@@ -22,15 +22,27 @@ public:
     }
 
 protected:
+    double intensity;
+    Colour colour;
+
+    bool castsShadows;
+
     Light()
     :
         intensity(1),
         colour(WHITE) {}
 
-    double intensity;
-    Colour colour;
+    Light(std::istringstream& iss) {
+        double r, g, b;
 
-    bool castsShadows;
+        iss >> r;
+        iss >> g;
+        iss >> b;
+
+        iss >> intensity;
+
+        colour = Colour(r, g, b);
+    }
 };
 
 #endif /* LIGHT_H_ */
