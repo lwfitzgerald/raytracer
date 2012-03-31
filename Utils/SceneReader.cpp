@@ -19,6 +19,7 @@ void SceneReader::buildScene(const char* filePath, World& world) {
         std::exit(1);
     }
 
+    unsigned int lineNo = 1;
     std::string line;
     std::string mainName;
 
@@ -32,8 +33,9 @@ void SceneReader::buildScene(const char* filePath, World& world) {
         // Set up the istringstream for parsing
         std::istringstream iss(line);
 
-        if (line.length() == 0) {
+        if (line.empty() || containsOnlyWhitespace(line)) {
             // Empty line so continue
+            lineNo++;
             continue;
         }
 
@@ -42,6 +44,7 @@ void SceneReader::buildScene(const char* filePath, World& world) {
 
         if (mainName.substr(0, 1).compare("#") == 0) {
             // This line contains a comment so continue
+            lineNo++;
             continue;
         }
 
@@ -67,7 +70,15 @@ void SceneReader::buildScene(const char* filePath, World& world) {
             handleDisc(iss, world);
         } else if (mainName.compare("TRIANGLE") == 0) {
             handleTriangle(iss, world);
+        } else {
+            handleWarning(lineNo);
         }
+
+        if (iss.fail()) {
+            handleError(lineNo);
+        }
+
+        lineNo++;
     }
 }
 
@@ -193,4 +204,25 @@ void SceneReader::uppercaseString(std::string& string) {
     for (itr = string.begin(); itr != string.end(); itr++) {
         *itr = toupper(*itr);
     }
+}
+
+bool SceneReader::containsOnlyWhitespace(const std::string& string) {
+    std::string::const_iterator itr;
+
+    for (itr = string.begin(); itr != string.end(); itr++) {
+        if (*itr != '\n' && *itr != ' ' && *itr != '\t') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void SceneReader::handleError(unsigned int lineNo) {
+    std::cerr << "Error parsing input file on line " << lineNo << std::endl;
+    std::exit(1);
+}
+
+void SceneReader::handleWarning(unsigned int lineNo) {
+    std::cout << "Warning: Unrecognised input data on line " << lineNo << std::endl;
 }
