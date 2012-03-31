@@ -20,11 +20,18 @@ World::~World() {
     // Delete the ambient light
     delete this->ambientLight;
 
-    // On destruction, delete all objects
-    std::vector<Object*>::iterator itr;
+    // Delete materials
+    std::map<const std::string, Material*>::iterator materialItr;
 
-    for (itr=this->objects.begin(); itr < this->objects.end(); itr++) {
-        delete *itr;
+    for (materialItr=materials.begin(); materialItr != materials.end(); materialItr++) {
+        delete materialItr->second;
+    }
+
+    // Delete all objects
+    std::vector<Object*>::iterator objectItr;
+
+    for (objectItr=objects.begin(); objectItr < objects.end(); objectItr++) {
+        delete *objectItr;
     }
 }
 

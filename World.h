@@ -17,7 +17,7 @@ public:
     AmbientLight* ambientLight;
 
     // Materials used in the world
-    std::map<std::string, Material*> materials;
+    std::map<const std::string, Material*> materials;
 
     // Vector of objects in the world
     std::vector<Object*> objects;
