@@ -11,6 +11,8 @@ public:
     :
         specularReflection(1) {}
 
+    Phong(std::istringstream& iss);
+
     virtual ~Phong() {}
 
     virtual Colour shade(

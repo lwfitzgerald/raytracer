@@ -2,6 +2,11 @@
 #include "../World.h"
 #include "../Utils/ShadeInfo.h"
 
+Lambert::Lambert(std::istringstream& iss)
+: Material(iss) {
+    iss >> name;
+}
+
 Colour Lambert::shade(
     const ShadeInfo& shadeInfo,
     const World& world,

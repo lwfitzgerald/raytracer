@@ -14,6 +14,39 @@ Triangle::Triangle(const Triangle& old)
     prepare();
 }
 
+Triangle::Triangle(std::istringstream& iss, World& world) {
+    // Extract the coordinates of the points
+
+    double aX, aY, aZ;
+
+    iss >> aX;
+    iss >> aY;
+    iss >> aZ;
+
+    double bX, bY, bZ;
+
+    iss >> bX;
+    iss >> bY;
+    iss >> bZ;
+
+    double cX, cY, cZ;
+
+    iss >> cX;
+    iss >> cY;
+    iss >> cZ;
+
+    // Extract and fetch the material
+    fetchMaterial(iss, world);
+
+    // Create and set the points
+
+    A = Point3(aX, aY, aZ);
+    B = Point3(bX, bY, bZ);
+    C = Point3(cX, cY, cZ);
+
+    prepare();
+}
+
 Triangle& Triangle::operator=(const Triangle& rhs) {
     Plane::operator=(rhs);
 

@@ -16,6 +16,9 @@ public:
     // Ambient light in the world
     AmbientLight* ambientLight;
 
+    // Materials used in the world
+    std::map<std::string, Material*> materials;
+
     // Vector of objects in the world
     std::vector<Object*> objects;
 
@@ -24,15 +27,21 @@ public:
 
     World()
     :
-        ambientLight(new AmbientLight),
+        ambientLight(NULL),
         camera(NULL) {}
 
     ~World();
 
-    void setup();
     void renderScene();
 
     void addObject(Object* object);
+    void addLight(Light* light);
+    void addMaterial(Material* material);
+
+    void setViewPlaneResolution(const unsigned int hres, const unsigned int vres);
+    void setViewPlanePixelSize(const float pixelSize);
+    void setCamera(Camera* camera);
+    void setAmbientLight(AmbientLight* ambientLight);
 
     ShadeInfo hitObjects(const Ray& ray) const {
         return hitObjects(ray, 1);

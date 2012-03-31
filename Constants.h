@@ -1,10 +1,3 @@
-/*
- * Constants.h
- *
- *  Created on: 28 Feb 2012
- *      Author: darkip
- */
-
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 

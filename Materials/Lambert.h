@@ -6,6 +6,8 @@
 class Lambert: public Material {
 public:
     Lambert() {}
+    Lambert(std::istringstream& iss);
+
     virtual ~Lambert() {}
 
     virtual Colour shade(

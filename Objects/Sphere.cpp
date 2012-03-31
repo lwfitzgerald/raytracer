@@ -3,6 +3,25 @@
 #include "../Utils/Vector3.h"
 #include "../Utils/ShadeInfo.h"
 
+Sphere::Sphere(std::istringstream& iss, World& world) {
+    // Extract center
+
+    double x, y, z;
+
+    iss >> x;
+    iss >> y;
+    iss >> z;
+
+    // Extract and store radius
+    iss >> radius;
+
+    // Store the material
+    fetchMaterial(iss, world);
+
+    // Create and store center
+    center = Point3(x, y, z);
+}
+
 Sphere& Sphere::operator=(Sphere& rhs) {
     this->center = rhs.center;
     this->radius = rhs.radius;

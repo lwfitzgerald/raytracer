@@ -2,7 +2,11 @@
 
 AmbientLight::AmbientLight()
 : Light() {
-    // Ambient lights don't cause shadows
+    castsShadows = false;
+}
+
+AmbientLight::AmbientLight(std::istringstream& iss)
+: Light(iss) {
     castsShadows = false;
 }
 

@@ -5,11 +5,11 @@
 
 class Triangle: public Plane {
 public:
-    Triangle() {}
-
     Triangle(const Point3& A, const Point3& B, const Point3& C);
 
     Triangle(const Triangle& old);
+
+    Triangle(std::istringstream& iss, World& world);
 
     virtual ~Triangle() {}
 

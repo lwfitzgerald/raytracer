@@ -13,6 +13,8 @@ public:
     Plane(const Plane& old)
     : position(old.position), normal(old.normal) {}
 
+    Plane(std::istringstream& iss, World& world);
+
     virtual ~Plane() {}
 
     Plane& operator=(const Plane& rhs);
@@ -25,6 +27,14 @@ protected:
     Normal normal;
 
     Plane() {}
+
+    /**
+     * Performs all of the operations to construct
+     * from an input line minus setting the material.
+     * This allows child classes to have a variable
+     * number of parameters.
+     */
+    void constructMinusMaterial(std::istringstream& iss);
 };
 
 #endif /* PLANE_H_ */

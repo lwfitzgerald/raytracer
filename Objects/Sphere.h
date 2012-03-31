@@ -12,6 +12,8 @@ public:
     Sphere(const Sphere& old)
     : center(old.center), radius(old.radius) {}
 
+    Sphere(std::istringstream& iss, World& world);
+
     virtual ~Sphere() {}
 
     Sphere& operator=(Sphere& rhs);

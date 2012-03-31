@@ -12,14 +12,14 @@ public:
     virtual bool hit(const Ray& ray, double& tmin) const = 0;
     virtual void getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const = 0;
 
-    virtual void setMaterial(Material* material) {
-        this->material = material;
-    }
+    virtual void setMaterial(Material* material);
 
     static const double epsilon = 0.001;
 
 protected:
     Object() {};
+
+    void fetchMaterial(std::istringstream& iss, World& world);
 };
 
 #endif /* OBJECT_H_ */

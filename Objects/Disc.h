@@ -15,6 +15,8 @@ public:
         Plane(old.position, old.normal),
         radius(old.radius) {}
 
+    Disc(std::istringstream& iss, World& world);
+
     virtual ~Disc() {}
 
     Disc& operator=(const Disc& rhs);

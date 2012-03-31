@@ -2,6 +2,13 @@
 #include "../World.h"
 #include "../Utils/ShadeInfo.h"
 
+Phong::Phong(std::istringstream& iss)
+: Material(iss) {
+    iss >> specularReflection;
+
+    iss >> name;
+}
+
 Colour Phong::shade(
     const ShadeInfo& shadeInfo,
     const World& world,
