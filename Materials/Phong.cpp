@@ -23,24 +23,26 @@ namespace Raytracer {
 
             Vector3 lightDirection = world.lights[i]->getDirection(shadeInfo);
 
-            double NdotL = shadeInfo.hitNormal * lightDirection;
+            double NdotL = shadeInfo.hitNormal * -lightDirection;
 
             if (NdotL > 0) {
-                colour += diffuseReflection * diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
+                if (!world.lights[i]->inShadow(shadeInfo, world)) {
+                    colour += diffuseReflection * diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
+
+                    // Calculate specular contribution...
+
+                    // Calculate reflection vector
+                    Vector3 R = -lightDirection - 2.0 * (-lightDirection * shadeInfo.hitNormal) * shadeInfo.hitNormal;
+
+                    colour += specularReflection * world.lights[i]->getRadiance(shadeInfo)
+                            * std::pow(std::max(0.0, R * shadeInfo.ray.direction), 100);
+                }
             }
-
-            // Calculate specular contribution...
-
-            // Calculate reflection vector
-            Vector3 R = lightDirection - 2.0 * (lightDirection * shadeInfo.hitNormal) * shadeInfo.hitNormal;
-
-            colour += specularReflection * world.lights[i]->getRadiance(shadeInfo)
-                    * std::pow(std::max(0.0, R * shadeInfo.ray.direction), 100);
 
             // Add contribution from reflections
             if (depth != MAX_TRACE_DEPTH) {
                 ShadeInfo reflectInfo = world.hitObjects(
-                    shadeInfo.ray.getReflectedRay(shadeInfo.hitPoint, shadeInfo.hitNormal),
+                    shadeInfo.ray.getReflectedRay(shadeInfo),
                     depth+1
                 );
 

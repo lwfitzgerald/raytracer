@@ -15,6 +15,8 @@ namespace Raytracer {
 
         void setDirection(const Vector3& direction);
 
+        virtual bool inShadow(const ShadeInfo& shadeInfo, const World& world) const;
+
     private:
         Vector3 direction;
     };

@@ -56,7 +56,7 @@ namespace Raytracer {
         // Handle the + root
         t = (-b + discroot) / denom;
 
-        if (t > EPSILON && t) {
+        if (t > EPSILON) {
             tmin = t;
             return true;
         }

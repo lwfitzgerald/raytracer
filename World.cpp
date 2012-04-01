@@ -77,6 +77,27 @@ namespace Raytracer {
         return shadeInfo;
     }
 
+    bool World::shadowHitObjects(const Ray& ray, double& tmin) const {
+        double t;
+        ShadeInfo shadeInfo;
+        Object* tminHitObject = NULL;
+
+        // Before handling BVH, intersect with unboundable objects
+
+        std::vector<Object*>::const_iterator itr;
+
+        for (itr=unboundableObjects.begin(); itr != unboundableObjects.end(); itr++) {
+            if ((*itr)->hit(ray, t) && t < tmin) {
+                return true;
+            }
+        }
+
+        // Intersect with the BVH objects
+        hitBVHObjects(ray, bvh, shadeInfo, tmin, tminHitObject);
+
+        return shadeInfo.hit;
+    }
+
     void World::hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
                 double& tmin, Object*& tminHitObject) const {
         if (!bvhNode->boundingBox.hit(ray)) {

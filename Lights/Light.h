@@ -22,11 +22,17 @@ namespace Raytracer {
             this->colour = colour;
         }
 
+        bool castsShadows() const {
+            return mCastsShadows;
+        }
+
+        virtual bool inShadow(const ShadeInfo& shadeInfo, const World& world) const = 0;
+
     protected:
         double intensity;
         Colour colour;
 
-        bool castsShadows;
+        bool mCastsShadows;
 
         Light()
         :

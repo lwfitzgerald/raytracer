@@ -20,9 +20,13 @@ namespace Raytracer {
             // Calculate diffuse contribution...
 
             Vector3 lightDirection = world.lights[i]->getDirection(shadeInfo);
-            double NdotL = std::max(0.0, shadeInfo.hitNormal * lightDirection);
+            double NdotL = shadeInfo.hitNormal * -lightDirection;
 
-            colour += diffuseReflection * diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
+            if (NdotL > 0) {
+                if (!world.lights[i]->inShadow(shadeInfo, world)) {
+                    colour += diffuseReflection * diffuseColour * world.lights[i]->getRadiance(shadeInfo) * NdotL;
+                }
+            }
         }
 
         return colour;

@@ -140,22 +140,7 @@ namespace Raytracer {
     }
 
     void SceneReader::handleDirectionalLight(std::istringstream& iss, World& world) {
-        double r, g, b;
-
-        iss >> r;
-        iss >> g;
-        iss >> b;
-
-        double x, y, z;
-
-        iss >> x;
-        iss >> y;
-        iss >> z;
-
-        DirectionalLight* directionalLight = new DirectionalLight();
-        directionalLight->setColour(Colour(r, g, b));
-        directionalLight->setDirection(Vector3(x, y, z));
-
+        DirectionalLight* directionalLight = new DirectionalLight(iss);
         world.addLight(directionalLight);
     }
 

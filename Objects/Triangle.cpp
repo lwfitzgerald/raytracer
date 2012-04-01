@@ -96,6 +96,10 @@ namespace Raytracer {
         return false;
     }
 
+    bool Triangle::isBoundable() const {
+        return true;
+    }
+
     BoundingBox Triangle::getBoundingBox() const {
         return BoundingBox(
             Point3(

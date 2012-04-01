@@ -1,14 +1,16 @@
 #include "DirectionalLight.h"
+#include "../Utils/Ray.h"
+#include "../World.h"
 
 namespace Raytracer {
     DirectionalLight::DirectionalLight()
     : Light() {
-        castsShadows = true;
+        mCastsShadows = true;
     }
 
     DirectionalLight::DirectionalLight(std::istringstream& iss)
     : Light(iss) {
-        castsShadows = true;
+        mCastsShadows = true;
 
         // Extract direction
 
@@ -32,5 +34,13 @@ namespace Raytracer {
 
     void DirectionalLight::setDirection(const Vector3& direction) {
         this->direction = direction.hat();
+    }
+
+    bool DirectionalLight::inShadow(const ShadeInfo& shadeInfo, const World& world) const {
+        Ray shadowRay = Ray::getShadowRay(shadeInfo, *this);
+
+        double tmin = std::numeric_limits<double>::infinity();
+
+        return world.shadowHitObjects(shadowRay, tmin);
     }
 }

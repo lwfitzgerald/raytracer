@@ -3,12 +3,12 @@
 namespace Raytracer {
     AmbientLight::AmbientLight()
     : Light() {
-        castsShadows = false;
+        mCastsShadows = false;
     }
 
     AmbientLight::AmbientLight(std::istringstream& iss)
     : Light(iss) {
-        castsShadows = false;
+        mCastsShadows = false;
     }
 
     Vector3 AmbientLight::getDirection(const ShadeInfo& shadeInfo) const {
@@ -17,5 +17,10 @@ namespace Raytracer {
 
     Colour AmbientLight::getRadiance(const ShadeInfo& shadeInfo) const {
         return colour * intensity;
+    }
+
+    bool AmbientLight::inShadow(const ShadeInfo& shadeInfo, const World& world) const {
+        // Ambient light doesn't shadow
+        return false;
     }
 }

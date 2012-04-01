@@ -25,17 +25,11 @@ namespace Raytracer {
 
         ~Ray() {}
 
-        Ray& operator=(const Ray& rhs) {
-            origin = rhs.origin;
-            direction = rhs.direction;
+        Ray& operator=(const Ray& rhs);
 
-            return *this;
-        }
+        Ray getReflectedRay(const ShadeInfo& shadeInfo) const;
 
-        Ray getReflectedRay(const Point3& hitPoint, const Normal& hitNormal) const {
-            Vector3 reflectedDirection = direction - 2.0 * (direction * hitNormal) * hitNormal;
-            return Ray(hitPoint + EPSILON * reflectedDirection, reflectedDirection);
-        }
+        static Ray getShadowRay(const ShadeInfo& shadeInfo, const Light& light);
     };
 }
 

@@ -55,9 +55,12 @@ namespace Raytracer {
         }
 
         ShadeInfo hitObjects(const Ray& ray, const unsigned int depth) const;
+        bool shadowHitObjects(const Ray& ray, double& tmin) const;
 
         void hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
             double& tmin, Object*& tminHitObject) const;
+
+        // Static methods used for sorting vectors of objects by an axis
 
         static bool compareX(const Object* obj1, const Object* obj2);
 

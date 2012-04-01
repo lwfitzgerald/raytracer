@@ -16,6 +16,8 @@ namespace Raytracer {
 
         void setPosition(const Point3& position);
 
+        virtual bool inShadow(const ShadeInfo& shadeInfo, const World& world) const;
+
     private:
         Point3 position;
     };
