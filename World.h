@@ -70,7 +70,7 @@ namespace Raytracer {
     private:
         Camera* camera;
 
-        void buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis);
+        bool buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis);
         BoundingBox getBoundingBox(std::vector<Object*>* objects);
         std::vector<Object*> orderByAxisDistance(std::vector<Object*>* currentObjects, Axis axis);
     };

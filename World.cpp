@@ -190,14 +190,14 @@ namespace Raytracer {
         buildBVH(bvh, objects, Z_AXIS);
     }
 
-    void World::buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis) {
+    bool World::buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis) {
         // Store bounding box for the node
         currentNode->boundingBox = getBoundingBox(currentObjects);
 
         if (currentObjects->size() <= MAX_BVH_LEAF_OBJECTS) {
             // Sufficiently small number of nodes in bounding box, make this a leaf node
             currentNode->objects = currentObjects;
-            return;
+            return true;
         }
 
         // Create left and right nodes
@@ -235,8 +235,20 @@ namespace Raytracer {
             j++;
         }
 
-        buildBVH(currentNode->left, leftObjects, orderAxis);
-        buildBVH(currentNode->right, rightObjects, orderAxis);
+        // Do the recursive calls
+        bool leftResult = buildBVH(currentNode->left, leftObjects, orderAxis);
+        bool rightResult = buildBVH(currentNode->right, rightObjects, orderAxis);
+
+        // If the recursive call did not create a leaf, delete the temporary vector
+        if (!leftResult) {
+            delete leftObjects;
+        }
+
+        if (!rightResult) {
+            delete rightObjects;
+        }
+
+        return false;
     }
 
     BoundingBox World::getBoundingBox(std::vector<Object*>* objects) {
