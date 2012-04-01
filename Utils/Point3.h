@@ -5,38 +5,40 @@
 
 #include "Vector3.h"
 
-class Point3 {
-public:
-    double x;
-    double y;
-    double z;
+namespace Raytracer {
+    class Point3 {
+    public:
+        double x;
+        double y;
+        double z;
 
-    Point3() {}
+        Point3() {}
 
-    Point3(const double x, const double y, const double z)
-    : x(x), y(y), z(z) {}
+        Point3(const double x, const double y, const double z)
+        : x(x), y(y), z(z) {}
 
-    Point3(const Point3& old)
-    : x(old.x), y(old.y), z(old.z) {}
+        Point3(const Point3& old)
+        : x(old.x), y(old.y), z(old.z) {}
 
-    ~Point3() {}
+        ~Point3() {}
 
-    Point3 operator+(const Vector3& other) const;
-    Point3 operator-(const Vector3& rhs) const;
+        Point3 operator+(const Vector3& other) const;
+        Point3 operator-(const Vector3& rhs) const;
 
-    Vector3 operator-(const Point3& rhs) const;
+        Vector3 operator-(const Point3& rhs) const;
 
-    Point3& operator=(const Point3& rhs);
+        Point3& operator=(const Point3& rhs);
 
-    friend Point3 operator*(const double& lhs, const Point3& rhs) {
-        return rhs * lhs;
-    }
-    Point3 operator*(const double& rhs) const;
+        friend Point3 operator*(const double& lhs, const Point3& rhs) {
+            return rhs * lhs;
+        }
+        Point3 operator*(const double& rhs) const;
 
-    Point3& operator+=(const Vector3& rhs);
-    Point3& operator-=(const Vector3& rhs);
+        Point3& operator+=(const Vector3& rhs);
+        Point3& operator-=(const Vector3& rhs);
 
-    bool operator==(const Point3& rhs);
-};
+        bool operator==(const Point3& rhs);
+    };
+}
 
 #endif /* POINT_H_ */

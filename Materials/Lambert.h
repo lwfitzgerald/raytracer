@@ -3,18 +3,20 @@
 
 #include "Material.h"
 
-class Lambert: public Material {
-public:
-    Lambert() {}
-    Lambert(std::istringstream& iss);
+namespace Raytracer {
+    class Lambert: public Material {
+    public:
+        Lambert() {}
+        Lambert(std::istringstream& iss);
 
-    virtual ~Lambert() {}
+        virtual ~Lambert() {}
 
-    virtual Colour shade(
-        const ShadeInfo& shadeInfo,
-        const World& world,
-        const unsigned int depth
-    ) const;
-};
+        virtual Colour shade(
+            const ShadeInfo& shadeInfo,
+            const World& world,
+            const unsigned int depth
+        ) const;
+    };
+}
 
 #endif /* LAMBERT_H_ */

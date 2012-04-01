@@ -1,6 +1,8 @@
 #include "World.h"
 #include "Utils/SceneReader.h"
 
+using namespace Raytracer;
+
 int main(int argc, char *argv[]) {
     if (argc < 1) {
         std::cerr << "Input file not specified" << std::endl;

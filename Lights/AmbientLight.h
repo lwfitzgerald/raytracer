@@ -3,15 +3,17 @@
 
 #include "Light.h"
 
-class AmbientLight: public Light {
-public:
-    AmbientLight();
-    AmbientLight(std::istringstream& iss);
+namespace Raytracer {
+    class AmbientLight: public Light {
+    public:
+        AmbientLight();
+        AmbientLight(std::istringstream& iss);
 
-    virtual ~AmbientLight() {}
+        virtual ~AmbientLight() {}
 
-    virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
-    virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
-};
+        virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
+        virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
+    };
+}
 
 #endif /* AMBIENTLIGHT_H_ */

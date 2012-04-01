@@ -3,27 +3,29 @@
 
 #include "Material.h"
 
-class Phong: public Material {
-public:
-    double specularReflection;
+namespace Raytracer {
+    class Phong: public Material {
+    public:
+        double specularReflection;
 
-    Phong()
-    :
-        specularReflection(1) {}
+        Phong()
+        :
+            specularReflection(1) {}
 
-    Phong(std::istringstream& iss);
+        Phong(std::istringstream& iss);
 
-    virtual ~Phong() {}
+        virtual ~Phong() {}
 
-    virtual Colour shade(
-        const ShadeInfo& shadeInfo,
-        const World& world,
-        const unsigned int depth
-    ) const;
+        virtual Colour shade(
+            const ShadeInfo& shadeInfo,
+            const World& world,
+            const unsigned int depth
+        ) const;
 
-    void setSpecularReflection(const double& specularReflection) {
-        this->specularReflection = specularReflection;
-    }
-};
+        void setSpecularReflection(const double& specularReflection) {
+            this->specularReflection = specularReflection;
+        }
+    };
+}
 
 #endif /* PHONG_H_ */

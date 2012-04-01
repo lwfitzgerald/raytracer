@@ -1,14 +1,16 @@
 #include "Object.h"
 #include "../World.h"
 
-void Object::setMaterial(Material* material) {
-    this->material = material;
-}
+namespace Raytracer {
+    void Object::setMaterial(Material* material) {
+        this->material = material;
+    }
 
-void Object::fetchMaterial(std::istringstream& iss, World& world) {
-    std::string materialName;
+    void Object::fetchMaterial(std::istringstream& iss, World& world) {
+        std::string materialName;
 
-    iss >> materialName;
+        iss >> materialName;
 
-    material = world.materials[materialName];
+        material = world.materials[materialName];
+    }
 }

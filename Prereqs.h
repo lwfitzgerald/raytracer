@@ -19,26 +19,39 @@ namespace std {
 
 #define sqr(x) ((x) * (x))
 
-class Object;
-class Point3;
-class Vector3;
-class Normal;
-class Matrix;
-class Colour;
-class BoundingBox;
+namespace Raytracer {
+    enum Axis {X_AXIS, Y_AXIS, Z_AXIS};
 
-class Ray;
-class ShadeInfo;
+    class Object;
+    class Point3;
+    class Vector3;
+    class Normal;
+    class Matrix;
+    class Colour;
+    class BoundingBox;
+    struct BVHNode;
 
-class World;
-class ViewPlane;
-class Camera;
-class RegularCamera;
+    class Sphere;
+    class Plane;
+    class Disc;
+    class Triangle;
 
-class Material;
-class Lambert;
+    class Ray;
+    class ShadeInfo;
 
-class Light;
-class AmbientLight;
+    class World;
+    class ViewPlane;
+    class Camera;
+    class RegularCamera;
+
+    class Material;
+    class Lambert;
+    class Phong;
+
+    class Light;
+    class AmbientLight;
+    class DirectionalLight;
+    class PointLight;
+}
 
 #endif /* PREREQS_H_ */

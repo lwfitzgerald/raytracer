@@ -12,84 +12,96 @@
 #include "Lights/PointLight.h"
 #include "Materials/Lambert.h"
 #include "Materials/Phong.h"
+#include "Utils/BVHNode.h"
 
-World::~World() {
-    // Delete the camera
-    delete this->camera;
+namespace Raytracer {
+    World::~World() {
+        // Delete the camera
+        delete this->camera;
 
-    // Delete the ambient light
-    delete this->ambientLight;
+        // Delete the ambient light
+        delete this->ambientLight;
 
-    // Delete materials
-    std::map<const std::string, Material*>::iterator materialItr;
+        // Delete materials
+        std::map<const std::string, Material*>::iterator materialItr;
 
-    for (materialItr=materials.begin(); materialItr != materials.end(); materialItr++) {
-        delete materialItr->second;
-    }
+        for (materialItr=materials.begin(); materialItr != materials.end(); materialItr++) {
+            delete materialItr->second;
+        }
 
-    // Delete all objects
-    std::vector<Object*>::iterator objectItr;
+        // Delete all objects
+        std::vector<Object*>::iterator objectItr;
 
-    for (objectItr=objects.begin(); objectItr < objects.end(); objectItr++) {
-        delete *objectItr;
-    }
-}
-
-void World::renderScene() {
-    camera->renderScene(*this);
-}
-
-ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {
-    double t;
-    ShadeInfo shadeInfo;
-    Object* tminHitObject = NULL;
-
-    // Set tmin to infinity
-    double tmin = std::numeric_limits<double>::infinity();
-
-    for (unsigned int i=0; i < this->objects.size(); i++) {
-        if (this->objects[i]->hit(ray, t) && t < tmin) {
-            shadeInfo.hit = true;
-            shadeInfo.ray = ray;
-            tminHitObject = this->objects[i];
-            tmin = t;
+        for (objectItr=objects.begin(); objectItr < objects.end(); objectItr++) {
+            delete *objectItr;
         }
     }
 
-    if (shadeInfo.hit) {
-        // Some object was hit so get the shading information for it
-        tminHitObject->getShadeInfo(shadeInfo, ray, tmin);
-
-        shadeInfo.colour = tminHitObject->material->shade(shadeInfo, *this, depth);
+    void World::renderScene() {
+        camera->renderScene(*this);
     }
 
-    return shadeInfo;
-}
+    ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {
+        double t;
+        ShadeInfo shadeInfo;
+        Object* tminHitObject = NULL;
 
-void World::addObject(Object* object) {
-    this->objects.push_back(object);
-}
+        // Set tmin to infinity
+        double tmin = std::numeric_limits<double>::infinity();
 
-void World::addLight(Light* light) {
-    this->lights.push_back(light);
-}
+        for (unsigned int i=0; i < this->objects.size(); i++) {
+            if (this->objects[i]->hit(ray, t) && t < tmin) {
+                shadeInfo.hit = true;
+                shadeInfo.ray = ray;
+                tminHitObject = this->objects[i];
+                tmin = t;
+            }
+        }
 
-void World::addMaterial(Material* material) {
-    this->materials[material->name] = material;
-}
+        if (shadeInfo.hit) {
+            // Some object was hit so get the shading information for it
+            tminHitObject->getShadeInfo(shadeInfo, ray, tmin);
 
-void World::setCamera(Camera* camera) {
-    this->camera = camera;
-}
+            shadeInfo.colour = tminHitObject->material->shade(shadeInfo, *this, depth);
+        }
 
-void World::setAmbientLight(AmbientLight* ambientLight) {
-    this->ambientLight = ambientLight;
-}
+        return shadeInfo;
+    }
 
-void World::setViewPlaneResolution(const unsigned int hres, const unsigned int vres) {
-    this->viewPlane.setResolution(hres, vres);
-}
+    void World::addObject(Object* object) {
+        this->objects.push_back(object);
+    }
 
-void World::setViewPlanePixelSize(float pixelSize) {
-    this->viewPlane.setPixelSize(pixelSize);
+    void World::addLight(Light* light) {
+        this->lights.push_back(light);
+    }
+
+    void World::addMaterial(Material* material) {
+        this->materials[material->name] = material;
+    }
+
+    void World::buildBVH() {
+        bvh = new BVHNode;
+        buildBVH(bvh, objects);
+    }
+
+    void World::buildBVH(BVHNode* currentNode, std::vector<Object*>& currentObjects) {
+
+    }
+
+    void World::setCamera(Camera* camera) {
+        this->camera = camera;
+    }
+
+    void World::setAmbientLight(AmbientLight* ambientLight) {
+        this->ambientLight = ambientLight;
+    }
+
+    void World::setViewPlaneResolution(const unsigned int hres, const unsigned int vres) {
+        this->viewPlane.setResolution(hres, vres);
+    }
+
+    void World::setViewPlanePixelSize(float pixelSize) {
+        this->viewPlane.setPixelSize(pixelSize);
+    }
 }

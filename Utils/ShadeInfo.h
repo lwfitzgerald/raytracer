@@ -8,20 +8,22 @@
 #include "Normal.h"
 #include "Colour.h"
 
-class ShadeInfo {
-public:
-    bool hit;
-    Ray ray;
-    Point3 hitPoint;
-    Normal hitNormal;
-    Colour colour;
+namespace Raytracer {
+    class ShadeInfo {
+    public:
+        bool hit;
+        Ray ray;
+        Point3 hitPoint;
+        Normal hitNormal;
+        Colour colour;
 
-    ShadeInfo()
-    : hit(false), hitPoint(), hitNormal(), colour() {}
+        ShadeInfo()
+        : hit(false), hitPoint(), hitNormal(), colour() {}
 
-    ~ShadeInfo() {}
+        ~ShadeInfo() {}
 
-    ShadeInfo& operator=(const ShadeInfo& rhs);
-};
+        ShadeInfo& operator=(const ShadeInfo& rhs);
+    };
+}
 
 #endif /* SHADEINFO_H_ */

@@ -8,34 +8,36 @@
 #include "Normal.h"
 #include "../Objects/Object.h"
 
-class Ray {
-public:
-    Point3 origin;
-    Vector3 direction;
+namespace Raytracer {
+    class Ray {
+    public:
+        Point3 origin;
+        Vector3 direction;
 
-    Ray()
-    : origin(0.0, 0.0, 0.0), direction(0.0, 0.0, -1.0) {}
+        Ray()
+        : origin(0.0, 0.0, 0.0), direction(0.0, 0.0, -1.0) {}
 
-    Ray(const Point3& origin, const Vector3& direction)
-    : origin(origin), direction(direction) {}
+        Ray(const Point3& origin, const Vector3& direction)
+        : origin(origin), direction(direction) {}
 
-    Ray(const Ray& old)
-    : origin(old.origin), direction(old.direction) {}
+        Ray(const Ray& old)
+        : origin(old.origin), direction(old.direction) {}
 
-    ~Ray() {}
+        ~Ray() {}
 
-    Ray& operator=(const Ray& rhs) {
-        origin = rhs.origin;
-        direction = rhs.direction;
+        Ray& operator=(const Ray& rhs) {
+            origin = rhs.origin;
+            direction = rhs.direction;
 
-        return *this;
-    }
+            return *this;
+        }
 
-    Ray getReflectedRay(const Point3& hitPoint, const Normal& hitNormal) const {
-        double epsilon = Object::epsilon;
-        Vector3 reflectedDirection = direction - 2.0 * (direction * hitNormal) * hitNormal;
-        return Ray(hitPoint + epsilon * reflectedDirection, reflectedDirection);
-    }
-};
+        Ray getReflectedRay(const Point3& hitPoint, const Normal& hitNormal) const {
+            double epsilon = Object::epsilon;
+            Vector3 reflectedDirection = direction - 2.0 * (direction * hitNormal) * hitNormal;
+            return Ray(hitPoint + epsilon * reflectedDirection, reflectedDirection);
+        }
+    };
+}
 
 #endif /* RAY_H_ */
