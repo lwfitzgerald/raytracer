@@ -28,6 +28,8 @@ namespace Raytracer {
 
         BVHNode* bvh;
 
+        std::vector<Object*> unboundableObjects;
+
         World()
         :
             ambientLight(NULL),
@@ -53,10 +55,18 @@ namespace Raytracer {
         }
 
         ShadeInfo hitObjects(const Ray& ray, const unsigned int depth) const;
+
+        static bool compareX(const Object* obj1, const Object* obj2);
+
+        static bool compareY(const Object* obj1, const Object* obj2);
+
+        static bool compareZ(const Object* obj1, const Object* obj2);
     private:
         Camera* camera;
 
-        void buildBVH(BVHNode* currentNode, std::vector<Object*>& currentObjects);
+        void buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis);
+        BoundingBox getBoundingBox(std::vector<Object*>* objects);
+        std::vector<Object*> orderByAxisDistance(std::vector<Object*>* currentObjects, Axis axis);
     };
 }
 

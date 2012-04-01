@@ -19,8 +19,6 @@ namespace Raytracer {
 
         virtual void setMaterial(Material* material);
 
-        static const double epsilon = 0.001;
-
     protected:
         Object() {};
 

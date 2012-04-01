@@ -33,9 +33,8 @@ namespace Raytracer {
         }
 
         Ray getReflectedRay(const Point3& hitPoint, const Normal& hitNormal) const {
-            double epsilon = Object::epsilon;
             Vector3 reflectedDirection = direction - 2.0 * (direction * hitNormal) * hitNormal;
-            return Ray(hitPoint + epsilon * reflectedDirection, reflectedDirection);
+            return Ray(hitPoint + EPSILON * reflectedDirection, reflectedDirection);
         }
     };
 }

@@ -100,12 +100,12 @@ namespace Raytracer {
         return BoundingBox(
             Point3(
                 std::min(A.x, std::min(B.x, C.x)),
-                std::max(A.y, std::max(B.y, C.y)),
-                std::max(A.z, std::max(B.z, C.z))
+                std::min(A.y, std::min(B.y, C.y)),
+                std::min(A.z, std::min(B.z, C.z))
             ),
             Point3(
                 std::max(A.x, std::max(B.x, C.x)),
-                std::min(A.y, std::min(B.y, C.y)),
+                std::max(A.y, std::max(B.y, C.y)),
                 std::max(A.z, std::max(B.z, C.z))
             )
         );

@@ -6,6 +6,8 @@
 namespace Raytracer {
     struct BVHNode {
         BVHNode() {
+            left = NULL;
+            right = NULL;
             objects = NULL;
         }
 

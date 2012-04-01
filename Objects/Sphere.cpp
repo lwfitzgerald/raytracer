@@ -48,7 +48,7 @@ namespace Raytracer {
         // Handle the - root
         double t = (-b - discroot) / denom;
 
-        if (t > epsilon) {
+        if (t > EPSILON) {
             tmin = t;
             return true;
         }
@@ -56,7 +56,7 @@ namespace Raytracer {
         // Handle the + root
         t = (-b + discroot) / denom;
 
-        if (t > epsilon && t) {
+        if (t > EPSILON && t) {
             tmin = t;
             return true;
         }
@@ -78,8 +78,8 @@ namespace Raytracer {
 
     BoundingBox Sphere::getBoundingBox() const {
         return BoundingBox(
-            Point3(center.x - radius, center.y + radius, center.z + radius),
-            Point3(center.x + radius, center.y - radius, center.z - radius)
+            Point3(center.x - radius, center.y - radius, center.z - radius),
+            Point3(center.x + radius, center.y + radius, center.z + radius)
         );
     }
 }

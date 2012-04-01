@@ -46,13 +46,13 @@ namespace Raytracer {
         return BoundingBox(
             Point3(
                 position.x - radius,
-                position.y + radius,
-                position.z + radius
+                position.y - radius,
+                position.z - radius
             ),
             Point3(
                 position.x + radius,
-                position.y - radius,
-                position.z - radius
+                position.y + radius,
+                position.z + radius
             )
         );
     }

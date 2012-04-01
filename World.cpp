@@ -29,6 +29,8 @@ namespace Raytracer {
             delete materialItr->second;
         }
 
+        // TODO: Delete BVH nodes
+
         // Delete all objects
         std::vector<Object*>::iterator objectItr;
 
@@ -82,11 +84,133 @@ namespace Raytracer {
 
     void World::buildBVH() {
         bvh = new BVHNode;
-        buildBVH(bvh, objects);
+
+        std::vector<Object*>* objects = new std::vector<Object*>(this->objects);
+
+        // Remove all unboundable objects
+
+        std::vector<Object*>::iterator itr;
+
+        for (itr=objects->begin(); itr != objects->end();) {
+            if (!(*itr)->isBoundable()) {
+                // Push into unboundable list
+                unboundableObjects.push_back(*itr);
+
+                // Remove from BVH build objects list
+                itr = objects->erase(itr);
+            } else {
+                itr++;
+            }
+        }
+
+        // Order by X axis first
+        buildBVH(bvh, objects, Z_AXIS);
     }
 
-    void World::buildBVH(BVHNode* currentNode, std::vector<Object*>& currentObjects) {
+    void World::buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis) {
+        // Store bounding box for the node
+        currentNode->boundingBox = getBoundingBox(currentObjects);
 
+        if (currentObjects->size() <= MAX_BVH_LEAF_OBJECTS) {
+            // Sufficiently small number of nodes in bounding box, make this a leaf node
+            currentNode->objects = currentObjects;
+            return;
+        }
+
+        // Create left and right nodes
+        currentNode->left = new BVHNode;
+        currentNode->right = new BVHNode;
+
+        // Choose axis to order objects on
+        Axis orderAxis;
+        if (lastAxis == X_AXIS) {
+            orderAxis = Y_AXIS;
+        } else if (lastAxis == Y_AXIS) {
+            orderAxis = Z_AXIS;
+        } else {
+            orderAxis = X_AXIS;
+        }
+
+        // Build left and right object lists
+
+        const std::vector<Object*> orderObjects = orderByAxisDistance(currentObjects, orderAxis);
+
+        std::vector<Object*>* leftObjects = new std::vector<Object*>(orderObjects.size() / 2);
+
+        for (unsigned int i=0; i < orderObjects.size() / 2; i++) {
+            (*leftObjects)[i] = orderObjects[i];
+        }
+
+        unsigned int rightStart = (orderObjects.size() & 1 == 0) ? orderObjects.size() / 2 - 1 : orderObjects.size() / 2;
+        unsigned int rightSize = orderObjects.size() - rightStart;
+
+        std::vector<Object*>* rightObjects = new std::vector<Object*>(rightSize);
+
+        unsigned int j = 0;
+        for (unsigned int i=rightStart; i < orderObjects.size(); i++) {
+            (*rightObjects)[j] = orderObjects[i];
+            j++;
+        }
+
+        buildBVH(currentNode->left, leftObjects, orderAxis);
+        buildBVH(currentNode->right, rightObjects, orderAxis);
+    }
+
+    BoundingBox World::getBoundingBox(std::vector<Object*>* objects) {
+        BoundingBox boundingBox = BoundingBox(Point3(0, 0, 0), Point3(0, 0, 0));
+
+        std::vector<Object*>::const_iterator itr;
+
+        for (itr=objects->begin(); itr != objects->end(); itr++) {
+            BoundingBox objectBox = (*itr)->getBoundingBox();
+            boundingBox.corner1 = Point3(
+                std::min(objectBox.corner1.x, boundingBox.corner1.x),
+                std::max(objectBox.corner1.y, boundingBox.corner1.y),
+                std::max(objectBox.corner1.z, boundingBox.corner1.z)
+            );
+            boundingBox.corner2 = Point3(
+                std::max(objectBox.corner2.x, boundingBox.corner2.x),
+                std::min(objectBox.corner2.y, boundingBox.corner2.y),
+                std::min(objectBox.corner2.z, boundingBox.corner2.z)
+            );
+        }
+
+        return boundingBox;
+    }
+
+    std::vector<Object*> World::orderByAxisDistance(std::vector<Object*>* currentObjects, Axis axis) {
+        std::vector<Object*> orderedObjects = std::vector<Object*>(*currentObjects);
+
+        if (axis == X_AXIS) {
+            std::sort(orderedObjects.begin(), orderedObjects.end(), World::compareX);
+        } else if (axis == Y_AXIS) {
+            std::sort(orderedObjects.begin(), orderedObjects.end(), World::compareY);
+        } else {
+            std::sort(orderedObjects.begin(), orderedObjects.end(), World::compareZ);
+        }
+
+        return orderedObjects;
+    }
+
+    bool World::compareX(const Object* obj1, const Object* obj2) {
+        BoundingBox obj1Box = obj1->getBoundingBox();
+        BoundingBox obj2Box = obj2->getBoundingBox();
+
+        return obj1Box.corner1.x < obj2Box.corner1.x;
+    }
+
+    bool World::compareY(const Object* obj1, const Object* obj2) {
+        BoundingBox obj1Box = obj1->getBoundingBox();
+        BoundingBox obj2Box = obj2->getBoundingBox();
+
+        return obj1Box.corner1.y < obj2Box.corner1.y;
+    }
+
+    bool World::compareZ(const Object* obj1, const Object* obj2) {
+        BoundingBox obj1Box = obj1->getBoundingBox();
+        BoundingBox obj2Box = obj2->getBoundingBox();
+
+        return obj1Box.corner2.z < obj2Box.corner2.z;
     }
 
     void World::setCamera(Camera* camera) {

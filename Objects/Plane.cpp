@@ -43,7 +43,7 @@ namespace Raytracer {
     bool Plane::hit(const Ray& ray, double& tmin) const {
         double t = (position - ray.origin) * normal / (ray.direction * normal);
 
-        if (t > epsilon) {
+        if (t > EPSILON) {
             tmin = t;
             return true;
         }
@@ -67,36 +67,36 @@ namespace Raytracer {
 
         if (normal.x == 0 && normal.y == 0) {
             corner1.x = -std::numeric_limits<double>::infinity();
-            corner1.y = std::numeric_limits<double>::infinity();
+            corner1.y = -std::numeric_limits<double>::infinity();
             corner1.z = position.z;
 
             corner2.x = std::numeric_limits<double>::infinity();
-            corner2.y = -std::numeric_limits<double>::infinity();
+            corner2.y = std::numeric_limits<double>::infinity();
             corner2.z = position.z;
         } else if (normal.x == 0 && normal.z == 0) {
             corner1.x = -std::numeric_limits<double>::infinity();
             corner1.y = position.y;
-            corner1.z = std::numeric_limits<double>::infinity();
+            corner1.z = -std::numeric_limits<double>::infinity();
 
             corner2.x = std::numeric_limits<double>::infinity();
             corner2.y = position.y;
-            corner2.z = -std::numeric_limits<double>::infinity();
+            corner2.z = std::numeric_limits<double>::infinity();
         } else if (normal.y == 0 && normal.z == 0) {
             corner1.x = position.x;
-            corner1.y = std::numeric_limits<double>::infinity();
-            corner1.z = std::numeric_limits<double>::infinity();
+            corner1.y = -std::numeric_limits<double>::infinity();
+            corner1.z = -std::numeric_limits<double>::infinity();
 
             corner2.x = position.x;
-            corner2.y = -std::numeric_limits<double>::infinity();
-            corner2.z = -std::numeric_limits<double>::infinity();
+            corner2.y = std::numeric_limits<double>::infinity();
+            corner2.z = std::numeric_limits<double>::infinity();
         } else {
             corner1.x = -std::numeric_limits<double>::infinity();
-            corner1.y = std::numeric_limits<double>::infinity();
-            corner1.z = std::numeric_limits<double>::infinity();
+            corner1.y = -std::numeric_limits<double>::infinity();
+            corner1.z = -std::numeric_limits<double>::infinity();
 
             corner2.x = std::numeric_limits<double>::infinity();
-            corner2.y = -std::numeric_limits<double>::infinity();
-            corner2.z = -std::numeric_limits<double>::infinity();
+            corner2.y = std::numeric_limits<double>::infinity();
+            corner2.z = std::numeric_limits<double>::infinity();
         }
 
         return BoundingBox(

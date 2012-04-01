@@ -11,6 +11,7 @@ int main(int argc, char *argv[]) {
 
     World world;
     SceneReader::buildScene(argv[1], world);
+    world.buildBVH();
     world.renderScene();
 
     return 0;
