@@ -51,14 +51,21 @@ namespace Raytracer {
         // Set tmin to infinity
         double tmin = std::numeric_limits<double>::infinity();
 
-        for (unsigned int i=0; i < this->objects.size(); i++) {
-            if (this->objects[i]->hit(ray, t) && t < tmin) {
+        // Before handling BVH, intersect with unboundable objects
+
+        std::vector<Object*>::const_iterator itr;
+
+        for (itr=unboundableObjects.begin(); itr != unboundableObjects.end(); itr++) {
+            if ((*itr)->hit(ray, t) && t < tmin) {
                 shadeInfo.hit = true;
                 shadeInfo.ray = ray;
-                tminHitObject = this->objects[i];
+                tminHitObject = *itr;
                 tmin = t;
             }
         }
+
+        // Intersect with the BVH objects
+        hitBVHObjects(ray, bvh, shadeInfo, tmin, tminHitObject);
 
         if (shadeInfo.hit) {
             // Some object was hit so get the shading information for it
@@ -68,6 +75,61 @@ namespace Raytracer {
         }
 
         return shadeInfo;
+    }
+
+    void World::hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
+                double& tmin, Object*& tminHitObject) const {
+        if (!bvhNode->boundingBox.hit(ray)) {
+            // No intersection with bounding box
+            return;
+        }
+
+        if (bvhNode->objects != NULL) {
+            // Leaf node so intersect with objects
+
+            double t;
+            std::vector<Object*>::const_iterator itr;
+
+            for (itr=bvhNode->objects->begin(); itr != bvhNode->objects->end(); itr++) {
+                if ((*itr)->hit(ray, t) && t < tmin) {
+                    shadeInfo.hit = true;
+                    shadeInfo.ray = ray;
+                    tminHitObject = *itr;
+                    tmin = t;
+                }
+            }
+            return;
+        }
+
+        // Create copies for the recursive calls
+        double tminLeft, tminRight;
+        tminLeft = tminRight = tmin;
+
+        Object* tminHitObjectLeft, *tminHitObjectRight;
+        tminHitObjectLeft = tminHitObjectRight = tminHitObject;
+
+        ShadeInfo shadeInfoLeft, shadeInfoRight;
+        shadeInfoLeft = shadeInfoRight = shadeInfo;
+
+        // Do the recursive calls
+        hitBVHObjects(ray, bvhNode->left, shadeInfoLeft, tminLeft, tminHitObjectLeft);
+        hitBVHObjects(ray, bvhNode->right, shadeInfoRight, tminRight, tminHitObjectRight);
+
+        if (tminLeft < tmin) {
+            if (tminRight < tminLeft) {
+                tmin = tminRight;
+                tminHitObject = tminHitObjectRight;
+                shadeInfo = shadeInfoRight;
+            } else {
+                tmin = tminLeft;
+                tminHitObject = tminHitObjectLeft;
+                shadeInfo = shadeInfoLeft;
+            }
+        } else if (tminRight < tmin) {
+            tmin = tminRight;
+            tminHitObject = tminHitObjectRight;
+            shadeInfo = shadeInfoRight;
+        }
     }
 
     void World::addObject(Object* object) {
@@ -165,13 +227,13 @@ namespace Raytracer {
             BoundingBox objectBox = (*itr)->getBoundingBox();
             boundingBox.corner1 = Point3(
                 std::min(objectBox.corner1.x, boundingBox.corner1.x),
-                std::max(objectBox.corner1.y, boundingBox.corner1.y),
-                std::max(objectBox.corner1.z, boundingBox.corner1.z)
+                std::min(objectBox.corner1.y, boundingBox.corner1.y),
+                std::min(objectBox.corner1.z, boundingBox.corner1.z)
             );
             boundingBox.corner2 = Point3(
                 std::max(objectBox.corner2.x, boundingBox.corner2.x),
-                std::min(objectBox.corner2.y, boundingBox.corner2.y),
-                std::min(objectBox.corner2.z, boundingBox.corner2.z)
+                std::max(objectBox.corner2.y, boundingBox.corner2.y),
+                std::max(objectBox.corner2.z, boundingBox.corner2.z)
             );
         }
 

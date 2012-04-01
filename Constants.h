@@ -4,6 +4,8 @@
 // Render settings
 #define MAX_TRACE_DEPTH 10
 #define OUTPUT_FILENAME "output.ppm"
+
+// Number of objects in a BVH leaf node (must be 2+)
 #define MAX_BVH_LEAF_OBJECTS 2
 
 // Accuracy tolerance value

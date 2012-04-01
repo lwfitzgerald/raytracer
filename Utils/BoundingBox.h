@@ -17,7 +17,7 @@ namespace Raytracer {
 
         BoundingBox& operator=(const BoundingBox& old);
 
-        bool hit(const Ray& ray, double& tmin) const;
+        bool hit(const Ray& ray) const;
 
         ~BoundingBox() {}
     };

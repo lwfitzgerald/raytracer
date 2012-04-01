@@ -2,7 +2,10 @@
 #include "Ray.h"
 
 namespace Raytracer {
-    bool BoundingBox::hit(const Ray& ray, double& tmin) const {
+    bool BoundingBox::hit(const Ray& ray) const {
+        // This code is closely derived from that in
+        // Raytracing from the ground up
+
         double tXmin, tYmin, tZmin;
         double tXmax, tYmax, tZmax;
 

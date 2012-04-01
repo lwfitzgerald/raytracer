@@ -56,6 +56,9 @@ namespace Raytracer {
 
         ShadeInfo hitObjects(const Ray& ray, const unsigned int depth) const;
 
+        void hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
+            double& tmin, Object*& tminHitObject) const;
+
         static bool compareX(const Object* obj1, const Object* obj2);
 
         static bool compareY(const Object* obj1, const Object* obj2);
