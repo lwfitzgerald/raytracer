@@ -62,8 +62,8 @@ namespace Raytracer {
          */
         void hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
             double& tmin, Object*& tminHitObject) const;
-        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
-            double& tmin, Object*& tminHitObject) const;
+        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, double& tmin,
+            Object*& tminHitObject) const;
 
         // Static methods used for sorting vectors of objects by an axis
 

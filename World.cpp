@@ -93,7 +93,7 @@ namespace Raytracer {
         }
 
         // Intersect with the BVH objects
-        return shadowHitBVHObjects(ray, bvh, shadeInfo, tmin, tminHitObject);
+        return shadowHitBVHObjects(ray, bvh, tmin, tminHitObject);
     }
 
     void World::hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
@@ -125,8 +125,8 @@ namespace Raytracer {
         hitBVHObjects(ray, bvhNode->right, shadeInfo, tmin, tminHitObject);
     }
 
-    bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
-                double& tmin, Object*& tminHitObject) const {
+    bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, double& tmin,
+        Object*& tminHitObject) const {
         if (!bvhNode->boundingBox.hit(ray)) {
             // No intersection with bounding box
             return false;
@@ -147,8 +147,8 @@ namespace Raytracer {
         }
 
         // Do the recursive calls
-        bool leftResult = shadowHitBVHObjects(ray, bvhNode->left, shadeInfo, tmin, tminHitObject);
-        bool rightResult = shadowHitBVHObjects(ray, bvhNode->right, shadeInfo, tmin, tminHitObject);
+        bool leftResult = shadowHitBVHObjects(ray, bvhNode->left, tmin, tminHitObject);
+        bool rightResult = shadowHitBVHObjects(ray, bvhNode->right, tmin, tminHitObject);
 
         return leftResult || rightResult;
     }
