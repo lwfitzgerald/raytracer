@@ -29,7 +29,7 @@ namespace Raytracer {
             delete materialItr->second;
         }
 
-        // TODO: Delete BVH nodes
+        deleteBVHNode(bvh);
 
         // Delete all objects
         std::vector<Object*>::iterator objectItr;
@@ -249,6 +249,22 @@ namespace Raytracer {
         }
 
         return false;
+    }
+
+    void World::deleteBVHNode(BVHNode* bvhNode) {
+        if (bvhNode->objects != NULL) {
+            delete bvhNode->objects;
+        }
+
+        if (bvhNode->left != NULL) {
+            deleteBVHNode(bvhNode->left);
+        }
+
+        if (bvhNode->right != NULL) {
+            deleteBVHNode(bvhNode->right);
+        }
+
+        delete bvhNode;
     }
 
     BoundingBox World::getBoundingBox(std::vector<Object*>* objects) {

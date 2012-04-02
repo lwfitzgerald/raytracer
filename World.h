@@ -57,14 +57,6 @@ namespace Raytracer {
         ShadeInfo hitObjects(const Ray& ray, const unsigned int depth) const;
         bool shadowHitObjects(const Ray& ray, double& tmin) const;
 
-        /**
-         * Intersects a ray
-         */
-        void hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
-            double& tmin, Object*& tminHitObject) const;
-        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, double& tmin,
-            Object*& tminHitObject) const;
-
         // Static methods used for sorting vectors of objects by an axis
 
         static bool compareX(const Object* obj1, const Object* obj2);
@@ -76,6 +68,13 @@ namespace Raytracer {
         Camera* camera;
 
         bool buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis);
+        static void deleteBVHNode(BVHNode* bvhNode);
+
+        void hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
+                    double& tmin, Object*& tminHitObject) const;
+        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, double& tmin,
+                    Object*& tminHitObject) const;
+
         BoundingBox getBoundingBox(std::vector<Object*>* objects);
         std::vector<Object*> orderByAxisDistance(std::vector<Object*>* currentObjects, Axis axis);
     };
