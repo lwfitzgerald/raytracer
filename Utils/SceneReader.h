@@ -19,6 +19,7 @@ namespace Raytracer {
 
         static void handleLambert(std::istringstream& iss, World& world);
         static void handlePhong(std::istringstream& iss, World& world);
+        static void handleTransparent(std::istringstream& iss, World& world);
 
         static void handleSphere(std::istringstream& iss, World& world);
         static void handlePlane(std::istringstream& iss, World& world);

@@ -8,9 +8,7 @@ namespace Raytracer {
     public:
         double specularReflection;
 
-        Phong()
-        :
-            specularReflection(1) {}
+        Phong() {}
 
         Phong(std::istringstream& iss);
 
@@ -22,9 +20,7 @@ namespace Raytracer {
             const unsigned int depth
         ) const;
 
-        void setSpecularReflection(const double& specularReflection) {
-            this->specularReflection = specularReflection;
-        }
+        void setSpecularReflection(const double& specularReflection);
     };
 }
 

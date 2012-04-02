@@ -36,6 +36,9 @@ namespace Raytracer {
         iss >> cY;
         iss >> cZ;
 
+        // Store the index of refraction
+        iss >> ior;
+
         // Extract and fetch the material
         Triangle::fetchMaterial(iss, world);
 

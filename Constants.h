@@ -14,6 +14,10 @@
 // Define some colours
 #define WHITE          Colour(1, 1, 1)
 
+// Exceptions
+#define NO_REFRACTED_RAY_EXCEPTION 99
+
+// Maths constants
 #define PI 3.14159265358979323846
 
 #endif /* CONSTANTS_H_ */

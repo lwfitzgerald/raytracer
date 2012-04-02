@@ -48,6 +48,10 @@ namespace Raytracer {
          * iss >> name;
          */
         Material(std::istringstream& iss) {
+            initMaterial(iss);
+        }
+
+        void initMaterial(std::istringstream& iss) {
             double r, g, b;
 
             iss >> r;

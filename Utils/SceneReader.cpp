@@ -9,6 +9,7 @@
 #include "../Lights/DirectionalLight.h"
 #include "../Materials/Lambert.h"
 #include "../Materials/Phong.h"
+#include "../Materials/Transparent.h"
 
 namespace Raytracer {
     void SceneReader::buildScene(const char* filePath, World& world) {
@@ -61,6 +62,8 @@ namespace Raytracer {
                 handleLambert(iss, world);
             } else if (mainName.compare("PHONG") == 0) {
                 handlePhong(iss, world);
+            } else if (mainName.compare("TRANSPARENT") == 0) {
+                handleTransparent(iss, world);
             } else if (mainName.compare("CAMERA") == 0) {
                 handleCamera(iss, world);
             } else if (mainName.compare("SPHERE") == 0) {
@@ -162,6 +165,16 @@ namespace Raytracer {
 
         // Store in hash map for lookup during scene build
         world.materials[phong->name] = phong;
+    }
+
+    void SceneReader::handleTransparent(std::istringstream& iss, World& world) {
+        Transparent* transparent = new Transparent(iss);
+
+        // Store in world vector (used for delete'ing at end)
+        world.addMaterial(transparent);
+
+        // Store in hash map for lookup during scene build
+        world.materials[transparent->name] = transparent;
     }
 
     void SceneReader::handleSphere(std::istringstream& iss, World& world) {

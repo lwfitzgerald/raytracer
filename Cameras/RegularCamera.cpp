@@ -4,6 +4,7 @@
 #include "../Utils/ShadeInfo.h"
 #include "../World.h"
 #include "../ViewPlane.h"
+#include "omp.h"
 
 namespace Raytracer {
     void RegularCamera::renderScene(World& world) const {
@@ -12,11 +13,13 @@ namespace Raytracer {
         Ray ray;
         ShadeInfo shadeInfo;
         double x, y;
+        int j;
 
         ray.origin = eye;
 
+#pragma omp parallel for firstprivate(j, x, y, shadeInfo, ray) schedule(guided)
         for (int i=0; i < viewPlane.verticalRes; i++) {
-            for (int j=0; j < viewPlane.horizontalRes; j++) {
+            for (j=0; j < viewPlane.horizontalRes; j++) {
                 x = viewPlane.pixelSize * (j - 0.5 * viewPlane.horizontalRes + 0.5);
                 y = viewPlane.pixelSize * (0.5 * viewPlane.verticalRes - i - 0.5);
 

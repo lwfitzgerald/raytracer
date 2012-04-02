@@ -54,4 +54,8 @@ namespace Raytracer {
 
         return colour;
     }
+
+    void Phong::setSpecularReflection(const double& specularReflection) {
+        this->specularReflection = specularReflection;
+    }
 }

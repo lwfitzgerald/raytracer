@@ -35,11 +35,11 @@ namespace Raytracer {
 
         /**
          * Performs all of the operations to construct
-         * from an input line minus setting the material.
+         * from an input line minus setting the material and IoR.
          * This allows child classes to have a variable
          * number of parameters.
          */
-        void constructMinusMaterial(std::istringstream& iss);
+        void constructMinusMaterialAndIoR(std::istringstream& iss);
     };
 }
 

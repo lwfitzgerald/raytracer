@@ -5,13 +5,16 @@
 namespace Raytracer {
     Plane::Plane(std::istringstream& iss, World& world) {
         // Construct apart from the material
-        constructMinusMaterial(iss);
+        constructMinusMaterialAndIoR(iss);
+
+        // Store the index of refraction
+        iss >> ior;
 
         // Store the material
         fetchMaterial(iss, world);
     }
 
-    void Plane::constructMinusMaterial(std::istringstream& iss) {
+    void Plane::constructMinusMaterialAndIoR(std::istringstream& iss) {
         // Extract the position
 
         double x, y, z;
