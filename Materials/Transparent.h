@@ -6,6 +6,8 @@
 namespace Raytracer {
     class Transparent : public Phong {
     public:
+        double ior;
+
         Transparent() {}
         Transparent(std::istringstream& iss);
 
@@ -16,6 +18,8 @@ namespace Raytracer {
             const World& world,
             const unsigned int depth
         ) const;
+
+        void setIndexOfRefraction(const double& ior);
     };
 }
 

@@ -7,9 +7,6 @@ namespace Raytracer {
         // Construct apart from the material
         constructMinusMaterialAndIoR(iss);
 
-        // Store the index of refraction
-        iss >> ior;
-
         // Store the material
         fetchMaterial(iss, world);
     }

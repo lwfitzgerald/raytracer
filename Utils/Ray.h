@@ -36,7 +36,9 @@ namespace Raytracer {
          *
          * Returns true if a refracted ray exists
          */
-        bool getTransparentDetails(const ShadeInfo& shadeInfo, double& reflectionCoeff, double& transmitCoeff, Ray& refractedRay) const;
+        bool getTransparentDetails(const ShadeInfo& shadeInfo, double ior,
+            double& reflectionCoeff, double& transmitCoeff,
+            Ray& refractedRay) const;
 
         static Ray getShadowRay(const ShadeInfo& shadeInfo, const Light& light);
     };

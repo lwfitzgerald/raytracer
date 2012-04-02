@@ -15,7 +15,6 @@ namespace Raytracer {
         Ray ray;
         Point3 hitPoint;
         Normal hitNormal;
-        double hitIoR;
         Colour colour;
 
         ShadeInfo()

@@ -9,9 +9,6 @@ namespace Raytracer {
     public:
         Material* material;
 
-        // Index of refraction
-        double ior;
-
         virtual ~Object() {};
 
         virtual bool hit(const Ray& ray, double& tmin) const = 0;

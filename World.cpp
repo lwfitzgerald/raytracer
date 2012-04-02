@@ -68,7 +68,6 @@ namespace Raytracer {
         hitBVHObjects(ray, bvh, shadeInfo, tmin, tminHitObject);
 
         if (shadeInfo.hit) {
-            shadeInfo.hitIoR = tminHitObject->ior;
             // Some object was hit so get the shading information for it
             tminHitObject->getShadeInfo(shadeInfo, ray, tmin);
 

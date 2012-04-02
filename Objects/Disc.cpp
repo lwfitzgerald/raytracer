@@ -10,9 +10,6 @@ namespace Raytracer {
         // Extract and store the radius
         iss >> radius;
 
-        // Store the index of refraction
-        iss >> ior;
-
         // Store the material
         fetchMaterial(iss, world);
     }

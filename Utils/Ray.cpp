@@ -16,11 +16,10 @@ namespace Raytracer {
         return Ray(shadeInfo.hitPoint + EPSILON * reflectedDirection, reflectedDirection);
     }
 
-    bool Ray::getTransparentDetails(const ShadeInfo& shadeInfo,
+    bool Ray::getTransparentDetails(const ShadeInfo& shadeInfo, double ior,
         double& reflectionCoeff, double& transmitCoeff,
         Ray& refractedRay) const {
 
-        double ior = shadeInfo.hitIoR;
         Normal normal = shadeInfo.hitNormal;
 
         double cos_i = normal * -direction;

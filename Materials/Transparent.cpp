@@ -9,6 +9,8 @@ namespace Raytracer {
 
         iss >> specularReflection;
 
+        iss >> ior;
+
         iss >> name;
     }
 
@@ -24,7 +26,7 @@ namespace Raytracer {
         Ray refractedRay;
         bool refractedExists;
 
-        refractedExists = shadeInfo.ray.getTransparentDetails(shadeInfo,
+        refractedExists = shadeInfo.ray.getTransparentDetails(shadeInfo, ior,
             reflectionCoeff, transmitCoeff, refractedRay);
 
         Ray reflectedRay = shadeInfo.ray.getReflectedRay(shadeInfo);
@@ -39,5 +41,9 @@ namespace Raytracer {
         }
 
         return colour;
+    }
+
+    void Transparent::setIndexOfRefraction(const double& ior) {
+        this->ior = ior;
     }
 }
