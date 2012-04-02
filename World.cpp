@@ -125,7 +125,7 @@ namespace Raytracer {
         hitBVHObjects(ray, bvhNode->right, shadeInfo, tmin, tminHitObject);
     }
 
-    bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, double& tmin,
+    bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, const double& tmin,
         Object*& tminHitObject) const {
         if (!bvhNode->boundingBox.hit(ray)) {
             // No intersection with bounding box
@@ -190,7 +190,7 @@ namespace Raytracer {
         buildBVH(bvh, objects, Z_AXIS);
     }
 
-    bool World::buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis) {
+    bool World::buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, const Axis lastAxis) {
         // Store bounding box for the node
         currentNode->boundingBox = getBoundingBox(currentObjects);
 
@@ -289,7 +289,7 @@ namespace Raytracer {
         return boundingBox;
     }
 
-    std::vector<Object*> World::orderByAxisDistance(std::vector<Object*>* currentObjects, Axis axis) {
+    std::vector<Object*> World::orderByAxisDistance(const std::vector<Object*>* currentObjects, const Axis axis) {
         std::vector<Object*> orderedObjects = std::vector<Object*>(*currentObjects);
 
         if (axis == X_AXIS) {

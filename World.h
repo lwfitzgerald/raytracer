@@ -67,16 +67,16 @@ namespace Raytracer {
     private:
         Camera* camera;
 
-        bool buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, Axis lastAxis);
+        bool buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, const Axis lastAxis);
         static void deleteBVHNode(BVHNode* bvhNode);
 
         void hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
                     double& tmin, Object*& tminHitObject) const;
-        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, double& tmin,
+        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, const double& tmin,
                     Object*& tminHitObject) const;
 
         BoundingBox getBoundingBox(std::vector<Object*>* objects);
-        std::vector<Object*> orderByAxisDistance(std::vector<Object*>* currentObjects, Axis axis);
+        std::vector<Object*> orderByAxisDistance(const std::vector<Object*>* currentObjects, const Axis axis);
     };
 }
 
