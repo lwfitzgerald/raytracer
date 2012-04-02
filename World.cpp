@@ -93,9 +93,7 @@ namespace Raytracer {
         }
 
         // Intersect with the BVH objects
-        hitBVHObjects(ray, bvh, shadeInfo, tmin, tminHitObject);
-
-        return shadeInfo.hit;
+        return shadowHitBVHObjects(ray, bvh, shadeInfo, tmin, tminHitObject);
     }
 
     void World::hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
@@ -122,35 +120,37 @@ namespace Raytracer {
             return;
         }
 
-        // Create copies for the recursive calls
-        double tminLeft, tminRight;
-        tminLeft = tminRight = tmin;
+        // Do the recursive calls
+        hitBVHObjects(ray, bvhNode->left, shadeInfo, tmin, tminHitObject);
+        hitBVHObjects(ray, bvhNode->right, shadeInfo, tmin, tminHitObject);
+    }
 
-        Object* tminHitObjectLeft, *tminHitObjectRight;
-        tminHitObjectLeft = tminHitObjectRight = tminHitObject;
+    bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
+                double& tmin, Object*& tminHitObject) const {
+        if (!bvhNode->boundingBox.hit(ray)) {
+            // No intersection with bounding box
+            return false;
+        }
 
-        ShadeInfo shadeInfoLeft, shadeInfoRight;
-        shadeInfoLeft = shadeInfoRight = shadeInfo;
+        if (bvhNode->objects != NULL) {
+            // Leaf node so intersect with objects
+
+            double t;
+            std::vector<Object*>::const_iterator itr;
+
+            for (itr=bvhNode->objects->begin(); itr != bvhNode->objects->end(); itr++) {
+                if ((*itr)->hit(ray, t) && t < tmin) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         // Do the recursive calls
-        hitBVHObjects(ray, bvhNode->left, shadeInfoLeft, tminLeft, tminHitObjectLeft);
-        hitBVHObjects(ray, bvhNode->right, shadeInfoRight, tminRight, tminHitObjectRight);
+        bool leftResult = shadowHitBVHObjects(ray, bvhNode->left, shadeInfo, tmin, tminHitObject);
+        bool rightResult = shadowHitBVHObjects(ray, bvhNode->right, shadeInfo, tmin, tminHitObject);
 
-        if (tminLeft < tmin) {
-            if (tminRight < tminLeft) {
-                tmin = tminRight;
-                tminHitObject = tminHitObjectRight;
-                shadeInfo = shadeInfoRight;
-            } else {
-                tmin = tminLeft;
-                tminHitObject = tminHitObjectLeft;
-                shadeInfo = shadeInfoLeft;
-            }
-        } else if (tminRight < tmin) {
-            tmin = tminRight;
-            tminHitObject = tminHitObjectRight;
-            shadeInfo = shadeInfoRight;
-        }
+        return leftResult || rightResult;
     }
 
     void World::addObject(Object* object) {
