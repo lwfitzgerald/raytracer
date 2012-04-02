@@ -29,12 +29,6 @@ namespace Raytracer {
 
         Ray reflectedRay = shadeInfo.ray.getReflectedRay(shadeInfo);
         if (depth != MAX_TRACE_DEPTH) {
-            ShadeInfo reflectInfo = world.hitObjects(reflectedRay, depth+1);
-
-            if (reflectInfo.hit) {
-                colour += reflectionCoeff * reflectInfo.colour;
-            }
-
             if (refractedExists) {
                 ShadeInfo refractInfo = world.hitObjects(refractedRay, depth+1);
 
