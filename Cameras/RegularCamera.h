@@ -9,7 +9,7 @@ namespace Raytracer {
         RegularCamera() {}
         virtual ~RegularCamera() {}
 
-        virtual void renderPixel(unsigned int arrayX, unsigned int arrayY,
+        virtual void renderPixel(const unsigned int arrayX, const unsigned int arrayY,
             World& world) const;
 
         /**

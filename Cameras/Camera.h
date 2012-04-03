@@ -27,7 +27,7 @@ namespace Raytracer {
          * Where array coordinates are:
          * 0 -> resX, 0->resY
          */
-        virtual void renderPixel(unsigned int arrayX, unsigned int arrayY,
+        virtual void renderPixel(const unsigned int arrayX, const unsigned int arrayY,
                     World& world) const = 0;
 
         /**

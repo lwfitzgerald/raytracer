@@ -6,7 +6,7 @@
 #include "../ViewPlane.h"
 
 namespace Raytracer {
-    void RegularCamera::renderPixel(unsigned int arrayX, unsigned int arrayY, World& world) const {
+    void RegularCamera::renderPixel(const unsigned int arrayX, const unsigned int arrayY, World& world) const {
         ViewPlane& viewPlane = world.viewPlane;
 
         Ray ray;
