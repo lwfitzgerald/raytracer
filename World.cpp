@@ -13,6 +13,7 @@
 #include "Materials/Lambert.h"
 #include "Materials/Phong.h"
 #include "Utils/BVHNode.h"
+#include "omp.h"
 
 namespace Raytracer {
     World::~World() {
@@ -40,7 +41,17 @@ namespace Raytracer {
     }
 
     void World::renderScene() {
-        camera->renderScene(*this);
+        int j;
+
+#pragma omp parallel for private(j) schedule(guided)
+        for (int i=0; i < viewPlane.verticalRes; i++) {
+            for (j=0; j < viewPlane.horizontalRes; j++) {
+                camera->renderPixel(j, i, *this);
+            }
+        }
+
+        // Write output image
+        viewPlane.writePPM(OUTPUT_FILENAME);
     }
 
     ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {

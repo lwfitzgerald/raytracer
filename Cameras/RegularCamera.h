@@ -9,7 +9,8 @@ namespace Raytracer {
         RegularCamera() {}
         virtual ~RegularCamera() {}
 
-        virtual void renderScene(World& world) const;
+        virtual void renderPixel(unsigned int arrayX, unsigned int arrayY,
+            World& world) const;
 
         /**
          * Set the distance of the view plane from the eye point

@@ -4,41 +4,31 @@
 #include "../Utils/ShadeInfo.h"
 #include "../World.h"
 #include "../ViewPlane.h"
-#include "omp.h"
 
 namespace Raytracer {
-    void RegularCamera::renderScene(World& world) const {
+    void RegularCamera::renderPixel(unsigned int arrayX, unsigned int arrayY, World& world) const {
         ViewPlane& viewPlane = world.viewPlane;
 
         Ray ray;
         ShadeInfo shadeInfo;
         double x, y;
-        int j;
 
         ray.origin = eye;
 
-#pragma omp parallel for firstprivate(j, x, y, shadeInfo, ray) schedule(guided)
-        for (int i=0; i < viewPlane.verticalRes; i++) {
-            for (j=0; j < viewPlane.horizontalRes; j++) {
-                x = viewPlane.pixelSize * (j - 0.5 * viewPlane.horizontalRes + 0.5);
-                y = viewPlane.pixelSize * (0.5 * viewPlane.verticalRes - i - 0.5);
+        x = viewPlane.pixelSize * (arrayX - 0.5 * viewPlane.horizontalRes + 0.5);
+        y = viewPlane.pixelSize * (0.5 * viewPlane.verticalRes - arrayY - 0.5);
 
-                ray.direction = x * this->u + y * this->v - this->viewPlaneDistance * this->w;
-                ray.direction.normalise();
+        ray.direction = x * this->u + y * this->v - this->viewPlaneDistance * this->w;
+        ray.direction.normalise();
 
-                // Intersect with all objects in scene
-                shadeInfo = world.hitObjects(ray);
+        // Intersect with all objects in scene
+        shadeInfo = world.hitObjects(ray);
 
-                if (shadeInfo.hit) {
-                    viewPlane.setPixelColour(j, i, shadeInfo.colour);
-                } else {
-                    viewPlane.setPixelColour(j, i, world.backgroundColour);
-                }
-            }
+        if (shadeInfo.hit) {
+            viewPlane.setPixelColour(arrayX, arrayY, shadeInfo.colour);
+        } else {
+            viewPlane.setPixelColour(arrayX, arrayY, world.backgroundColour);
         }
-
-        // Write output image
-        world.viewPlane.writePPM(OUTPUT_FILENAME);
     }
 
     void RegularCamera::setViewPlaneDistance(const double& distance) {
