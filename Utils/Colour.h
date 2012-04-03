@@ -14,28 +14,19 @@ namespace Raytracer {
          * Default constructor, initialises to Black
          */
         Colour()
-        :
-            r(0),
-            g(0),
-            b(0) {}
+        : r(0), g(0), b(0) {}
 
         /**
          * Create a Colour with the given RGB values
          */
         Colour(const double r, const double g, const double b)
-        :
-            r(std::max(0.0, std::min(1.0, r))),
-            g(std::max(0.0, std::min(1.0, g))),
-            b(std::max(0.0, std::min(1.0, b))) {}
+        : r(r),g(g), b(b) {}
 
         /**
          * Copy constructor
          */
         Colour(const Colour& old)
-        :
-            r(std::max(0.0, std::min(1.0, old.r))),
-            g(std::max(0.0, std::min(1.0, old.g))),
-            b(std::max(0.0, std::min(1.0, old.b))) {}
+        : r(old.r), g(old.g), b(old.b) {}
 
         ~Colour() {}
 
@@ -58,6 +49,11 @@ namespace Raytracer {
         Colour exp(const double& rhs) const;
 
         Colour& operator+=(const Colour& rhs);
+
+        /**
+         * Clamp values between 0 and 1 whilst maintaining tone
+         */
+        Colour& toneClamp();
     };
 }
 

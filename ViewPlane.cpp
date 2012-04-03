@@ -57,7 +57,7 @@ namespace Raytracer {
 
         for (int i=0; i < this->verticalRes; i++) {
             for (int j=0; j < this->horizontalRes; j++) {
-                Colour& pixelColour = getPixelColour(j, i);
+                Colour& pixelColour = getPixelColour(j, i).toneClamp();
 
                 if (lineCount + (3 * (MAX_COLOUR_VALUE_CHARS + 1)) > PPM_MAX_CHARS_PER_LINE) {
                     // We'll go over 70 chars per line so insert line break
