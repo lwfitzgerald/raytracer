@@ -24,6 +24,20 @@ namespace Raytracer {
         void setSpecularReflection(const double& specularReflection);
 
         void setDistribution(const double& distribution);
+
+    protected:
+        /**
+         * Shade using the provided specular reflection
+         * coefficient to allow transparency class to
+         * use fresnel equations to calculate reflection
+         * coefficient
+         */
+        Colour shade(
+            const double& specularReflection,
+            const ShadeInfo& shadeInfo,
+            const World& world,
+            const unsigned int depth
+        ) const;
     };
 }
 

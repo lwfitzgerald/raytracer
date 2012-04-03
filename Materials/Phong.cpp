@@ -16,6 +16,15 @@ namespace Raytracer {
         const World& world,
         const unsigned int depth
     ) const {
+        return shade(specularReflection, shadeInfo, world, depth);
+    }
+
+    Colour Phong::shade(
+        const double& specularReflection,
+        const ShadeInfo& shadeInfo,
+        const World& world,
+        const unsigned int depth
+    ) const {
         // Calculate ambient contribution first
         Colour colour = (ambientReflection * diffuseColour) * world.ambientLight->getRadiance(shadeInfo);
 

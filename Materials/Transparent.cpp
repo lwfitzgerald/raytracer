@@ -7,8 +7,6 @@ namespace Raytracer {
     Transparent::Transparent(std::istringstream& iss) {
         initMaterialFromIss(iss);
 
-        iss >> specularReflection;
-
         iss >> ior;
 
         iss >> name;
@@ -19,15 +17,15 @@ namespace Raytracer {
         const World& world,
         const unsigned int depth
     ) const {
-        // Use Phong shading first
-        Colour colour = Phong::shade(shadeInfo, world, depth);
-
         double reflectionCoeff, transmitCoeff;
         Ray refractedRay;
         bool refractedExists;
 
         refractedExists = shadeInfo.ray.getTransparentDetails(shadeInfo, ior,
             reflectionCoeff, transmitCoeff, refractedRay);
+
+        // Use Phong shading first
+        Colour colour = Phong::shade(reflectionCoeff, shadeInfo, world, depth);
 
         Ray reflectedRay = shadeInfo.ray.getReflectedRay(shadeInfo);
         if (depth != MAX_TRACE_DEPTH) {
