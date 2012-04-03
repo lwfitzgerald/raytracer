@@ -24,8 +24,8 @@ namespace Raytracer {
         refractedExists = shadeInfo.ray.getTransparentDetails(shadeInfo, ior,
             reflectionCoeff, transmitCoeff, refractedRay);
 
-        // Use Phong shading first
-        Colour colour = Phong::shade(reflectionCoeff, shadeInfo, world, depth);
+        // Use specular shading first
+        Colour colour = Specular::shade(reflectionCoeff, shadeInfo, world, depth);
 
         Ray reflectedRay = shadeInfo.ray.getReflectedRay(shadeInfo);
         if (depth != MAX_TRACE_DEPTH) {

@@ -1,9 +1,9 @@
-#include "Phong.h"
+#include "Specular.h"
 #include "../World.h"
 #include "../Utils/ShadeInfo.h"
 
 namespace Raytracer {
-    Phong::Phong(std::istringstream& iss)
+    Specular::Specular(std::istringstream& iss)
     : Material(iss) {
         iss >> specularReflection;
         iss >> distribution;
@@ -11,7 +11,7 @@ namespace Raytracer {
         iss >> name;
     }
 
-    Colour Phong::shade(
+    Colour Specular::shade(
         const ShadeInfo& shadeInfo,
         const World& world,
         const unsigned int depth
@@ -19,7 +19,7 @@ namespace Raytracer {
         return shade(specularReflection, shadeInfo, world, depth);
     }
 
-    Colour Phong::shade(
+    Colour Specular::shade(
         const double& specularReflection,
         const ShadeInfo& shadeInfo,
         const World& world,
@@ -65,11 +65,11 @@ namespace Raytracer {
         return colour;
     }
 
-    void Phong::setSpecularReflection(const double& specularReflection) {
+    void Specular::setSpecularReflection(const double& specularReflection) {
         this->specularReflection = specularReflection;
     }
 
-    void Phong::setDistribution(const double& distribution) {
+    void Specular::setDistribution(const double& distribution) {
         this->distribution = distribution;
     }
 }

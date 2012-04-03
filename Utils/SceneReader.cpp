@@ -8,8 +8,8 @@
 #include "../Lights/PointLight.h"
 #include "../Lights/SpotLight.h"
 #include "../Lights/DirectionalLight.h"
-#include "../Materials/Lambert.h"
-#include "../Materials/Phong.h"
+#include "../Materials/Matte.h"
+#include "../Materials/Specular.h"
 #include "../Materials/Transparent.h"
 
 namespace Raytracer {
@@ -61,10 +61,10 @@ namespace Raytracer {
                 handleSpotLight(iss, world);
             } else if (mainName.compare("DIRECTIONALLIGHT") == 0) {
                 handleDirectionalLight(iss, world);
-            } else if (mainName.compare("LAMBERT") == 0) {
-                handleLambert(iss, world);
-            } else if (mainName.compare("PHONG") == 0) {
-                handlePhong(iss, world);
+            } else if (mainName.compare("MATTE") == 0) {
+                handleMatte(iss, world);
+            } else if (mainName.compare("SPECULAR") == 0) {
+                handleSpecular(iss, world);
             } else if (mainName.compare("TRANSPARENT") == 0) {
                 handleTransparent(iss, world);
             } else if (mainName.compare("CAMERA") == 0) {
@@ -155,8 +155,8 @@ namespace Raytracer {
         world.addLight(directionalLight);
     }
 
-    void SceneReader::handleLambert(std::istringstream& iss, World& world) {
-        Lambert* lambert = new Lambert(iss);
+    void SceneReader::handleMatte(std::istringstream& iss, World& world) {
+        Matte* lambert = new Matte(iss);
 
         // Store in world vector (used for delete'ing at end)
         world.addMaterial(lambert);
@@ -165,8 +165,8 @@ namespace Raytracer {
         world.materials[lambert->name] = lambert;
     }
 
-    void SceneReader::handlePhong(std::istringstream& iss, World& world) {
-        Phong* phong = new Phong(iss);
+    void SceneReader::handleSpecular(std::istringstream& iss, World& world) {
+        Specular* phong = new Specular(iss);
 
         // Store in world vector (used for delete'ing at end)
         world.addMaterial(phong);

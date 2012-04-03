@@ -45,8 +45,8 @@ namespace Raytracer {
     class RegularCamera;
 
     class Material;
-    class Lambert;
-    class Phong;
+    class Matte;
+    class Specular;
 
     class Light;
     class AmbientLight;

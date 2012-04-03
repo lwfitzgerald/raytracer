@@ -1,10 +1,10 @@
 #ifndef TRANSPARENT_H_
 #define TRANSPARENT_H_
 
-#include "Phong.h"
+#include "Specular.h"
 
 namespace Raytracer {
-    class Transparent : public Phong {
+    class Transparent : public Specular {
     public:
         /**
          * Index of refraction

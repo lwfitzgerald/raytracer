@@ -10,8 +10,8 @@
 #include "Cameras/RegularCamera.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/PointLight.h"
-#include "Materials/Lambert.h"
-#include "Materials/Phong.h"
+#include "Materials/Matte.h"
+#include "Materials/Specular.h"
 #include "Utils/BVHNode.h"
 #include "omp.h"
 

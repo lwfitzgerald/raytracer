@@ -4,7 +4,7 @@
 #include "Material.h"
 
 namespace Raytracer {
-    class Phong: public Material {
+    class Specular: public Material {
     public:
         /**
          * This value is used for both highlights and perfect reflections
@@ -14,14 +14,14 @@ namespace Raytracer {
 
         double distribution;
 
-        Phong() {}
+        Specular() {}
 
         /**
-         * Construct a Phong material from an istringstream
+         * Construct a Specular material from an istringstream
          */
-        Phong(std::istringstream& iss);
+        Specular(std::istringstream& iss);
 
-        virtual ~Phong() {}
+        virtual ~Specular() {}
 
         virtual Colour shade(
             const ShadeInfo& shadeInfo,

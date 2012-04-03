@@ -21,8 +21,8 @@ namespace Raytracer {
         static void handleSpotLight(std::istringstream& iss, World& world);
         static void handleDirectionalLight(std::istringstream& iss, World& world);
 
-        static void handleLambert(std::istringstream& iss, World& world);
-        static void handlePhong(std::istringstream& iss, World& world);
+        static void handleMatte(std::istringstream& iss, World& world);
+        static void handleSpecular(std::istringstream& iss, World& world);
         static void handleTransparent(std::istringstream& iss, World& world);
 
         static void handleSphere(std::istringstream& iss, World& world);

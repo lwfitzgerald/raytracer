@@ -1,14 +1,14 @@
-#include "Lambert.h"
+#include "Matte.h"
 #include "../World.h"
 #include "../Utils/ShadeInfo.h"
 
 namespace Raytracer {
-    Lambert::Lambert(std::istringstream& iss)
+    Matte::Matte(std::istringstream& iss)
     : Material(iss) {
         iss >> name;
     }
 
-    Colour Lambert::shade(
+    Colour Matte::shade(
         const ShadeInfo& shadeInfo,
         const World& world,
         const unsigned int depth
