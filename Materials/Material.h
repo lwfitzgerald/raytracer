@@ -51,6 +51,12 @@ namespace Raytracer {
             initMaterialFromIss(iss);
         }
 
+        /**
+         * Called from constructors.
+         *
+         * Mainly to allow indirect child classes to use the Material
+         * iss construction mechanism
+         */
         void initMaterialFromIss(std::istringstream& iss) {
             double r, g, b;
 

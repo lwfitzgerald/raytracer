@@ -7,6 +7,10 @@ namespace Raytracer {
     class Lambert: public Material {
     public:
         Lambert() {}
+
+        /**
+         * Construct a Lambert material from an istringstream
+         */
         Lambert(std::istringstream& iss);
 
         virtual ~Lambert() {}

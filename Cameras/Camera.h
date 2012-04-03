@@ -21,14 +21,35 @@ namespace Raytracer {
 
         virtual ~Camera() {}
 
+        /**
+         * Render the objects in the World using
+         * this camera
+         */
         virtual void renderScene(World& world) const = 0;
 
+        /**
+         * Set the eye point of the camera
+         */
         void setEyePoint(const Point3& point);
+
+        /**
+         * Set the look at point of the camera
+         */
         void setLookAtPoint(const Point3& point);
+
+        /**
+         * Set the up vector of the camera
+         */
         void setUpVector(const Vector3& vector);
+
+        /**
+         * Set the roll angle of the camera
+         */
         void setRollAngle(const double& angle);
 
-        // Calculate u,v,w of the orthonormal basis
+        /*
+         * Calculate u,v,w of the orthonormal basis
+         */
         void calcUVW();
 
     protected:
@@ -40,7 +61,9 @@ namespace Raytracer {
         Vector3 v;
         Vector3 w;
 
-        // Get the matrix transform to roll the up vector
+        /**
+         * Get the matrix transform to roll the up vector
+         */
         Matrix getRollTransform() const;
     };
 }

@@ -14,9 +14,15 @@ namespace Raytracer {
 
         Point3() {}
 
+        /**
+         * Construct a Point3 with the given parameters
+         */
         Point3(const double x, const double y, const double z)
         : x(x), y(y), z(z) {}
 
+        /**
+         * Copy constructor
+         */
         Point3(const Point3& old)
         : x(old.x), y(old.y), z(old.z) {}
 
@@ -29,6 +35,10 @@ namespace Raytracer {
 
         Point3& operator=(const Point3& rhs);
 
+        /**
+         * Method to allow double * Point3 operations using
+         * the Point3 * double method
+         */
         friend Point3 operator*(const double& lhs, const Point3& rhs) {
             return rhs * lhs;
         }

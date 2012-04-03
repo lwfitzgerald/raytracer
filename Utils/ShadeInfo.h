@@ -18,7 +18,7 @@ namespace Raytracer {
         Colour colour;
 
         ShadeInfo()
-        : hit(false), hitPoint(), hitNormal(), colour() {}
+        : hit(false) {}
 
         ~ShadeInfo() {}
 

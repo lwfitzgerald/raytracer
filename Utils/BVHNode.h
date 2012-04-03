@@ -4,6 +4,10 @@
 #include "../Prereqs.h"
 
 namespace Raytracer {
+    /**
+     * Structure for representing a node in the
+     * BVH tree
+     */
     struct BVHNode {
         BVHNode() {
             left = NULL;

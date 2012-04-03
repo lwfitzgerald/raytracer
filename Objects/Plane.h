@@ -8,12 +8,21 @@
 namespace Raytracer {
     class Plane: public Object {
     public:
+        /**
+         * Construct a Plane using the given parameters
+         */
         Plane(const Point3 &position, const Normal& normal)
         : position(position), normal(normal) {}
 
+        /**
+         * Copy constructor
+         */
         Plane(const Plane& old)
         : position(old.position), normal(old.normal) {}
 
+        /**
+         * Construct a Plane from an istringstream
+         */
         Plane(std::istringstream& iss, World& world);
 
         virtual ~Plane() {}

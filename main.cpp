@@ -10,8 +10,14 @@ int main(int argc, char *argv[]) {
     }
 
     World world;
+
+    // Fill the world!
     SceneReader::buildScene(argv[1], world);
+
+    // Build the bounding volume hierarchy
     world.buildBVH();
+
+    // Render the scene
     world.renderScene();
 
     return 0;

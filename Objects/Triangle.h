@@ -6,10 +6,19 @@
 namespace Raytracer {
     class Triangle: public Plane {
     public:
+        /**
+         * Construct a Triangle with the given parameters
+         */
         Triangle(const Point3& A, const Point3& B, const Point3& C);
 
+        /**
+         * Copy constructor
+         */
         Triangle(const Triangle& old);
 
+        /**
+         * Construct a Triangle from an istringstream
+         */
         Triangle(std::istringstream& iss, World& world);
 
         virtual ~Triangle() {}
@@ -39,6 +48,9 @@ namespace Raytracer {
          */
         void prepare();
 
+        /**
+         * Identify the dominant axis of the vertices
+         */
         Axis identifyDominantAxis() const;
     };
 }

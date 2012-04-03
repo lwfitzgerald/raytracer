@@ -6,11 +6,19 @@
 namespace Raytracer {
     class Phong: public Material {
     public:
+        /**
+         * This value is used for both highlights and perfect reflections
+         * because in most lighting models this value is the same
+         */
         double specularReflection;
+
         double distribution;
 
         Phong() {}
 
+        /**
+         * Construct a Phong material from an istringstream
+         */
         Phong(std::istringstream& iss);
 
         virtual ~Phong() {}
@@ -21,8 +29,14 @@ namespace Raytracer {
             const unsigned int depth
         ) const;
 
+        /**
+         * Set the specular reflection.
+         */
         void setSpecularReflection(const double& specularReflection);
 
+        /**
+         * Set the specular distribution
+         */
         void setDistribution(const double& distribution);
 
     protected:

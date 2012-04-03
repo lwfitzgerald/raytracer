@@ -10,18 +10,27 @@ namespace Raytracer {
         double g;
         double b;
 
+        /**
+         * Default constructor, initialises to Black
+         */
         Colour()
         :
             r(0),
             g(0),
             b(0) {}
 
+        /**
+         * Create a Colour with the given RGB values
+         */
         Colour(const double r, const double g, const double b)
         :
             r(std::max(0.0, std::min(1.0, r))),
             g(std::max(0.0, std::min(1.0, g))),
             b(std::max(0.0, std::min(1.0, b))) {}
 
+        /**
+         * Copy constructor
+         */
         Colour(const Colour& old)
         :
             r(std::max(0.0, std::min(1.0, old.r))),
@@ -34,6 +43,10 @@ namespace Raytracer {
 
         Colour operator+(const Colour& rhs) const;
 
+        /**
+         * Inline method to allow double * Colour
+         * using the Colour * double method
+         */
         __inline friend Colour operator*(const double& lhs, const Colour& rhs) {
             return rhs * lhs;
         }

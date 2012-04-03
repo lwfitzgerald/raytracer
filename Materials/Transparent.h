@@ -6,9 +6,16 @@
 namespace Raytracer {
     class Transparent : public Phong {
     public:
+        /**
+         * Index of refraction
+         */
         double ior;
 
         Transparent() {}
+
+        /**
+         * Construct a Transparent material from an istringstream
+         */
         Transparent(std::istringstream& iss);
 
         virtual ~Transparent() {}
@@ -19,6 +26,9 @@ namespace Raytracer {
             const unsigned int depth
         ) const;
 
+        /**
+         * Set the index of refraction
+         */
         void setIndexOfRefraction(const double& ior);
     };
 }

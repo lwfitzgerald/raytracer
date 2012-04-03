@@ -8,6 +8,10 @@ namespace Raytracer {
     class PointLight: public Light {
     public:
         PointLight();
+
+        /**
+         * Construct a Point Light from an istringstream
+         */
         PointLight(std::istringstream& iss);
         virtual ~PointLight() {}
 
@@ -15,6 +19,9 @@ namespace Raytracer {
         virtual Vector3 getDirectionToHitPoint(const ShadeInfo& shadeInfo) const;
         virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
 
+        /**
+         * Set the position of the Point Light
+         */
         void setPosition(const Point3& position);
 
         virtual bool inShadow(const ShadeInfo& shadeInfo, const World& world) const;

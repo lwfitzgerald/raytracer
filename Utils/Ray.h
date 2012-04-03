@@ -14,12 +14,17 @@ namespace Raytracer {
         Point3 origin;
         Vector3 direction;
 
-        Ray()
-        : origin(0.0, 0.0, 0.0), direction(0.0, 0.0, -1.0) {}
+        Ray() {}
 
+        /**
+         * Construct a Ray with the given parameters
+         */
         Ray(const Point3& origin, const Vector3& direction)
         : origin(origin), direction(direction) {}
 
+        /**
+         * Copy constructor
+         */
         Ray(const Ray& old)
         : origin(old.origin), direction(old.direction) {}
 
@@ -27,6 +32,10 @@ namespace Raytracer {
 
         Ray& operator=(const Ray& rhs);
 
+        /**
+         * Get the reflection of this ray at the hit point with the normal
+         * at that point
+         */
         Ray getReflectedRay(const ShadeInfo& shadeInfo) const;
 
         /**
@@ -40,6 +49,10 @@ namespace Raytracer {
             double& reflectionCoeff, double& transmitCoeff,
             Ray& refractedRay) const;
 
+        /**
+         * Get a shadow ray from the given hit point
+         * to the given light
+         */
         static Ray getShadowRay(const ShadeInfo& shadeInfo, const Light& light);
     };
 }

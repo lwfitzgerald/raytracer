@@ -12,11 +12,18 @@ namespace Raytracer {
 
         BoundingBox() {}
 
+        /**
+         * Construct a Bounding Box with the given parameters
+         */
         BoundingBox(const Point3& corner1, const Point3& corner2)
         : corner1(corner1), corner2(corner2) {}
 
         BoundingBox& operator=(const BoundingBox& old);
 
+        /**
+         * Intersect a ray with the bounding box returning
+         * true if the ray intersects
+         */
         bool hit(const Ray& ray) const;
 
         ~BoundingBox() {}

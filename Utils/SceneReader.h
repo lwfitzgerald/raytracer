@@ -7,6 +7,9 @@
 namespace Raytracer {
     class SceneReader {
     public:
+        /**
+         * Build the scene from the given file
+         */
         static void buildScene(const char* filePath, World& world);
 
     private:

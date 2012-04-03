@@ -12,9 +12,15 @@ namespace Raytracer {
 
         Vector3() {};
 
+        /**
+         * Construct a Vector3 with the given parameters
+         */
         Vector3(const double x, const double y, const double z)
         : x(x), y(y), z(z) {}
 
+        /**
+         * Copy constructor
+         */
         Vector3(const Vector3& old)
         : x(old.x), y(old.y), z(old.z) {}
 
@@ -27,7 +33,10 @@ namespace Raytracer {
         Vector3 operator-(const Normal& rhs) const;
         Vector3& operator=(const Vector3& rhs);
 
-        // Scalar mult
+        /**
+         * Allow double * Vector3 operations using the
+         * Vector3 * double method
+         */
         friend Vector3 operator*(const double& lhs, const Vector3& rhs) {
             return rhs * lhs;
         }
@@ -44,14 +53,35 @@ namespace Raytracer {
         double operator*(const Vector3& rhs) const;
         double operator*(const Normal& rhs) const;
 
+        /**
+         * Get the magnitude of this vector
+         */
         double mag() const;
+
+        /**
+         * Get the squared magnitude of this vector
+         * (sMore efficient than mag() )
+         */
         double magsqr() const;
 
+        /**
+         * Get the cross product of this vector and another
+         */
         Vector3 cross(const Vector3& other) const;
 
+        /**
+         * Normalise the vector
+         */
         void normalise();
+
+        /**
+         * Return a normalised copy of this vector
+         */
         Vector3 hat() const;
 
+        /**
+         * Allow output of a Vector3 on a stream
+         */
         __inline friend std::ostream& operator<<(std::ostream& lhs, Vector3& rhs) {
             lhs << "(" << rhs.x << "," << rhs.y << "," << rhs.z << ")";
 

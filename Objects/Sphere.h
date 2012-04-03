@@ -7,12 +7,21 @@
 namespace Raytracer {
     class Sphere: public Object {
     public:
+        /**
+         * Construct a sphere with the given parameters
+         */
         Sphere(const Point3& center, const double& radius)
         : center(center), radius(radius) {}
 
+        /**
+         * Copy constructor
+         */
         Sphere(const Sphere& old)
         : center(old.center), radius(old.radius) {}
 
+        /**
+         * Construct a Sphere from the
+         */
         Sphere(std::istringstream& iss, World& world);
 
         virtual ~Sphere() {}
