@@ -28,6 +28,11 @@ namespace Raytracer {
         return direction;
     }
 
+    Vector3 DirectionalLight::getDirectionToHitPoint(const ShadeInfo& shadeInfo) const {
+        // Should not be called
+        return Vector3(0, 0, 0);
+    }
+
     Colour DirectionalLight::getRadiance(const ShadeInfo& shadeInfo) const {
         return colour * intensity;
     }

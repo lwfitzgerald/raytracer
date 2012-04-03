@@ -12,13 +12,14 @@ namespace Raytracer {
         virtual ~PointLight() {}
 
         virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const;
+        virtual Vector3 getDirectionToHitPoint(const ShadeInfo& shadeInfo) const;
         virtual Colour getRadiance(const ShadeInfo& shadeInfo) const;
 
         void setPosition(const Point3& position);
 
         virtual bool inShadow(const ShadeInfo& shadeInfo, const World& world) const;
 
-    private:
+    protected:
         Point3 position;
     };
 }

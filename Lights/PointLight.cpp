@@ -28,6 +28,10 @@ namespace Raytracer {
         return (shadeInfo.hitPoint - position).hat();
     }
 
+    Vector3 PointLight::getDirectionToHitPoint(const ShadeInfo& shadeInfo) const {
+        return getDirection(shadeInfo);
+    }
+
     Colour PointLight::getRadiance(const ShadeInfo& shadeInfo) const {
         return colour * intensity;
     }

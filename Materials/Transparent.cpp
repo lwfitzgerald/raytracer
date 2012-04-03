@@ -5,7 +5,7 @@
 
 namespace Raytracer {
     Transparent::Transparent(std::istringstream& iss) {
-        initMaterial(iss);
+        initMaterialFromIss(iss);
 
         iss >> specularReflection;
 

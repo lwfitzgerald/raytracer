@@ -7,6 +7,7 @@ namespace Raytracer {
     class Phong: public Material {
     public:
         double specularReflection;
+        double distribution;
 
         Phong() {}
 
@@ -21,6 +22,8 @@ namespace Raytracer {
         ) const;
 
         void setSpecularReflection(const double& specularReflection);
+
+        void setDistribution(const double& distribution);
     };
 }
 

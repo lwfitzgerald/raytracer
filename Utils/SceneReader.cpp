@@ -6,6 +6,7 @@
 #include "../Cameras/RegularCamera.h"
 #include "../Lights/AmbientLight.h"
 #include "../Lights/PointLight.h"
+#include "../Lights/SpotLight.h"
 #include "../Lights/DirectionalLight.h"
 #include "../Materials/Lambert.h"
 #include "../Materials/Phong.h"
@@ -56,6 +57,8 @@ namespace Raytracer {
                 handleAmbientLight(iss, world);
             } else if (mainName.compare("POINTLIGHT") == 0) {
                 handlePointLight(iss, world);
+            } else if (mainName.compare("SPOTLIGHT") == 0) {
+                handleSpotLight(iss, world);
             } else if (mainName.compare("DIRECTIONALLIGHT") == 0) {
                 handleDirectionalLight(iss, world);
             } else if (mainName.compare("LAMBERT") == 0) {
@@ -140,6 +143,11 @@ namespace Raytracer {
     void SceneReader::handlePointLight(std::istringstream& iss, World& world) {
         PointLight* pointLight = new PointLight(iss);
         world.addLight(pointLight);
+    }
+
+    void SceneReader::handleSpotLight(std::istringstream& iss, World& world) {
+        SpotLight* spotLight = new SpotLight(iss);
+        world.addLight(spotLight);
     }
 
     void SceneReader::handleDirectionalLight(std::istringstream& iss, World& world) {

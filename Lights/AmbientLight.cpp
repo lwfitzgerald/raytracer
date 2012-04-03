@@ -12,7 +12,13 @@ namespace Raytracer {
     }
 
     Vector3 AmbientLight::getDirection(const ShadeInfo& shadeInfo) const {
-        return Vector3(0.0, 0.0, 0.0);
+        // Should not be called
+        return Vector3(0, 0, 0);
+    }
+
+    Vector3 AmbientLight::getDirectionToHitPoint(const ShadeInfo& shadeInfo) const {
+        // Should not be called
+        return Vector3(0, 0, 0);
     }
 
     Colour AmbientLight::getRadiance(const ShadeInfo& shadeInfo) const {

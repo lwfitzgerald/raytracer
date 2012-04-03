@@ -6,6 +6,7 @@ namespace Raytracer {
     Phong::Phong(std::istringstream& iss)
     : Material(iss) {
         iss >> specularReflection;
+        iss >> distribution;
 
         iss >> name;
     }
@@ -35,7 +36,7 @@ namespace Raytracer {
                     Vector3 R = -lightDirection - 2.0 * (-lightDirection * shadeInfo.hitNormal) * shadeInfo.hitNormal;
 
                     colour += specularReflection * world.lights[i]->getRadiance(shadeInfo)
-                            * std::pow(std::max(0.0, R * shadeInfo.ray.direction), 100);
+                            * std::pow(std::max(0.0, R * shadeInfo.ray.direction), distribution);
                 }
             }
 
@@ -57,5 +58,9 @@ namespace Raytracer {
 
     void Phong::setSpecularReflection(const double& specularReflection) {
         this->specularReflection = specularReflection;
+    }
+
+    void Phong::setDistribution(const double& distribution) {
+        this->distribution = distribution;
     }
 }

@@ -62,8 +62,8 @@ namespace Raytracer {
 
     Ray Ray::getShadowRay(const ShadeInfo& shadeInfo, const Light& light) {
         return Ray(
-            shadeInfo.hitPoint + EPSILON * -light.getDirection(shadeInfo),
-            -light.getDirection(shadeInfo)
+            shadeInfo.hitPoint + EPSILON * -light.getDirectionToHitPoint(shadeInfo),
+            -light.getDirectionToHitPoint(shadeInfo)
         );
     }
 }

@@ -12,6 +12,7 @@ namespace Raytracer {
         virtual ~Light() {}
 
         virtual Vector3 getDirection(const ShadeInfo& shadeInfo) const = 0;
+        virtual Vector3 getDirectionToHitPoint(const ShadeInfo& shadeInfo) const = 0;
         virtual Colour getRadiance(const ShadeInfo& shadeInfo) const = 0;
 
         void setIntensity(const double& intensity) {
