@@ -235,7 +235,7 @@ namespace Raytracer {
             (*leftObjects)[i] = orderObjects[i];
         }
 
-        unsigned int rightStart = (orderObjects.size() & 1 == 0) ? orderObjects.size() / 2 - 1 : orderObjects.size() / 2;
+        unsigned int rightStart = ((orderObjects.size() & 1) == 0) ? orderObjects.size() / 2 - 1 : orderObjects.size() / 2;
         unsigned int rightSize = orderObjects.size() - rightStart;
 
         std::vector<Object*>* rightObjects = new std::vector<Object*>(rightSize);
