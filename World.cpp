@@ -42,6 +42,7 @@ namespace Raytracer {
 
     void World::renderScene() {
         std::cout << "Rendering scene..." << std::endl;
+        clock_t start = clock();
 
         int j;
 
@@ -52,13 +53,19 @@ namespace Raytracer {
             }
         }
 
-        std::cout << "Scene rendered!" << std::endl;
+        clock_t end = clock();
+        double time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+
+        std::cout << "Scene rendered in " << time << "ms" << std::endl;
         std::cout << "Writing output file..." << std::endl;
+        start = clock();
 
         // Write output image
         viewPlane.writePPM(OUTPUT_FILENAME);
 
-        std::cout << "Output file written!" << std::endl;
+        end = clock();
+        time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+        std::cout << "Output file written in " << time << "ms" << std::endl;
     }
 
     ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {
@@ -184,6 +191,7 @@ namespace Raytracer {
 
     void World::buildBVH() {
         std::cout << "Building BVH..." << std::endl;
+        clock_t start = clock();
 
         bvh = new BVHNode;
 
@@ -208,7 +216,9 @@ namespace Raytracer {
         // Order by X axis first
         buildBVH(bvh, objects, Z_AXIS);
 
-        std::cout << "BVH built!" << std::endl;
+        clock_t end = clock();
+        double time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+        std::cout << "BVH built in " << time << "ms" << std::endl;
     }
 
     bool World::buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, const Axis lastAxis) {

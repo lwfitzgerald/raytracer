@@ -15,6 +15,7 @@
 namespace Raytracer {
     void SceneReader::buildScene(const char* filePath, World& world) {
         std::cout << "Building scene..." << std::endl;
+        clock_t start = clock();
 
         std::ifstream file(filePath);
 
@@ -90,7 +91,9 @@ namespace Raytracer {
             lineNo++;
         }
 
-        std::cout << "Scene built!" << std::endl;
+        clock_t end = clock();
+        double time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+        std::cout << "Scene built in " << time << "ms" << std::endl;
     }
 
     void SceneReader::handleViewPlane(std::istringstream& iss, World& world) {
