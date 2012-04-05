@@ -41,6 +41,8 @@ namespace Raytracer {
     }
 
     void World::renderScene() {
+        std::cout << "Rendering scene..." << std::endl;
+
         int j;
 
 #pragma omp parallel for private(j) schedule(guided)
@@ -50,8 +52,13 @@ namespace Raytracer {
             }
         }
 
+        std::cout << "Scene rendered!" << std::endl;
+        std::cout << "Writing output file..." << std::endl;
+
         // Write output image
         viewPlane.writePPM(OUTPUT_FILENAME);
+
+        std::cout << "Output file written!" << std::endl;
     }
 
     ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {
@@ -91,7 +98,6 @@ namespace Raytracer {
     bool World::shadowHitObjects(const Ray& ray, double& tmin) const {
         double t;
         ShadeInfo shadeInfo;
-        Object* tminHitObject = NULL;
 
         // Before handling BVH, intersect with unboundable objects
 
@@ -104,7 +110,7 @@ namespace Raytracer {
         }
 
         // Intersect with the BVH objects
-        return shadowHitBVHObjects(ray, bvh, tmin, tminHitObject);
+        return shadowHitBVHObjects(ray, bvh, tmin);
     }
 
     void World::hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
@@ -136,8 +142,8 @@ namespace Raytracer {
         hitBVHObjects(ray, bvhNode->right, shadeInfo, tmin, tminHitObject);
     }
 
-    bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, const double& tmin,
-        Object*& tminHitObject) const {
+    bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode,
+        const double& tmin) const {
         if (!bvhNode->boundingBox.hit(ray)) {
             // No intersection with bounding box
             return false;
@@ -158,8 +164,8 @@ namespace Raytracer {
         }
 
         // Do the recursive calls
-        bool leftResult = shadowHitBVHObjects(ray, bvhNode->left, tmin, tminHitObject);
-        bool rightResult = shadowHitBVHObjects(ray, bvhNode->right, tmin, tminHitObject);
+        bool leftResult = shadowHitBVHObjects(ray, bvhNode->left, tmin);
+        bool rightResult = shadowHitBVHObjects(ray, bvhNode->right, tmin);
 
         return leftResult || rightResult;
     }
@@ -177,6 +183,8 @@ namespace Raytracer {
     }
 
     void World::buildBVH() {
+        std::cout << "Building BVH..." << std::endl;
+
         bvh = new BVHNode;
 
         std::vector<Object*>* objects = new std::vector<Object*>(this->objects);
@@ -199,6 +207,8 @@ namespace Raytracer {
 
         // Order by X axis first
         buildBVH(bvh, objects, Z_AXIS);
+
+        std::cout << "BVH built!" << std::endl;
     }
 
     bool World::buildBVH(BVHNode* currentNode, std::vector<Object*>* currentObjects, const Axis lastAxis) {
@@ -235,7 +245,7 @@ namespace Raytracer {
             (*leftObjects)[i] = orderObjects[i];
         }
 
-        unsigned int rightStart = ((orderObjects.size() & 1) == 0) ? orderObjects.size() / 2 - 1 : orderObjects.size() / 2;
+        unsigned int rightStart = orderObjects.size() / 2;
         unsigned int rightSize = orderObjects.size() - rightStart;
 
         std::vector<Object*>* rightObjects = new std::vector<Object*>(rightSize);
@@ -279,11 +289,18 @@ namespace Raytracer {
     }
 
     BoundingBox World::getBoundingBox(std::vector<Object*>* objects) {
-        BoundingBox boundingBox = BoundingBox(Point3(0, 0, 0), Point3(0, 0, 0));
+        if (objects->size() == 0) {
+            return BoundingBox(Point3(0, 0, 0), Point3(0, 0, 0));
+        }
+
+        // Initialise the box to the bounding box of the first object
+        BoundingBox boundingBox = (*objects->begin())->getBoundingBox();
 
         std::vector<Object*>::const_iterator itr;
 
-        for (itr=objects->begin(); itr != objects->end(); itr++) {
+        // Start from the second object
+
+        for (itr=++(objects->begin()); itr != objects->end(); itr++) {
             BoundingBox objectBox = (*itr)->getBoundingBox();
             boundingBox.corner1 = Point3(
                 std::min(objectBox.corner1.x, boundingBox.corner1.x),

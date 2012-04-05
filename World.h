@@ -138,8 +138,8 @@ namespace Raytracer {
          * the given node returning as soon as there is
          * an intersection (before tmin)
          */
-        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode, const double& tmin,
-                    Object*& tminHitObject) const;
+        bool shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode,
+            const double& tmin) const;
 
         /**
          * Get the bounding box of the vector of objects

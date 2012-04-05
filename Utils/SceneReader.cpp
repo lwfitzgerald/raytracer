@@ -14,6 +14,8 @@
 
 namespace Raytracer {
     void SceneReader::buildScene(const char* filePath, World& world) {
+        std::cout << "Building scene..." << std::endl;
+
         std::ifstream file(filePath);
 
         // Check if file handle is valid
@@ -87,6 +89,8 @@ namespace Raytracer {
 
             lineNo++;
         }
+
+        std::cout << "Scene built!" << std::endl;
     }
 
     void SceneReader::handleViewPlane(std::istringstream& iss, World& world) {
