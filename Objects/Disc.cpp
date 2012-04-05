@@ -5,7 +5,7 @@
 namespace Raytracer {
     Disc::Disc(std::istringstream& iss, World& world) {
         // Call the plane construction method (without extracting the material)
-        constructMinusMaterialAndIoR(iss);
+        constructMinusMaterial(iss);
 
         // Extract and store the radius
         iss >> radius;

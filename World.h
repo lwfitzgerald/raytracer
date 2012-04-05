@@ -133,7 +133,7 @@ namespace Raytracer {
                     double& tmin, Object*& tminHitObject) const;
 
         /**
-         * Recursvie method for intersecting a ray with
+         * Recursive method for intersecting a ray with
          * the bounding volume hierarchy starting at
          * the given node returning as soon as there is
          * an intersection (before tmin)
