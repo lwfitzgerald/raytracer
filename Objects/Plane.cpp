@@ -41,7 +41,13 @@ namespace Raytracer {
     }
 
     bool Plane::hit(const Ray& ray, double& tmin) const {
-        double t = (position - ray.origin) * normal / (ray.direction * normal);
+        double ND = normal * ray.direction;
+
+        if (ND == 0) {
+            return false;
+        }
+
+        double t = (position - ray.origin) * normal / ND;
 
         if (t > EPSILON) {
             tmin = t;
