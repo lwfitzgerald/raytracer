@@ -6,11 +6,11 @@ namespace Raytracer {
         this->material = material;
     }
 
-    void Object::fetchMaterial(std::istringstream& iss, World& world) {
+    void Object::fetchMaterial(std::istringstream& iss, const World& world) {
         std::string materialName;
 
         iss >> materialName;
 
-        material = world.materials[materialName];
+        material = world.materials.at(materialName);
     }
 }

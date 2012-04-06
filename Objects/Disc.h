@@ -25,7 +25,7 @@ namespace Raytracer {
         /**
          * Construct a Disc from an istringstream
          */
-        Disc(std::istringstream& iss, World& world);
+        Disc(std::istringstream& iss, const World& world);
 
         virtual ~Disc() {}
 

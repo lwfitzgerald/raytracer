@@ -4,7 +4,7 @@
 #include "../Utils/ShadeInfo.h"
 
 namespace Raytracer {
-    Sphere::Sphere(std::istringstream& iss, World& world) {
+    Sphere::Sphere(std::istringstream& iss, const World& world) {
         // Extract center
 
         double x, y, z;

@@ -3,7 +3,7 @@
 #include "../Utils/ShadeInfo.h"
 
 namespace Raytracer {
-    Plane::Plane(std::istringstream& iss, World& world) {
+    Plane::Plane(std::istringstream& iss, const World& world) {
         // Construct apart from the material
         constructMinusMaterial(iss);
 

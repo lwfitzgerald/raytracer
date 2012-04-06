@@ -19,7 +19,7 @@ namespace Raytracer {
         /**
          * Construct a Triangle from an istringstream
          */
-        Triangle(std::istringstream& iss, World& world);
+        Triangle(std::istringstream& iss, const World& world);
 
         virtual ~Triangle() {}
 

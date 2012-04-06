@@ -49,7 +49,7 @@ namespace Raytracer {
          * and fetch the pointer to the material and store it in
          * the object
          */
-        void fetchMaterial(std::istringstream& iss, World& world);
+        void fetchMaterial(std::istringstream& iss, const World& world);
     };
 }
 

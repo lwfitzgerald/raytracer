@@ -15,7 +15,7 @@ namespace Raytracer {
         prepare();
     }
 
-    Triangle::Triangle(std::istringstream& iss, World& world) {
+    Triangle::Triangle(std::istringstream& iss, const World& world) {
         // Extract the coordinates of the points
 
         double aX, aY, aZ;

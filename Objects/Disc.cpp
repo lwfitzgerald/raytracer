@@ -3,7 +3,7 @@
 #include "../Utils/ShadeInfo.h"
 
 namespace Raytracer {
-    Disc::Disc(std::istringstream& iss, World& world) {
+    Disc::Disc(std::istringstream& iss, const World& world) {
         // Call the plane construction method (without extracting the material)
         constructMinusMaterial(iss);
 

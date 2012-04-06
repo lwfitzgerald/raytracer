@@ -27,8 +27,8 @@ namespace Raytracer {
          * Where array coordinates are:
          * 0 -> resX, 0->resY
          */
-        virtual void renderPixel(const unsigned int arrayX, const unsigned int arrayY,
-                    World& world) const = 0;
+        virtual void renderPixel(const unsigned int arrayX,
+            const unsigned int arrayY, World& world) const = 0;
 
         /**
          * Set the eye point of the camera

@@ -22,7 +22,7 @@ namespace Raytracer {
         /**
          * Construct a Sphere from the
          */
-        Sphere(std::istringstream& iss, World& world);
+        Sphere(std::istringstream& iss, const World& world);
 
         virtual ~Sphere() {}
 

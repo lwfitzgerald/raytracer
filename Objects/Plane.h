@@ -23,7 +23,7 @@ namespace Raytracer {
         /**
          * Construct a Plane from an istringstream
          */
-        Plane(std::istringstream& iss, World& world);
+        Plane(std::istringstream& iss, const World& world);
 
         virtual ~Plane() {}
 
