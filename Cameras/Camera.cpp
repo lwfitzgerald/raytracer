@@ -3,6 +3,37 @@
 #include "../Utils/Matrix.h"
 
 namespace Raytracer {
+    Camera::Camera(std::istringstream& iss)
+    :
+        rollAngle(0.0),
+        up(0.0, 1.0, 0.0),
+        u(1.0, 0.0, 0.0),
+        v(0.0, 1.0, 0.0),
+        w(0.0, 0.0, 1.0) {
+
+        double eyeX, eyeY, eyeZ;
+
+        iss >> eyeX;
+        iss >> eyeY;
+        iss >> eyeZ;
+
+        double lookAtX, lookAtY, lookAtZ;
+
+        iss >> lookAtX;
+        iss >> lookAtY;
+        iss >> lookAtZ;
+
+        double rollAngle;
+
+        iss >> rollAngle;
+
+        eye = Point3(eyeX, eyeY, eyeZ);
+        lookAt = Point3(lookAtX, lookAtY, lookAtZ);
+        calcUVW();
+        setRollAngle(rollAngle);
+        calcUVW();
+    }
+
     void Camera::setEyePoint(const Point3& point) {
         this->eye = point;
     }
@@ -16,6 +47,12 @@ namespace Raytracer {
     }
 
     void Camera::setRollAngle(const double& angle) {
+        // First roll back any existing roll
+        rollAngle = -rollAngle;
+        up = getRollTransform() * up;
+        calcUVW();
+
+        // Then do the new roll
         rollAngle = angle * (PI / 180);
 
         up = getRollTransform() * up;

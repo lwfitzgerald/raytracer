@@ -7,6 +7,8 @@ namespace Raytracer {
     class RegularCamera: public Camera {
     public:
         RegularCamera() {}
+        RegularCamera(std::istringstream& iss);
+
         virtual ~RegularCamera() {}
 
         virtual void renderPixel(const unsigned int arrayX, const unsigned int arrayY,

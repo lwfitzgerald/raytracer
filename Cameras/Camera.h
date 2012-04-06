@@ -9,15 +9,7 @@
 namespace Raytracer {
     class Camera {
     public:
-        Camera()
-        :
-            eye(0.0, 0, 350.0),
-            lookAt(0.0, 0.0, 0.0),
-            rollAngle(0.0),
-            up(0.0, 1.0, 0.0),
-            u(1.0, 0.0, 0.0),
-            v(0.0, 1.0, 0.0),
-            w(0.0, 0.0, 1.0) {}
+        Camera(std::istringstream& iss);
 
         virtual ~Camera() {}
 
@@ -63,6 +55,16 @@ namespace Raytracer {
         Vector3 u;
         Vector3 v;
         Vector3 w;
+
+        Camera()
+        :
+            eye(0.0, 0, 350.0),
+            lookAt(0.0, 0.0, 0.0),
+            rollAngle(0.0),
+            up(0.0, 1.0, 0.0),
+            u(1.0, 0.0, 0.0),
+            v(0.0, 1.0, 0.0),
+            w(0.0, 0.0, 1.0) {}
 
         /**
          * Get the matrix transform to roll the up vector

@@ -111,34 +111,7 @@ namespace Raytracer {
     }
 
     void SceneReader::handleCamera(std::istringstream& iss, World& world) {
-        double eyeX, eyeY, eyeZ;
-
-        iss >> eyeX;
-        iss >> eyeY;
-        iss >> eyeZ;
-
-        double lookAtX, lookAtY, lookAtZ;
-
-        iss >> lookAtX;
-        iss >> lookAtY;
-        iss >> lookAtZ;
-
-        double viewPlaneDistance;
-
-        iss >> viewPlaneDistance;
-
-        double rollAngle;
-
-        iss >> rollAngle;
-
-        RegularCamera* camera = new RegularCamera();
-        camera->setEyePoint(Point3(eyeX, eyeY, eyeZ));
-        camera->setLookAtPoint(Point3(lookAtX, lookAtY, lookAtZ));
-        camera->setViewPlaneDistance(viewPlaneDistance);
-        camera->calcUVW();
-        camera->setRollAngle(rollAngle);
-        camera->calcUVW();
-
+        RegularCamera* camera = new RegularCamera(iss);
         world.setCamera(camera);
     }
 

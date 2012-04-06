@@ -6,6 +6,11 @@
 #include "../ViewPlane.h"
 
 namespace Raytracer {
+    RegularCamera::RegularCamera(std::istringstream& iss)
+    : Camera(iss) {
+        iss >> viewPlaneDistance;
+    }
+
     void RegularCamera::renderPixel(const unsigned int arrayX, const unsigned int arrayY, World& world) const {
         ViewPlane& viewPlane = world.viewPlane;
 
