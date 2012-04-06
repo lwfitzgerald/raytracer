@@ -7,6 +7,8 @@ namespace Raytracer {
     Transparent::Transparent(std::istringstream& iss) {
         initMaterialFromIss(iss);
 
+        iss >> distribution;
+
         iss >> ior;
 
         iss >> name;
