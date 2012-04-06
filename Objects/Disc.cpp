@@ -26,6 +26,11 @@ namespace Raytracer {
         double planarT = tmin;
 
         if (Plane::hit(ray, planarT)) {
+            if (planarT >= tmin) {
+                // t is greater than tmin so no need to continue
+                return false;
+            }
+
             Point3 pointOfIntersection = ray.origin + planarT * ray.direction;
 
             // Check if point of intersection is inside radius

@@ -49,7 +49,7 @@ namespace Raytracer {
 
         double t = (position - ray.origin) * normal / ND;
 
-        if (t > EPSILON) {
+        if (t > EPSILON && t < tmin) {
             tmin = t;
             return true;
         }

@@ -69,7 +69,6 @@ namespace Raytracer {
     }
 
     ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {
-        double t;
         ShadeInfo shadeInfo;
         Object* tminHitObject = NULL;
 
@@ -81,11 +80,10 @@ namespace Raytracer {
         std::vector<Object*>::const_iterator itr;
 
         for (itr=unboundableObjects.begin(); itr != unboundableObjects.end(); itr++) {
-            if ((*itr)->hit(ray, t) && t < tmin) {
+            if ((*itr)->hit(ray, tmin)) {
                 shadeInfo.hit = true;
                 shadeInfo.ray = ray;
                 tminHitObject = *itr;
-                tmin = t;
             }
         }
 
@@ -103,7 +101,6 @@ namespace Raytracer {
     }
 
     bool World::shadowHitObjects(const Ray& ray, double& tmin) const {
-        double t;
         ShadeInfo shadeInfo;
 
         // Before handling BVH, intersect with unboundable objects
@@ -111,7 +108,7 @@ namespace Raytracer {
         std::vector<Object*>::const_iterator itr;
 
         for (itr=unboundableObjects.begin(); itr != unboundableObjects.end(); itr++) {
-            if ((*itr)->hit(ray, t) && t < tmin) {
+            if ((*itr)->hit(ray, tmin)) {
                 return true;
             }
         }
@@ -130,15 +127,13 @@ namespace Raytracer {
         if (bvhNode->objects != NULL) {
             // Leaf node so intersect with objects
 
-            double t;
             std::vector<Object*>::const_iterator itr;
 
             for (itr=bvhNode->objects->begin(); itr != bvhNode->objects->end(); itr++) {
-                if ((*itr)->hit(ray, t) && t < tmin) {
+                if ((*itr)->hit(ray, tmin)) {
                     shadeInfo.hit = true;
                     shadeInfo.ray = ray;
                     tminHitObject = *itr;
-                    tmin = t;
                 }
             }
             return;
@@ -159,11 +154,11 @@ namespace Raytracer {
         if (bvhNode->objects != NULL) {
             // Leaf node so intersect with objects
 
-            double t;
+            double t = tmin;
             std::vector<Object*>::const_iterator itr;
 
             for (itr=bvhNode->objects->begin(); itr != bvhNode->objects->end(); itr++) {
-                if ((*itr)->hit(ray, t) && t < tmin) {
+                if ((*itr)->hit(ray, t)) {
                     return true;
                 }
             }

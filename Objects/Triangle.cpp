@@ -64,6 +64,11 @@ namespace Raytracer {
         double planarT = tmin;
 
         if (Plane::hit(ray, planarT)) {
+            if (planarT >= tmin) {
+                // t is greater than tmin so no need to continue
+                return false;
+            }
+
             Point3 poi = ray.origin + planarT * ray.direction;
 
             Axis dominantAxis = identifyDominantAxis();
