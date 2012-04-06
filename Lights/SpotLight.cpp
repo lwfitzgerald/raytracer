@@ -13,7 +13,7 @@ namespace Raytracer {
 
         iss >> rateOfFallOff;
 
-        direction = Vector3(directionX, directionY, directionZ);
+        direction = Vector3(directionX, directionY, directionZ).hat();
     }
 
     Vector3 SpotLight::getDirection(const ShadeInfo& shadeInfo) const {

@@ -21,7 +21,7 @@ namespace Raytracer {
         iss >> z;
 
         // Create and set direction
-        direction = Vector3(x, y, z);
+        direction = Vector3(x, y, z).hat();
     }
 
     Vector3 DirectionalLight::getDirection(const ShadeInfo& shadeInfo) const {
