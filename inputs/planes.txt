@@ -1,0 +1,21 @@
+VIEWPLANE 640 480 1.0
+CAMERA      0   0 200 0 0 -200 0 200
+
+AMBIENTLIGHT 1 1 1 0
+POINTLIGHT   1 1 1 1 0 0 0
+
+MATTE 0.76 0.75 0.5 1 1  WHITE
+TRANSPARENT 0 0 1 0 0 100 1.52 TRANSPARENT
+
+# Left plane
+PLANE -200    0    0  1  0  0 WHITE
+# Right plane
+PLANE  200    0    0 -1  0  0 WHITE
+# Back plane
+PLANE    0    0 -200  0  0  1 WHITE
+# Front plane
+PLANE    0    0  200  0  0 -1 WHITE
+# Top plane
+PLANE    0  200    0  0 -1  0 WHITE
+# Bottom plane
+PLANE    0  -200   0  0  1  0 WHITE
