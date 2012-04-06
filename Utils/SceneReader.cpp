@@ -28,6 +28,9 @@ namespace Raytracer {
         unsigned int lineNo = 1;
         std::string line;
         std::string mainName;
+        bool viewplaneDefined = false;
+        bool cameraDefined = false;
+        bool ambientDefined = false;
 
         while (!file.eof()) {
             // Read a line from the input file
@@ -56,8 +59,10 @@ namespace Raytracer {
 
             if (mainName.compare("VIEWPLANE") == 0) {
                 handleViewPlane(iss, world);
+                viewplaneDefined = true;
             } else if (mainName.compare("AMBIENTLIGHT") == 0) {
                 handleAmbientLight(iss, world);
+                ambientDefined = true;
             } else if (mainName.compare("POINTLIGHT") == 0) {
                 handlePointLight(iss, world);
             } else if (mainName.compare("SPOTLIGHT") == 0) {
@@ -72,6 +77,7 @@ namespace Raytracer {
                 handleTransparent(iss, world);
             } else if (mainName.compare("CAMERA") == 0) {
                 handleCamera(iss, world);
+                cameraDefined = true;
             } else if (mainName.compare("SPHERE") == 0) {
                 handleSphere(iss, world);
             } else if (mainName.compare("PLANE") == 0) {
@@ -89,6 +95,22 @@ namespace Raytracer {
             }
 
             lineNo++;
+        }
+
+        // Check vital are defined...
+        if (!viewplaneDefined) {
+            std::cerr << "Error: Viewplane parameters not given" << std::endl;
+            std::exit(1);
+        }
+
+        if (!cameraDefined) {
+            std::cerr << "Error: Camera parameters not given" << std::endl;
+            std::exit(1);
+        }
+
+        if (!ambientDefined) {
+            std::cerr << "Error: Ambient light parameters not given" << std::endl;
+            std::exit(1);
         }
 
         clock_t end = clock();
