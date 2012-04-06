@@ -30,8 +30,11 @@ namespace Raytracer {
         eye = Point3(eyeX, eyeY, eyeZ);
         lookAt = Point3(lookAtX, lookAtY, lookAtZ);
         calcUVW();
-        setRollAngle(rollAngle);
-        calcUVW();
+
+        if (rollAngle != 0) {
+            setRollAngle(rollAngle);
+            calcUVW();
+        }
     }
 
     void Camera::setEyePoint(const Point3& point) {
@@ -47,11 +50,6 @@ namespace Raytracer {
     }
 
     void Camera::setRollAngle(const double& angle) {
-        // First roll back any existing roll
-        rollAngle = -rollAngle;
-        up = getRollTransform() * up;
-        calcUVW();
-
         // Then do the new roll
         rollAngle = angle * (PI / 180);
 
