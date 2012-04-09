@@ -12,6 +12,7 @@
 #include <limits>
 #include <map>
 #include <ctime>
+#include "omp.h"
 
 #include "Constants.h"
 

@@ -13,7 +13,6 @@
 #include "Materials/Matte.h"
 #include "Materials/Specular.h"
 #include "Utils/BVHNode.h"
-#include "omp.h"
 
 namespace Raytracer {
     World::~World() {
@@ -42,7 +41,7 @@ namespace Raytracer {
 
     void World::renderScene() {
         std::cout << "Rendering scene..." << std::endl;
-        clock_t start = clock();
+        double start = omp_get_wtime();
 
         int j;
 
@@ -53,18 +52,18 @@ namespace Raytracer {
             }
         }
 
-        clock_t end = clock();
-        double time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+        double end = omp_get_wtime();
+        double time = (end - start) * 1000;
 
         std::cout << "Scene rendered in " << time << "ms" << std::endl;
         std::cout << "Writing output file..." << std::endl;
-        start = clock();
+        start = omp_get_wtime();
 
         // Write output image
         viewPlane.writePPM(OUTPUT_FILENAME);
 
-        end = clock();
-        time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+        end = omp_get_wtime();
+        time = (end - start) * 1000;
         std::cout << "Output file written in " << time << "ms" << std::endl;
     }
 
@@ -186,7 +185,7 @@ namespace Raytracer {
 
     void World::buildBVH() {
         std::cout << "Building BVH..." << std::endl;
-        clock_t start = clock();
+        double start = omp_get_wtime();
 
         bvh = new BVHNode;
 
@@ -211,8 +210,8 @@ namespace Raytracer {
         // Order by X axis first
         buildBVH(bvh, objects, Z_AXIS);
 
-        clock_t end = clock();
-        double time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+        double end = omp_get_wtime();
+        double time = (end - start) * 1000;
         std::cout << "BVH built in " << time << "ms" << std::endl;
     }
 

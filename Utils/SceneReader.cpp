@@ -15,7 +15,7 @@
 namespace Raytracer {
     void SceneReader::buildScene(const char* filePath, World& world) {
         std::cout << "Building scene..." << std::endl;
-        clock_t start = clock();
+        double start = omp_get_wtime();
 
         std::ifstream file(filePath);
 
@@ -113,8 +113,8 @@ namespace Raytracer {
             std::exit(1);
         }
 
-        clock_t end = clock();
-        double time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+        double end = omp_get_wtime();
+        double time = (end - start) * 1000;
         std::cout << "Scene built in " << time << "ms" << std::endl;
     }
 
