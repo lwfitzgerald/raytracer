@@ -46,7 +46,7 @@ namespace Raytracer {
 
         int j;
 
-#pragma omp parallel for private(j) schedule(guided)
+#pragma omp parallel for private(j) schedule(dynamic)
         for (int i=0; i < viewPlane.verticalRes; i++) {
             for (j=0; j < viewPlane.horizontalRes; j++) {
                 camera->renderPixel(j, i, *this);
