@@ -24,11 +24,9 @@ namespace Raytracer {
 
         double cos_i = normal * -direction;
 
-        if (cos_i < 0) {
+        if (shadeInfo.normalFlipped) {
             // Flip when intersecting from inside
             ior = 1 / ior;
-            normal = -normal;
-            cos_i = -cos_i;
         }
 
         double cos_t_sqr = 1 - (1 / sqr(ior)) * (1 - sqr(cos_i));

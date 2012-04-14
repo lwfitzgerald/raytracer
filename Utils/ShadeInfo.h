@@ -16,9 +16,11 @@ namespace Raytracer {
         Point3 hitPoint;
         Normal hitNormal;
         Colour colour;
+        bool normalFlipped;
 
         ShadeInfo()
-        : hit(false) {}
+        : hit(false),
+          normalFlipped(false) {}
 
         ~ShadeInfo() {}
 

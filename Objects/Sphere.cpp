@@ -69,6 +69,13 @@ namespace Raytracer {
 
         // Normal calculated by vector from C to P and then normalised using the radius
         shadeInfo.hitNormal = (oMinusC + tmin * ray.direction) / radius;
+
+        // Flip normal in case of inside intersection
+        if (shadeInfo.hitNormal * -ray.direction < 0) {
+            shadeInfo.hitNormal = -shadeInfo.hitNormal;
+            shadeInfo.normalFlipped = true;
+        }
+
         shadeInfo.hitPoint = ray.origin + tmin * ray.direction;
     }
 

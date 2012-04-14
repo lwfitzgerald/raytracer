@@ -59,6 +59,13 @@ namespace Raytracer {
 
     void Plane::getShadeInfo(ShadeInfo& shadeInfo, const Ray& ray, const double& tmin) const {
         shadeInfo.hitNormal = normal;
+
+        // Flip normal in case of other side intersection
+        if (shadeInfo.hitNormal * -ray.direction < 0) {
+            shadeInfo.hitNormal = -shadeInfo.hitNormal;
+            shadeInfo.normalFlipped = true;
+        }
+
         shadeInfo.hitPoint = ray.origin + tmin * ray.direction;
     }
 
