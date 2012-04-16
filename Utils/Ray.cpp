@@ -24,7 +24,10 @@ namespace Raytracer {
 
         double cos_i = normal * -direction;
 
-        if (shadeInfo.normalFlipped && shadeInfo.hitObject->hasVolume()) {
+        if (!shadeInfo.hitObject->hasVolume()) {
+            // Object has no volume so refracted ray remains in same direction
+            ior = 1;
+        } else if (shadeInfo.normalFlipped) {
             // Flip when intersecting from inside (must be volumetric object)
             ior = 1 / ior;
         }
