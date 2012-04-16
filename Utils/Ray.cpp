@@ -24,8 +24,8 @@ namespace Raytracer {
 
         double cos_i = normal * -direction;
 
-        if (shadeInfo.normalFlipped) {
-            // Flip when intersecting from inside
+        if (shadeInfo.normalFlipped && shadeInfo.hitObject->hasVolume()) {
+            // Flip when intersecting from inside (must be volumetric object)
             ior = 1 / ior;
         }
 

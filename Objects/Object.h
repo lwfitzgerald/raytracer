@@ -37,6 +37,12 @@ namespace Raytracer {
         virtual BoundingBox getBoundingBox() const = 0;
 
         /**
+         * Returns whether the object has volume
+         * (for example, planes do not, spheres do)
+         */
+        virtual bool hasVolume() const = 0;
+
+        /**
          * Set the material for this object
          */
         virtual void setMaterial(Material* material);

@@ -89,4 +89,8 @@ namespace Raytracer {
             Point3(center.x + radius, center.y + radius, center.z + radius)
         );
     }
+
+    bool Sphere::hasVolume() const {
+        return true;
+    }
 }

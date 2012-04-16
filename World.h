@@ -130,7 +130,7 @@ namespace Raytracer {
          * the given node
          */
         void hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
-                    double& tmin, Object*& tminHitObject) const;
+            double& tmin) const;
 
         /**
          * Recursive method for intersecting a ray with

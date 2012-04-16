@@ -117,4 +117,9 @@ namespace Raytracer {
             corner2
         );
     }
+
+    bool Plane::hasVolume() const {
+        // A plane is infinitely thin
+        return false;
+    }
 }

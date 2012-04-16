@@ -69,7 +69,6 @@ namespace Raytracer {
 
     ShadeInfo World::hitObjects(const Ray& ray, const unsigned int depth) const {
         ShadeInfo shadeInfo;
-        Object* tminHitObject = NULL;
 
         // Set tmin to infinity
         double tmin = std::numeric_limits<double>::infinity();
@@ -82,18 +81,18 @@ namespace Raytracer {
             if ((*itr)->hit(ray, tmin)) {
                 shadeInfo.hit = true;
                 shadeInfo.ray = ray;
-                tminHitObject = *itr;
+                shadeInfo.hitObject = *itr;
             }
         }
 
         // Intersect with the BVH objects
-        hitBVHObjects(ray, bvh, shadeInfo, tmin, tminHitObject);
+        hitBVHObjects(ray, bvh, shadeInfo, tmin);
 
         if (shadeInfo.hit) {
             // Some object was hit so get the shading information for it
-            tminHitObject->getShadeInfo(shadeInfo, ray, tmin);
+            shadeInfo.hitObject->getShadeInfo(shadeInfo, ray, tmin);
 
-            shadeInfo.colour = tminHitObject->material->shade(shadeInfo, *this, depth);
+            shadeInfo.colour = shadeInfo.hitObject->material->shade(shadeInfo, *this, depth);
         }
 
         return shadeInfo;
@@ -116,8 +115,8 @@ namespace Raytracer {
         return shadowHitBVHObjects(ray, bvh, tmin);
     }
 
-    void World::hitBVHObjects(const Ray& ray, BVHNode* bvhNode, ShadeInfo& shadeInfo,
-                double& tmin, Object*& tminHitObject) const {
+    void World::hitBVHObjects(const Ray& ray, BVHNode* bvhNode,
+        ShadeInfo& shadeInfo, double& tmin) const {
         if (!bvhNode->boundingBox.hit(ray)) {
             // No intersection with bounding box
             return;
@@ -132,15 +131,15 @@ namespace Raytracer {
                 if ((*itr)->hit(ray, tmin)) {
                     shadeInfo.hit = true;
                     shadeInfo.ray = ray;
-                    tminHitObject = *itr;
+                    shadeInfo.hitObject = *itr;
                 }
             }
             return;
         }
 
         // Do the recursive calls
-        hitBVHObjects(ray, bvhNode->left, shadeInfo, tmin, tminHitObject);
-        hitBVHObjects(ray, bvhNode->right, shadeInfo, tmin, tminHitObject);
+        hitBVHObjects(ray, bvhNode->left, shadeInfo, tmin);
+        hitBVHObjects(ray, bvhNode->right, shadeInfo, tmin);
     }
 
     bool World::shadowHitBVHObjects(const Ray& ray, BVHNode* bvhNode,

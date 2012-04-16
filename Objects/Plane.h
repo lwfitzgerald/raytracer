@@ -36,6 +36,8 @@ namespace Raytracer {
 
         virtual BoundingBox getBoundingBox() const;
 
+        virtual bool hasVolume() const;
+
     protected:
         Point3 position;
         Normal normal;

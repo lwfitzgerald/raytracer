@@ -15,11 +15,13 @@ namespace Raytracer {
         Ray ray;
         Point3 hitPoint;
         Normal hitNormal;
+        Object* hitObject;
         Colour colour;
         bool normalFlipped;
 
         ShadeInfo()
         : hit(false),
+          hitObject(NULL),
           normalFlipped(false) {}
 
         ~ShadeInfo() {}

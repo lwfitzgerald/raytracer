@@ -6,7 +6,9 @@ namespace Raytracer {
         ray = rhs.ray;
         hitPoint = rhs.hitPoint;
         hitNormal = rhs.hitNormal;
+        hitObject = rhs.hitObject;
         colour = rhs.colour;
+        normalFlipped = rhs.normalFlipped;
 
         return *this;
     }
