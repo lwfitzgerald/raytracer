@@ -40,7 +40,7 @@ namespace Raytracer {
         // Find the minimum exiting value
         t1 = std::min(tXmax, std::max(tYmax, tZmax));
 
-        return t0 < t1 && t1 > EPSILON;
+        return t0 <= t1 && t1 > EPSILON;
     }
 
     BoundingBox& BoundingBox::operator=(const BoundingBox& old) {
