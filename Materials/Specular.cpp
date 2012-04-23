@@ -26,7 +26,7 @@ namespace Raytracer {
         const unsigned int depth
     ) const {
         // Calculate ambient contribution first
-        Colour colour = ambientReflection * world.ambientLight->getRadiance(shadeInfo);
+        Colour colour = ambientReflection * diffuseColour * world.ambientLight->getRadiance(shadeInfo);
 
         for (unsigned int i=0; i < world.lights.size(); i++) {
             // Calculate diffuse contribution...
