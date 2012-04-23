@@ -5,15 +5,15 @@
 namespace Raytracer {
     SpotLight::SpotLight(std::istringstream& iss)
     : PointLight(iss) {
-        double directionX, directionY, directionZ;
+        double pointAtX, pointAtY, pointAtZ;
 
-        iss >> directionX;
-        iss >> directionY;
-        iss >> directionZ;
+        iss >> pointAtX;
+        iss >> pointAtY;
+        iss >> pointAtZ;
 
         iss >> rateOfFallOff;
 
-        direction = Vector3(directionX, directionY, directionZ).hat();
+        direction = (Point3(pointAtX, pointAtY, pointAtZ) - position).hat();
     }
 
     Vector3 SpotLight::getDirection(const ShadeInfo& shadeInfo) const {
